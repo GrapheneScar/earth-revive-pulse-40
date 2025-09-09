@@ -10,48 +10,48 @@ const EcoNewsUpdates = () => {
   const newsItems = [
     {
       id: 1,
-      image: "https://renewableaffairs.com/wp-content/uploads/2024/09/featured-image-1-1.png",
-      title: "India's Push for Green Hydrogen",
-      description: "India has launched a ₹45,000 thousand crore green hydrogen initiative to promote renewable energy and reduce carbon emissions. The government aims to make India a global hub for green hydrogen production.",
-      link: "https://www.reuters.com/world/india/indias-green-hydrogen-push-challenges-2023-07-10/",
-      category: "🌱 Renewable Energy",
-      date: "10 July, 2023"
+      image: "https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=800&h=600&fit=crop&crop=center",
+      title: "COP30 Climate Conference Set for Brazil",
+      description: "The pivotal COP30 conference will take place in Belém, Brazil from November 10-21, focusing on limiting global temperature rise to 1.5°C and advancing climate finance solutions.",
+      link: "https://unfccc.int/cop30",
+      category: "🌍 Climate Action",
+      date: "November, 2025"
     },
     {
       id: 2,
-      image: "https://www.spc.int/sites/default/files/styles/featured_image/public/featuredimages/events/2025-01/UNFCCC_0.jpg?itok=vj_UdlU9",
-      title: "2025 UN Climate Change Conference (UNFCCC COP 30)",
-      description: "The 2025 UN Climate Change Conference (COP 30) will bring together world leaders to discuss climate action, including key meetings under the Kyoto Protocol and Paris Agreement.",
-      link: "https://sdg.iisd.org/events/2025-un-climate-change-conference-unfccc-cop-30/",
-      category: "🌍 Climate Change",
-      date: "January, 2025"
+      image: "https://images.unsplash.com/photo-1614332287897-cdc485fa562d?w=800&h=600&fit=crop&crop=center",
+      title: "AI Discovers Revolutionary Battery Alternatives",
+      description: "Scientists using AI have identified five new materials that could replace lithium-ion batteries, addressing sustainability concerns and resource limitations in energy storage.",
+      link: "https://scitechdaily.com/ai-just-found-the-future-of-batteries-and-its-not-lithium/",
+      category: "🔋 Battery Tech",
+      date: "August, 2025"
     },
     {
       id: 3,
-      image: "https://i.ytimg.com/vi/m3sDZYk0-TE/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLD1ugcsmUqjNLgo1pmsoR8QWdeg4w",
-      title: "India Becomes Third-Largest Solar Market",
-      description: "India has surpassed Germany to become the third-largest solar energy market in the world, with massive investments in renewable energy projects nationwide.",
-      link: "https://ddnews.gov.in/en/india-becomes-worlds-third-largest-solar-power-generator-overtakes-japan-report/",
-      category: "☀️ Solar Power",
-      date: "9 May, 2024"
+      image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&h=600&fit=crop&crop=center",
+      title: "Breakthrough in Perovskite Solar Cells",
+      description: "Northwestern University researchers have achieved major advances in perovskite solar cell efficiency and durability, bringing this promising technology closer to commercial viability.",
+      link: "https://www.mccormick.northwestern.edu/news/articles/2025/01/advance-in-perovskite-solar-cells-improves-efficiency-durability/",
+      category: "☀️ Solar Innovation",
+      date: "January, 2025"
     },
     {
       id: 4,
-      image: "https://westmed-initiative.ec.europa.eu/wp-content/uploads/2024/12/UN.Ocean-conference-2025-poster.jpg",
-      title: "2025 United Nations Ocean Conference",
-      description: "The 2025 UN Ocean Conference, co-hosted by France and Costa Rica will focus on accelerating action to conserve and sustainably use the ocean. It aims to support SDG 14 by mobilizing global efforts.",
-      link: "https://www.nationalgeographic.com",
-      category: "🌊 Ocean Conservation",
-      date: "21 Feb, 2025"
+      image: "https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=800&h=600&fit=crop&crop=center",
+      title: "Record $386B Renewable Energy Investment",
+      description: "Global renewable energy investment reached a record $386 billion in the first half of 2025, driven by offshore wind and small-scale solar projects worldwide.",
+      link: "https://about.bnef.com/insights/clean-energy/global-renewable-energy-investment-reaches-new-record-as-investors-reassess-risks/",
+      category: "💰 Green Finance",
+      date: "August, 2025"
     },
     {
       id: 5,
-      image: "https://www.braunability.com/us/en/blog/mobility-solutions/electric-vehicles-ev-tax-credit-state-regulations/_jcr_content/root/responsivegrid/image.coreimg.jpeg/1674077116969/ev-future.jpeg",
-      title: "India's Electric Vehicle Industry Booming",
-      description: "India's electric vehicle industry is experiencing a surge in growth, with new government incentives and major automakers launching affordable EVs.",
-      link: "https://ciiblog.in/indias-booming-electric-vehicle-industry/",
-      category: "🚗 EV Revolution",
-      date: "25 Oct, 2023"
+      image: "https://images.unsplash.com/photo-1548337138-e87d889cc369?w=800&h=600&fit=crop&crop=center",
+      title: "China Leads Global Wind Power Expansion",
+      description: "China approved almost 40 GW of wind energy projects in Q1 2025, significantly outpacing other countries and reinforcing its leadership in renewable energy development.",
+      link: "https://www.ciphernews.com/articles/on-wind-power-china-blows-past-rest-of-world/",
+      category: "💨 Wind Energy",
+      date: "March, 2025"
     }
   ];
 
