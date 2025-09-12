@@ -354,14 +354,6 @@ const InitiativesPage = () => {
 
           <div className="space-y-8">
             {[{
-            id: 'post-visarjan-beach-cleanup-2025',
-            icon: Waves,
-            title: "Post-Visarjan Beach Cleanup 2025",
-            year: "2025",
-            description: "Our students from JBCN International School participated in a meaningful post-Visarjan beach cleanup initiative at Chowpatty Beach, Mumbai. Working alongside community partners, our team helped restore the shoreline after the Ganesh festival celebrations, demonstrating our commitment to marine conservation and environmental stewardship.",
-            color: "from-blue-500/20 to-blue-500/5",
-            iconColor: "text-blue-600"
-          }, {
             id: 'green-initiative',
             icon: Leaf,
             title: "Green Initiative",
@@ -455,13 +447,7 @@ const InitiativesPage = () => {
                           COMPLETED
                         </Badge>
                       </div>
-                      {initiative.id === 'post-visarjan-beach-cleanup-2025' ? (
-                        <img 
-                          src="/lovable-uploads/ac5a0ffe-a03a-488c-ad6e-ee9e6ff71666.png"
-                          alt="Post-Visarjan Beach Cleanup 2025 - JBCN International School students holding banner during beach cleanup at Chowpatty Beach"
-                          className="w-full h-full object-cover"
-                        />
-                      ) : initiative.id === 'green-initiative' ? (
+                      {initiative.id === 'green-initiative' ? (
                         <img 
                           src="/lovable-uploads/d7dc9d72-6f8f-42e6-a5eb-3ab3c6198f71.png"
                           alt="Green Initiative - Students learning gardening and environmental responsibility in an outdoor classroom setting"
