@@ -11,29 +11,101 @@ const GalleryPage = () => {
   const [selectedItem, setSelectedItem] = useState<any>(null);
 
   const galleryItems = [
-    { id: 1, type: 'image', title: 'Tree Planting Drive - Phase 1', category: 'Projects', views: 1234 },
-    { id: 2, type: 'video', title: 'Climate Action Documentary', category: 'Videos', views: 2567 },
-    { id: 3, type: 'image', title: 'Solar Panel Installation', category: 'Renewable Energy', views: 892 },
-    { id: 4, type: 'image', title: 'Community Clean-up Day', category: 'Community', views: 1456 },
-    { id: 5, type: 'video', title: 'Ocean Conservation Efforts', category: 'Videos', views: 3421 },
-    { id: 6, type: 'image', title: 'Vertical Garden Project', category: 'Projects', views: 987 },
-    { id: 7, type: 'image', title: 'Waste Recycling Workshop', category: 'Education', views: 654 },
-    { id: 8, type: 'video', title: 'Youth Climate Summit 2024', category: 'Videos', views: 4567 },
-    { id: 9, type: 'image', title: 'Green Building Initiative', category: 'Projects', views: 1234 },
-    { id: 10, type: 'image', title: 'Biodiversity Conservation', category: 'Environment', views: 2890 },
-    { id: 11, type: 'video', title: 'Sustainable Living Guide', category: 'Videos', views: 1876 },
-    { id: 12, type: 'image', title: 'Air Quality Monitoring', category: 'Research', views: 743 },
+    {
+      id: 1,
+      type: 'image',
+      title: 'Environmental Awareness Campaign',
+      category: 'Awareness',
+      image: '/gallery/save-earth-poster.jpeg',
+      views: 1250,
+    },
+    {
+      id: 2,
+      type: 'image',
+      title: 'Beach Cleanup Drive 2024',
+      category: 'Events',
+      image: '/gallery/beach-cleanup-team.jpg',
+      views: 2340,
+    },
+    {
+      id: 3,
+      type: 'image',
+      title: 'Community Beach Cleanup',
+      category: 'Events',
+      image: '/gallery/beach-cleanup-group.jpg',
+      views: 980,
+    },
+    {
+      id: 4,
+      type: 'image',
+      title: 'Ocean Conservation Efforts',
+      category: 'Conservation',
+      image: '/gallery/cleanup-activity.jpg',
+      views: 1850,
+    },
+    {
+      id: 5,
+      type: 'image',
+      title: 'Marine Debris Removal',
+      category: 'Conservation',
+      image: '/gallery/beach-debris-cleanup.jpg',
+      views: 1500,
+    },
+    {
+      id: 6,
+      type: 'image',
+      title: 'Environmental Volunteers',
+      category: 'Volunteers',
+      image: '/gallery/environmental-volunteers.jpg',
+      views: 720,
+    },
+    {
+      id: 7,
+      type: 'image',
+      title: 'Community Clean-up Initiative',
+      category: 'Events',
+      image: '/gallery/community-cleanup.jpg',
+      views: 650,
+    },
+    {
+      id: 8,
+      type: 'image',
+      title: 'Nature Conservation Work',
+      category: 'Conservation',
+      image: '/gallery/nature-conservation.jpg',
+      views: 890,
+    },
+    {
+      id: 9,
+      type: 'image',
+      title: 'Environmental Award Ceremony',
+      category: 'Recognition',
+      image: '/gallery/award-ceremony.jpg',
+      views: 1100,
+    },
+    {
+      id: 10,
+      type: 'image',
+      title: 'Tree Planting Initiative',
+      category: 'Nature',
+      image: '/gallery/tree-planting.jpg',
+      views: 1300,
+    },
   ];
 
   const filters = [
-    { key: 'all', label: 'All Media' },
-    { key: 'image', label: 'Images' },
-    { key: 'video', label: 'Videos' },
+    { key: 'all', label: 'All Images' },
+    { key: 'Events', label: 'Events' },
+    { key: 'Conservation', label: 'Conservation' },
+    { key: 'Volunteers', label: 'Volunteers' },
+    { key: 'Nature', label: 'Nature' },
+    { key: 'Awareness', label: 'Awareness' },
+    { key: 'Recognition', label: 'Recognition' },
   ];
 
   const filteredItems = activeFilter === 'all' 
     ? galleryItems 
-    : galleryItems.filter(item => item.type === activeFilter);
+    : galleryItems.filter(item => item.category === activeFilter);
 
   const handleItemClick = (item: any) => {
     setSelectedItem(item);
@@ -93,7 +165,7 @@ const GalleryPage = () => {
           <div className="container mx-auto">
             <motion.div 
               layout
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+              className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 sm:gap-6"
             >
               {filteredItems.map((item, index) => (
                 <motion.div
@@ -107,13 +179,14 @@ const GalleryPage = () => {
                   <Card className="overflow-hidden shadow-card hover-lift cursor-pointer"
                         onClick={() => handleItemClick(item)}>
                     <CardContent className="p-0 relative">
-                      {/* Placeholder Image/Video */}
-                      <div className="aspect-square bg-gradient-earth relative overflow-hidden">
-                        {item.type === 'video' && (
-                          <div className="absolute inset-0 flex items-center justify-center bg-black/20">
-                            <Play className="w-12 h-12 text-primary" />
-                          </div>
-                        )}
+                      {/* Actual Image */}
+                      <div className="aspect-square bg-muted relative overflow-hidden">
+                        <img 
+                          src={item.image} 
+                          alt={item.title}
+                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                          loading="lazy"
+                        />
                         
                         {/* Overlay on Hover */}
                         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
@@ -149,7 +222,7 @@ const GalleryPage = () => {
                     </CardContent>
                   </Card>
                 </motion.div>
-              ))}
+                ))}
             </motion.div>
           </div>
         </section>
@@ -170,12 +243,12 @@ const GalleryPage = () => {
               className="max-w-4xl w-full bg-card rounded-lg overflow-hidden"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="aspect-video bg-gradient-nature relative">
-                {selectedItem.type === 'video' && (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <Play className="w-16 h-16 text-primary" />
-                  </div>
-                )}
+              <div className="aspect-video bg-muted relative overflow-hidden">
+                <img 
+                  src={selectedItem.image} 
+                  alt={selectedItem.title}
+                  className="w-full h-full object-contain"
+                />
               </div>
               <div className="p-6">
                 <h2 className="text-2xl font-bold text-foreground mb-2">
