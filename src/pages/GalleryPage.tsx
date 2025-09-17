@@ -107,6 +107,86 @@ const GalleryPage = () => {
       category: 'Nature',
       image: '/gallery/tree-planting.jpg',
       size: 'square'
+    },
+    {
+      id: 11,
+      type: 'image',
+      title: 'Beach Cleanup Volunteers',
+      category: 'Volunteers',
+      image: '/gallery/beach-cleanup-volunteers.jpg',
+      size: 'wide'
+    },
+    {
+      id: 12,
+      type: 'image',
+      title: 'Individual Cleanup Effort',
+      category: 'Conservation',
+      image: '/gallery/individual-cleanup-effort.jpg',
+      size: 'tall'
+    },
+    {
+      id: 13,
+      type: 'image',
+      title: 'Forest Conservation Team',
+      category: 'Conservation',
+      image: '/gallery/forest-conservation-team.jpg',
+      size: 'square'
+    },
+    {
+      id: 14,
+      type: 'image',
+      title: 'Community Forest Cleanup',
+      category: 'Events',
+      image: '/gallery/community-forest-cleanup.jpg',
+      size: 'wide'
+    },
+    {
+      id: 15,
+      type: 'image',
+      title: 'Environmental Action Team',
+      category: 'Volunteers',
+      image: '/gallery/environmental-action-team.jpg',
+      size: 'square'
+    },
+    {
+      id: 16,
+      type: 'image',
+      title: 'Family Beach Cleanup',
+      category: 'Events',
+      image: '/gallery/family-beach-cleanup.jpg',
+      size: 'tall'
+    },
+    {
+      id: 17,
+      type: 'image',
+      title: 'Coastal Debris Removal',
+      category: 'Conservation',
+      image: '/gallery/coastal-debris-removal.jpg',
+      size: 'square'
+    },
+    {
+      id: 18,
+      type: 'image',
+      title: 'Team Coastal Cleanup',
+      category: 'Events',
+      image: '/gallery/team-coastal-cleanup.jpg',
+      size: 'wide'
+    },
+    {
+      id: 19,
+      type: 'image',
+      title: 'Marine Conservation Effort',
+      category: 'Conservation',
+      image: '/gallery/marine-conservation-effort.jpg',
+      size: 'square'
+    },
+    {
+      id: 20,
+      type: 'image',
+      title: 'Individual Forest Cleanup',
+      category: 'Conservation',
+      image: '/gallery/individual-forest-cleanup.jpg',
+      size: 'tall'
     }
   ];
 
