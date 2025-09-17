@@ -66,10 +66,9 @@ const ProjectSummary = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.7 + index * 0.1 }}
-                whileHover={{ scale: 1.05 }}
               >
-                <Card className="p-6 text-center shadow-card border-none bg-gradient-to-br from-background to-muted/5 hover:shadow-soft transition-all duration-300">
-                  <div className={`w-12 h-12 mx-auto mb-4 rounded-xl bg-gradient-earth flex items-center justify-center`}>
+                <Card className="p-6 text-center border-none bg-gradient-to-br from-background to-muted/5 shadow-[0_0_20px_hsl(var(--primary)/0.3)] hover:shadow-[0_0_30px_hsl(var(--primary)/0.4)] transition-all duration-300">
+                  <div className={`w-12 h-12 mx-auto mb-4 rounded-xl bg-gradient-earth flex items-center justify-center shadow-[0_0_15px_hsl(var(--primary)/0.4)]`}>
                     <item.icon className="w-6 h-6 text-white" />
                   </div>
                   <h3 className={`font-semibold ${item.color} mb-2`}>

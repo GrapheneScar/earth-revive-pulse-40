@@ -94,37 +94,37 @@ const ClimateQuizGame = () => {
 
   if (gameComplete) {
     return (
-      <Card className="p-4 sm:p-6 lg:p-8 text-center shadow-hero border border-primary/30 bg-gradient-to-br from-primary/20 via-secondary/20 to-primary/20 backdrop-blur-lg relative">
+      <Card className="p-3 sm:p-4 md:p-6 lg:p-8 text-center shadow-hero border border-primary/30 bg-gradient-to-br from-primary/20 via-secondary/20 to-primary/20 backdrop-blur-lg relative mx-2 sm:mx-0">
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          className="relative z-10 w-full max-w-md mx-auto space-y-4 sm:space-y-6"
+          className="relative z-10 w-full max-w-xs sm:max-w-md mx-auto space-y-3 sm:space-y-4 md:space-y-6"
         >
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-            className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 mx-auto bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center"
+            className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 mx-auto bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center"
           >
-            <Trophy className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-primary-foreground" />
+            <Trophy className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 text-primary-foreground" />
           </motion.div>
           
-          <div className="space-y-2 sm:space-y-3">
-            <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-earth bg-clip-text text-transparent leading-tight">
+          <div className="space-y-2 sm:space-y-3 px-2">
+            <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold bg-gradient-earth bg-clip-text text-transparent leading-tight">
               Quiz Complete!
             </h3>
             
-            <p className="text-sm sm:text-base lg:text-lg font-medium">{getScoreMessage()}</p>
-            <p className="text-sm lg:text-base text-muted-foreground">
+            <p className="text-xs sm:text-sm md:text-base lg:text-lg font-medium break-words">{getScoreMessage()}</p>
+            <p className="text-xs sm:text-sm md:text-base text-muted-foreground break-words">
               You scored <span className="font-semibold text-primary">{score}</span> out of <span className="font-semibold text-primary">{questions.length}</span> questions correctly!
             </p>
           </div>
           
-          <div className="pt-2">
+          <div className="pt-1 sm:pt-2">
             <Button 
               onClick={resetGame} 
-              className="group px-6 py-3 text-sm sm:text-base min-w-[140px]"
+              className="group px-4 sm:px-6 py-2 sm:py-3 text-xs sm:text-sm md:text-base min-w-[120px] sm:min-w-[140px]"
             >
-              <RotateCcw className="w-4 h-4 mr-2 group-hover:rotate-180 transition-transform duration-300" />
+              <RotateCcw className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2 group-hover:rotate-180 transition-transform duration-300" />
               Play Again
             </Button>
           </div>
@@ -137,7 +137,7 @@ const ClimateQuizGame = () => {
   const IconComponent = currentQ.icon;
 
   return (
-    <Card className="p-4 sm:p-6 lg:p-8 text-center shadow-hero border border-primary/30 bg-gradient-to-br from-primary/20 via-secondary/20 to-primary/20 backdrop-blur-lg relative overflow-hidden">
+    <Card className="p-3 sm:p-4 md:p-6 lg:p-8 text-center shadow-hero border border-primary/30 bg-gradient-to-br from-primary/20 via-secondary/20 to-primary/20 backdrop-blur-lg relative overflow-hidden mx-2 sm:mx-0">
       <motion.div
         className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/30 to-transparent"
         animate={{ x: ['-100%', '100%'] }}
@@ -145,7 +145,7 @@ const ClimateQuizGame = () => {
       />
       
       <div className="relative z-10">
-        <div className="flex flex-col sm:flex-row justify-between items-center mb-4 sm:mb-6 gap-2 sm:gap-4">
+        <div className="flex flex-col sm:flex-row justify-between items-center mb-3 sm:mb-4 md:mb-6 gap-2 sm:gap-4">
           <div className="text-xs sm:text-sm text-muted-foreground">
             Question {currentQuestion + 1} of {questions.length}
           </div>
@@ -157,8 +157,8 @@ const ClimateQuizGame = () => {
                 className="flex items-center gap-1 text-primary font-semibold"
               >
                 <Zap className="w-3 h-3 sm:w-4 sm:h-4" />
-                <span className="hidden xs:inline">{streak} streak</span>
-                <span className="xs:hidden">{streak}</span>
+                <span className="hidden sm:inline">{streak} streak</span>
+                <span className="sm:hidden">{streak}</span>
               </motion.div>
             )}
             <div className="font-semibold">Score: {score}</div>
@@ -183,12 +183,12 @@ const ClimateQuizGame = () => {
           key={currentQuestion}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-lg sm:text-xl lg:text-2xl font-bold mb-6 sm:mb-8 bg-gradient-earth bg-clip-text text-transparent px-2"
+          className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold mb-4 sm:mb-6 md:mb-8 bg-gradient-earth bg-clip-text text-transparent px-2 leading-tight break-words"
         >
           {currentQ.question}
         </motion.h3>
 
-        <div className="grid grid-cols-1 gap-3 sm:gap-4 mb-6 sm:mb-8 max-w-2xl mx-auto">
+        <div className="grid grid-cols-1 gap-2 sm:gap-3 md:gap-4 mb-4 sm:mb-6 md:mb-8 max-w-2xl mx-auto">
           {currentQ.options.map((option, index) => (
             <motion.button
               key={index}
@@ -197,7 +197,7 @@ const ClimateQuizGame = () => {
               transition={{ delay: index * 0.1 }}
               onClick={() => handleAnswer(index)}
               disabled={selectedAnswer !== null}
-              className={`p-3 sm:p-4 rounded-xl border-2 transition-all duration-300 hover:scale-105 text-sm sm:text-base text-left ${
+              className={`p-2 sm:p-3 md:p-4 rounded-xl border-2 transition-all duration-300 hover:scale-105 text-xs sm:text-sm md:text-base text-left break-words ${
                 selectedAnswer === null
                   ? 'border-primary/30 hover:border-primary bg-background/20 hover:bg-primary/10'
                   : selectedAnswer === index
@@ -218,12 +218,12 @@ const ClimateQuizGame = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mb-4 sm:mb-6"
+            className="mb-3 sm:mb-4 md:mb-6 px-2"
           >
-            <p className="text-xs sm:text-sm text-muted-foreground mb-3 sm:mb-4 italic px-2">
+            <p className="text-xs sm:text-sm text-muted-foreground mb-2 sm:mb-3 md:mb-4 italic break-words leading-relaxed">
               {currentQ.fact}
             </p>
-            <Button onClick={nextQuestion} className="animate-pulse text-sm sm:text-base px-4 sm:px-6 py-2 sm:py-3">
+            <Button onClick={nextQuestion} className="animate-pulse text-xs sm:text-sm md:text-base px-3 sm:px-4 md:px-6 py-2 sm:py-3">
               {currentQuestion < questions.length - 1 ? 'Next Question' : 'See Results'}
             </Button>
           </motion.div>
