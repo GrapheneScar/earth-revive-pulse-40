@@ -1,13 +1,12 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Filter, Play, Download, Share, Eye } from 'lucide-react';
+import { Play, Download, Share, Eye } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 
 const GalleryPage = () => {
-  const [activeFilter, setActiveFilter] = useState('all');
   const [selectedItem, setSelectedItem] = useState<any>(null);
 
   const galleryItems = [
@@ -93,19 +92,6 @@ const GalleryPage = () => {
     },
   ];
 
-  const filters = [
-    { key: 'all', label: 'All Images' },
-    { key: 'Events', label: 'Events' },
-    { key: 'Conservation', label: 'Conservation' },
-    { key: 'Volunteers', label: 'Volunteers' },
-    { key: 'Nature', label: 'Nature' },
-    { key: 'Awareness', label: 'Awareness' },
-    { key: 'Recognition', label: 'Recognition' },
-  ];
-
-  const filteredItems = activeFilter === 'all' 
-    ? galleryItems 
-    : galleryItems.filter(item => item.category === activeFilter);
 
   const handleItemClick = (item: any) => {
     setSelectedItem(item);
@@ -141,24 +127,6 @@ const GalleryPage = () => {
           </div>
         </section>
 
-        {/* Filter Section */}
-        <section className="px-4 mb-12">
-          <div className="container mx-auto">
-            <div className="flex flex-wrap justify-center gap-4 mb-8">
-              {filters.map((filter) => (
-                <Button
-                  key={filter.key}
-                  variant={activeFilter === filter.key ? 'default' : 'outline'}
-                  onClick={() => setActiveFilter(filter.key)}
-                  className="transition-smooth hover-lift"
-                >
-                  <Filter className="w-4 h-4 mr-2" />
-                  {filter.label}
-                </Button>
-              ))}
-            </div>
-          </div>
-        </section>
 
         {/* Gallery Grid */}
         <section className="px-4 pb-20">
@@ -167,7 +135,7 @@ const GalleryPage = () => {
               layout
               className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 sm:gap-6"
             >
-              {filteredItems.map((item, index) => (
+              {galleryItems.map((item, index) => (
                 <motion.div
                   key={item.id}
                   layout
