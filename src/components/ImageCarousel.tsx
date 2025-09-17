@@ -68,20 +68,7 @@ const ImageCarousel = () => {
       const currentItem = carouselItems[newCurrent - 1];
       setIsVideoPlaying(currentItem?.type === 'streamable');
     });
-
-    // Auto-play functionality - pause when video is playing
-    const interval = setInterval(() => {
-      if (!isVideoPlaying) {
-        if (api.canScrollNext()) {
-          api.scrollNext();
-        } else {
-          api.scrollTo(0);
-        }
-      }
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, [api, isVideoPlaying]);
+  }, [api]);
 
   return (
     <section className="py-16 sm:py-20 px-4 bg-gradient-to-br from-background to-card">
