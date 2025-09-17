@@ -3,7 +3,7 @@ import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Calendar, Users, Target, Award } from 'lucide-react';
+import { Calendar, Users, Target, Award, Compass, Lightbulb, Sparkles, Globe } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import LeadershipCards from '@/components/LeadershipCards';
@@ -141,33 +141,104 @@ const AboutPage = () => {
           }} transition={{
             duration: 0.8
           }}>
-              <Card className="p-8 h-full shadow-card border-none bg-gradient-to-br from-primary/5 to-background hover-lift interactive-card relative overflow-hidden">
-                {/* Animated border effect */}
-                <motion.div className="absolute inset-0 border-2 border-primary/20 rounded-xl" animate={{
-                borderColor: ["hsl(var(--primary) / 0.2)", "hsl(var(--primary) / 0.4)", "hsl(var(--primary) / 0.2)"]
-              }} transition={{
-                duration: 3,
-                repeat: Infinity
-              }} />
+              <Card className="p-8 h-full border-none bg-gradient-to-br from-primary/10 via-primary/5 to-background relative overflow-hidden group shadow-[0_0_30px_hsl(var(--primary)/0.2)] hover:shadow-[0_0_50px_hsl(var(--primary)/0.4)] transition-all duration-500">
+                {/* Floating particles */}
+                <div className="absolute inset-0 pointer-events-none">
+                  {[...Array(8)].map((_, i) => (
+                    <motion.div
+                      key={i}
+                      className="absolute w-1 h-1 bg-primary/30 rounded-full"
+                      style={{
+                        left: `${15 + Math.random() * 70}%`,
+                        top: `${15 + Math.random() * 70}%`
+                      }}
+                      animate={{
+                        y: [0, -10, 0],
+                        opacity: [0.3, 0.8, 0.3],
+                        scale: [0.5, 1, 0.5]
+                      }}
+                      transition={{
+                        duration: 3 + Math.random() * 2,
+                        repeat: Infinity,
+                        delay: Math.random() * 2
+                      }}
+                    />
+                  ))}
+                </div>
+
+                {/* Animated gradient overlay */}
+                <motion.div 
+                  className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/10 opacity-0 group-hover:opacity-100"
+                  transition={{ duration: 0.5 }}
+                />
+
+                {/* Decorative corner elements */}
+                <div className="absolute top-4 right-4">
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                    className="w-8 h-8 border-2 border-primary/20 rounded-full"
+                  />
+                </div>
+                <div className="absolute bottom-4 left-4">
+                  <motion.div
+                    animate={{ scale: [1, 1.2, 1] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                    className="w-2 h-2 bg-primary/40 rounded-full"
+                  />
+                </div>
+
                 <div className="relative z-10">
-                  <motion.h2 className="text-3xl font-bold mb-6 text-primary" animate={{
-                  textShadow: ["0 0 0px hsl(var(--primary) / 0)", "0 0 10px hsl(var(--primary) / 0.3)", "0 0 0px hsl(var(--primary) / 0)"]
-                }} transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  delay: 0.5
-                }}>
-                    Our Mission
-                  </motion.h2>
-                  <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                    To mobilize global action against climate change through innovative solutions, 
-                    community engagement, and environmental education that creates lasting impact 
-                    for our planet and future generations.
-                  </p>
-                  <p className="text-muted-foreground leading-relaxed">
-                    We believe that meaningful environmental change happens when communities, 
-                    technology, and policy work together toward common goals.
-                  </p>
+                  <div className="flex items-center gap-4 mb-6">
+                    <motion.div
+                      className="w-16 h-16 bg-gradient-to-br from-primary to-primary/60 rounded-2xl flex items-center justify-center shadow-lg"
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                    >
+                      <Compass className="w-8 h-8 text-white" />
+                    </motion.div>
+                    <motion.h2 
+                      className="text-3xl font-bold text-primary"
+                      animate={{
+                        textShadow: ["0 0 0px hsl(var(--primary) / 0)", "0 0 20px hsl(var(--primary) / 0.4)", "0 0 0px hsl(var(--primary) / 0)"]
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity
+                      }}
+                    >
+                      Our Mission
+                    </motion.h2>
+                  </div>
+                  
+                  <div className="space-y-4">
+                    <p className="text-lg text-muted-foreground leading-relaxed">
+                      To mobilize global action against climate change through innovative solutions, 
+                      community engagement, and environmental education that creates lasting impact 
+                      for our planet and future generations.
+                    </p>
+                    <div className="h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent"></div>
+                    <p className="text-muted-foreground leading-relaxed">
+                      We believe that meaningful environmental change happens when communities, 
+                      technology, and policy work together toward common goals.
+                    </p>
+                  </div>
+
+                  {/* Progress indicator */}
+                  <div className="mt-6 pt-4">
+                    <div className="flex items-center justify-between text-sm text-muted-foreground mb-2">
+                      <span>Global Impact</span>
+                      <span>500K+ Members</span>
+                    </div>
+                    <div className="w-full bg-primary/10 rounded-full h-2">
+                      <motion.div
+                        className="bg-gradient-to-r from-primary to-primary/60 h-2 rounded-full"
+                        initial={{ width: 0 }}
+                        whileInView={{ width: "85%" }}
+                        transition={{ duration: 2, delay: 0.5 }}
+                      />
+                    </div>
+                  </div>
                 </div>
               </Card>
             </motion.div>
@@ -184,34 +255,141 @@ const AboutPage = () => {
             duration: 0.8,
             delay: 0.2
           }}>
-              <Card className="p-8 h-full shadow-card border-none bg-gradient-to-br from-secondary/5 to-background hover-lift interactive-card relative overflow-hidden">
-                {/* Animated border effect */}
-                <motion.div className="absolute inset-0 border-2 border-secondary/20 rounded-xl" animate={{
-                borderColor: ["hsl(var(--secondary) / 0.2)", "hsl(var(--secondary) / 0.4)", "hsl(var(--secondary) / 0.2)"]
-              }} transition={{
-                duration: 3,
-                repeat: Infinity,
-                delay: 1
-              }} />
+              <Card className="p-8 h-full border-none bg-gradient-to-br from-secondary/10 via-accent/5 to-background relative overflow-hidden group shadow-[0_0_30px_hsl(var(--secondary)/0.2)] hover:shadow-[0_0_50px_hsl(var(--secondary)/0.4)] transition-all duration-500">
+                {/* Floating sparkles */}
+                <div className="absolute inset-0 pointer-events-none">
+                  {[...Array(6)].map((_, i) => (
+                    <motion.div
+                      key={i}
+                      className="absolute"
+                      style={{
+                        left: `${20 + Math.random() * 60}%`,
+                        top: `${20 + Math.random() * 60}%`
+                      }}
+                      animate={{
+                        rotate: [0, 360],
+                        scale: [0.5, 1, 0.5],
+                        opacity: [0.2, 0.6, 0.2]
+                      }}
+                      transition={{
+                        duration: 4 + Math.random() * 2,
+                        repeat: Infinity,
+                        delay: Math.random() * 3
+                      }}
+                    >
+                      <Sparkles className="w-3 h-3 text-secondary/40" />
+                    </motion.div>
+                  ))}
+                </div>
+
+                {/* Animated gradient overlay */}
+                <motion.div 
+                  className="absolute inset-0 bg-gradient-to-l from-secondary/5 via-transparent to-accent/10 opacity-0 group-hover:opacity-100"
+                  transition={{ duration: 0.5 }}
+                />
+
+                {/* Decorative elements */}
+                <div className="absolute top-4 left-4">
+                  <motion.div
+                    animate={{ 
+                      boxShadow: [
+                        "0 0 0px hsl(var(--secondary) / 0.3)",
+                        "0 0 20px hsl(var(--secondary) / 0.6)",
+                        "0 0 0px hsl(var(--secondary) / 0.3)"
+                      ]
+                    }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                    className="w-6 h-6 bg-secondary/30 rounded-full"
+                  />
+                </div>
+                <div className="absolute bottom-4 right-4">
+                  <motion.div
+                    animate={{ y: [0, -5, 0] }}
+                    transition={{ duration: 2, repeat: Infinity, delay: 1 }}
+                    className="w-3 h-8 bg-gradient-to-t from-secondary/20 to-transparent rounded-full"
+                  />
+                </div>
+
                 <div className="relative z-10">
-                  <motion.h2 className="text-3xl font-bold mb-6 text-secondary" animate={{
-                  textShadow: ["0 0 0px hsl(var(--secondary) / 0)", "0 0 10px hsl(var(--secondary) / 0.3)", "0 0 0px hsl(var(--secondary) / 0)"]
-                }} transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  delay: 1.5
-                }}>
-                    Our Vision
-                  </motion.h2>
-                  <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                    A world where humanity lives in harmony with nature, powered by clean energy, 
-                    sustained by healthy ecosystems, and guided by environmental stewardship 
-                    at every level of society.
-                  </p>
-                  <p className="text-muted-foreground leading-relaxed">
-                    We envision communities that thrive while protecting the environment, 
-                    creating a legacy of sustainability for generations to come.
-                  </p>
+                  <div className="flex items-center gap-4 mb-6">
+                    <motion.div
+                      className="w-16 h-16 bg-gradient-to-br from-secondary to-accent rounded-2xl flex items-center justify-center shadow-lg relative overflow-hidden"
+                      whileHover={{ scale: 1.1, rotate: -5 }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                    >
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                        animate={{ x: ['-100%', '100%'] }}
+                        transition={{ duration: 2, repeat: Infinity, delay: 1 }}
+                      />
+                      <Lightbulb className="w-8 h-8 text-white relative z-10" />
+                    </motion.div>
+                    <motion.h2 
+                      className="text-3xl font-bold text-secondary"
+                      animate={{
+                        textShadow: ["0 0 0px hsl(var(--secondary) / 0)", "0 0 20px hsl(var(--secondary) / 0.4)", "0 0 0px hsl(var(--secondary) / 0)"]
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        delay: 1
+                      }}
+                    >
+                      Our Vision
+                    </motion.h2>
+                  </div>
+                  
+                  <div className="space-y-4">
+                    <p className="text-lg text-muted-foreground leading-relaxed">
+                      A world where humanity lives in harmony with nature, powered by clean energy, 
+                      sustained by healthy ecosystems, and guided by environmental stewardship 
+                      at every level of society.
+                    </p>
+                    <div className="h-px bg-gradient-to-r from-transparent via-secondary/30 to-transparent"></div>
+                    <p className="text-muted-foreground leading-relaxed">
+                      We envision communities that thrive while protecting the environment, 
+                      creating a legacy of sustainability for generations to come.
+                    </p>
+                  </div>
+
+                  {/* Vision metrics */}
+                  <div className="mt-6 pt-4">
+                    <div className="grid grid-cols-3 gap-4 text-center">
+                      <div>
+                        <motion.div
+                          className="text-2xl font-bold text-secondary mb-1"
+                          initial={{ opacity: 0, y: 10 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.8 }}
+                        >
+                          2030
+                        </motion.div>
+                        <div className="text-xs text-muted-foreground">Carbon Neutral</div>
+                      </div>
+                      <div>
+                        <motion.div
+                          className="text-2xl font-bold text-secondary mb-1"
+                          initial={{ opacity: 0, y: 10 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 1 }}
+                        >
+                          100%
+                        </motion.div>
+                        <div className="text-xs text-muted-foreground">Clean Energy</div>
+                      </div>
+                      <div>
+                        <motion.div
+                          className="text-2xl font-bold text-secondary mb-1"
+                          initial={{ opacity: 0, y: 10 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 1.2 }}
+                        >
+                          1M+
+                        </motion.div>
+                        <div className="text-xs text-muted-foreground">Trees Planted</div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </Card>
             </motion.div>
