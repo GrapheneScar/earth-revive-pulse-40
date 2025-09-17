@@ -94,38 +94,38 @@ const ClimateQuizGame = () => {
 
   if (gameComplete) {
     return (
-      <Card className="p-2 sm:p-3 md:p-4 lg:p-6 text-center shadow-hero border border-primary/30 bg-gradient-to-br from-primary/20 via-secondary/20 to-primary/20 backdrop-blur-lg relative overflow-hidden mx-2 sm:mx-0">
+      <Card className="p-1 sm:p-2 md:p-3 lg:p-4 text-center shadow-hero border border-primary/30 bg-gradient-to-br from-primary/20 via-secondary/20 to-primary/20 backdrop-blur-lg relative overflow-hidden mx-1 sm:mx-2 max-w-[calc(100vw-0.5rem)] sm:max-w-none">
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          className="relative z-10 w-full max-w-[280px] sm:max-w-sm md:max-w-md mx-auto space-y-2 sm:space-y-3 md:space-y-4"
+          className="relative z-10 w-full max-w-[250px] sm:max-w-sm md:max-w-md mx-auto space-y-1 sm:space-y-2 md:space-y-3"
         >
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-            className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 mx-auto bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center"
+            className="w-8 h-8 sm:w-12 sm:h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 mx-auto bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center"
           >
-            <Trophy className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 text-primary-foreground" />
+            <Trophy className="w-4 h-4 sm:w-6 sm:h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 text-primary-foreground" />
           </motion.div>
           
-          <div className="space-y-1 sm:space-y-2 px-1 sm:px-2">
-            <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold bg-gradient-earth bg-clip-text text-transparent leading-tight">
+          <div className="space-y-1 px-1">
+            <h3 className="text-sm sm:text-base md:text-lg lg:text-xl font-bold bg-gradient-earth bg-clip-text text-transparent leading-tight">
               Quiz Complete!
             </h3>
             
-            <p className="text-xs sm:text-sm md:text-base font-medium break-words hyphens-auto">{getScoreMessage()}</p>
-            <p className="text-xs sm:text-sm text-muted-foreground break-words hyphens-auto">
-              You scored <span className="font-semibold text-primary">{score}</span> out of <span className="font-semibold text-primary">{questions.length}</span> questions correctly!
+            <p className="text-xs sm:text-sm font-medium break-words hyphens-auto leading-tight">{getScoreMessage()}</p>
+            <p className="text-xs sm:text-sm text-muted-foreground break-words hyphens-auto leading-tight">
+              You scored <span className="font-semibold text-primary">{score}</span> out of <span className="font-semibold text-primary">{questions.length}</span> correctly!
             </p>
           </div>
           
-          <div className="pt-1 sm:pt-2">
+          <div className="pt-1">
             <Button 
               onClick={resetGame} 
-              className="group px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 md:py-3 text-xs sm:text-sm md:text-base min-w-[100px] sm:min-w-[120px] max-w-[200px]"
+              className="group px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 text-xs sm:text-sm text-center w-full max-w-[120px] sm:max-w-[140px]"
             >
-              <RotateCcw className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2 group-hover:rotate-180 transition-transform duration-300" />
-              Play Again
+              <RotateCcw className="w-3 h-3 sm:w-4 sm:h-4 mr-1 group-hover:rotate-180 transition-transform duration-300" />
+              <span className="truncate">Play Again</span>
             </Button>
           </div>
         </motion.div>
