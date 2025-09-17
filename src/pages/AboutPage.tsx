@@ -352,42 +352,101 @@ const AboutPage = () => {
                     </p>
                   </div>
 
-                  {/* Vision metrics */}
+                  {/* Interactive vision elements */}
                   <div className="mt-6 pt-4">
-                    <div className="grid grid-cols-3 gap-4 text-center">
-                      <div>
+                    <div className="grid grid-cols-2 gap-3">
+                      <motion.div
+                        className="group cursor-pointer p-3 rounded-lg bg-secondary/10 hover:bg-secondary/20 transition-all duration-300"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <div className="flex items-center gap-2 mb-2">
+                          <motion.div
+                            animate={{ rotate: [0, 360] }}
+                            transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                          >
+                            <Globe className="w-4 h-4 text-secondary" />
+                          </motion.div>
+                          <span className="text-sm font-medium text-secondary">Global Reach</span>
+                        </div>
                         <motion.div
-                          className="text-2xl font-bold text-secondary mb-1"
-                          initial={{ opacity: 0, y: 10 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          transition={{ delay: 0.8 }}
+                          className="w-full h-1 bg-secondary/20 rounded-full overflow-hidden"
+                          whileHover={{ height: "6px" }}
                         >
-                          2030
+                          <motion.div
+                            className="h-full bg-gradient-to-r from-secondary to-accent rounded-full"
+                            initial={{ width: "0%" }}
+                            whileInView={{ width: "90%" }}
+                            transition={{ duration: 2, delay: 0.5 }}
+                          />
                         </motion.div>
-                        <div className="text-xs text-muted-foreground">Carbon Neutral</div>
-                      </div>
-                      <div>
+                      </motion.div>
+
+                      <motion.div
+                        className="group cursor-pointer p-3 rounded-lg bg-accent/10 hover:bg-accent/20 transition-all duration-300"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <div className="flex items-center gap-2 mb-2">
+                          <motion.div
+                            animate={{ 
+                              scale: [1, 1.2, 1],
+                              opacity: [0.7, 1, 0.7]
+                            }}
+                            transition={{ duration: 2, repeat: Infinity }}
+                          >
+                            <Sparkles className="w-4 h-4 text-accent" />
+                          </motion.div>
+                          <span className="text-sm font-medium text-accent">Innovation</span>
+                        </div>
                         <motion.div
-                          className="text-2xl font-bold text-secondary mb-1"
-                          initial={{ opacity: 0, y: 10 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          transition={{ delay: 1 }}
+                          className="w-full h-1 bg-accent/20 rounded-full overflow-hidden"
+                          whileHover={{ height: "6px" }}
                         >
-                          100%
+                          <motion.div
+                            className="h-full bg-gradient-to-r from-accent to-secondary rounded-full"
+                            initial={{ width: "0%" }}
+                            whileInView={{ width: "85%" }}
+                            transition={{ duration: 2, delay: 0.8 }}
+                          />
                         </motion.div>
-                        <div className="text-xs text-muted-foreground">Clean Energy</div>
-                      </div>
-                      <div>
+                      </motion.div>
+
+                      <motion.div
+                        className="group cursor-pointer p-3 rounded-lg bg-primary/10 hover:bg-primary/20 transition-all duration-300 col-span-2"
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <motion.div
+                              animate={{ y: [0, -3, 0] }}
+                              transition={{ duration: 2, repeat: Infinity, delay: 1 }}
+                            >
+                              <Target className="w-4 h-4 text-primary" />
+                            </motion.div>
+                            <span className="text-sm font-medium text-primary">Sustainable Future</span>
+                          </div>
+                          <motion.div
+                            className="text-xs text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity"
+                            initial={{ x: 10 }}
+                            whileHover={{ x: 0 }}
+                          >
+                            Click to explore →
+                          </motion.div>
+                        </div>
                         <motion.div
-                          className="text-2xl font-bold text-secondary mb-1"
-                          initial={{ opacity: 0, y: 10 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          transition={{ delay: 1.2 }}
+                          className="w-full h-1 bg-primary/20 rounded-full overflow-hidden mt-2"
+                          whileHover={{ height: "6px" }}
                         >
-                          1M+
+                          <motion.div
+                            className="h-full bg-gradient-to-r from-primary via-secondary to-accent rounded-full"
+                            initial={{ width: "0%" }}
+                            whileInView={{ width: "95%" }}
+                            transition={{ duration: 2, delay: 1.1 }}
+                          />
                         </motion.div>
-                        <div className="text-xs text-muted-foreground">Trees Planted</div>
-                      </div>
+                      </motion.div>
                     </div>
                   </div>
                 </div>
