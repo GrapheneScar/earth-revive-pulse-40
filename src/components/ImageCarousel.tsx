@@ -38,7 +38,7 @@ const ImageCarousel = () => {
     {
       id: 3,
       title: 'Nature Reserve Conservation',
-      description: 'Our dedicated team working together at SGNP Nature Reserve for environmental conservation',
+      description: 'Our dedicated team working together at BHNS Nature Reserve for environmental conservation',
       type: 'image',
       image: '/lovable-uploads/nature-reserve-team.jpg',
       category: 'Conservation'
