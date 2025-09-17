@@ -61,7 +61,24 @@ const ImageCarousel = () => {
     setCurrent(api.selectedScrollSnap() + 1);
 
     api.on('select', () => {
-      setCurrent(api.selectedScrollSnap() + 1);
+      const newCurrent = api.selectedScrollSnap() + 1;
+      setCurrent(newCurrent);
+      
+      // Control video playback based on current slide
+      const currentItem = carouselItems[newCurrent - 1];
+      if (currentItem?.type === 'streamable') {
+        setIsVideoPlaying(true);
+        // Update video src to include autoplay when it becomes active
+        if (videoRef.current) {
+          videoRef.current.src = "https://streamable.com/e/cw49u8?autoplay=1&nocontrols=1";
+        }
+      } else {
+        setIsVideoPlaying(false);
+        // Remove autoplay when video is not active
+        if (videoRef.current) {
+          videoRef.current.src = "https://streamable.com/e/cw49u8?nocontrols=1";
+        }
+      }
     });
 
     // Auto-play functionality - pause when video is playing
@@ -76,7 +93,7 @@ const ImageCarousel = () => {
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [api]);
+  }, [api, isVideoPlaying]);
 
   return (
     <section className="py-16 sm:py-20 px-4 bg-gradient-to-br from-background to-card">
@@ -126,7 +143,7 @@ const ImageCarousel = () => {
                               allow="fullscreen;autoplay" 
                               allowFullScreen 
                               height="100%" 
-                              src="https://streamable.com/e/cw49u8?autoplay=1&nocontrols=1" 
+                              src="https://streamable.com/e/cw49u8?nocontrols=1" 
                               width="100%" 
                               style={{border:'none', width:'100%', height:'100%', position:'absolute', left:'0px', top:'0px', overflow:'hidden'}}
                               title={item.title}
