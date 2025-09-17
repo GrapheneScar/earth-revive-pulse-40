@@ -28,6 +28,7 @@ const TeamPage = () => {
     borderColor: "border-yellow-500/30",
     glowColor: "shadow-yellow-500/20",
     category: "leadership",
+    skills: ["Strategic Leadership", "Environmental Policy"],
     achievements: ["Environmental Leadership Award", "Youth Climate Ambassador", "Published Researcher"],
     quote: "Every action counts in our fight for a sustainable future.",
     image: "/lovable-uploads/354b055f-8da4-4c2f-8205-6df4f43db47a.png"
@@ -42,6 +43,7 @@ const TeamPage = () => {
     borderColor: "border-secondary/30",
     glowColor: "shadow-secondary/20",
     category: "leadership",
+    skills: ["Operations Management", "Strategic Planning"],
     achievements: ["Operations Excellence", "Community Builder", "Strategic Planner"],
     quote: "Strategy without execution is just a wish.",
     image: "/lovable-uploads/33fea22c-785c-4f6a-82b8-b825b0d6f3a3.png"
@@ -56,6 +58,7 @@ const TeamPage = () => {
     borderColor: "border-secondary/30",
     glowColor: "shadow-secondary/20",
     category: "leadership",
+    skills: ["Community Building", "Partnership Development"],
     achievements: ["Global Connector", "Partnership Developer", "Community Advocate"],
     quote: "Together we can create waves of positive change.",
     image: "/lovable-uploads/9ab57c9f-653a-4b7e-b6c9-a4773810f8f9.png"
@@ -315,6 +318,61 @@ const TeamPage = () => {
             </div>
           </div>
 
+          {/* Description */}
+          <motion.p className="text-sm sm:text-base text-muted-foreground mb-4 leading-relaxed" animate={hoveredCard === index ? {
+            scale: 1.02
+          } : {
+            scale: 1
+          }}>
+            {member.description}
+          </motion.p>
+
+          {/* Skills */}
+          {member.skills && (
+            <div className="mb-4">
+              <h4 className="text-sm font-semibold text-foreground mb-2 flex items-center gap-2">
+                <Zap className="w-4 h-4" />
+                Key Skills
+              </h4>
+              <div className="flex flex-wrap gap-2">
+                {member.skills.slice(0, 2).map((skill: string, skillIndex: number) => (
+                  <motion.div
+                    key={skillIndex}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: skillIndex * 0.1 }}
+                  >
+                    <Badge 
+                      variant="outline" 
+                      className={`text-xs px-2 py-1 ${member.iconColor} border-current bg-current/5 hover:bg-current/10 transition-colors`}
+                    >
+                      {skill}
+                    </Badge>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Quote for Leadership or Projects for Others */}
+          {isLeadership && member.quote && (
+            <motion.blockquote className="text-sm italic text-muted-foreground border-l-4 border-current pl-4 mb-4" animate={hoveredCard === index ? {
+              scale: 1.02
+            } : {
+              scale: 1
+            }}>
+              "{member.quote}"
+            </motion.blockquote>
+          )}
+          
+          {!isLeadership && member.projects && (
+            <div className="mb-4">
+              <Badge variant="secondary" className="text-xs px-3 py-1">
+                <Award className="w-3 h-3 mr-1" />
+                {member.projects}
+              </Badge>
+            </div>
+          )}
 
           {/* Social Links */}
           <div className="flex gap-3">
