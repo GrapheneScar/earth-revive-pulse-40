@@ -191,7 +191,7 @@ const TeamPage = () => {
     borderColor: "border-secondary/30",
     glowColor: "shadow-secondary/20",
     category: "digital-tech",
-    skills: ["Frontend Development", "UI Design", "Responsive Design", "User Experience"],
+    skills: ["Content Management", "UI Design"],
     projects: "10+ Web Projects",
     image: "/lovable-uploads/72eede36-376c-4854-aa5b-8c6c85b1c530.png"
   }];
