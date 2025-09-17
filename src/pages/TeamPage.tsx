@@ -319,60 +319,46 @@ const TeamPage = () => {
           </div>
 
           {/* Description */}
-          <motion.p className="text-sm sm:text-base text-muted-foreground mb-4 leading-relaxed" animate={hoveredCard === index ? {
-            scale: 1.02
-          } : {
-            scale: 1
-          }}>
-            {member.description}
-          </motion.p>
+          
 
           {/* Skills */}
-          {member.skills && (
-            <div className="mb-4">
+          {member.skills && <div className="mb-4">
               <h4 className="text-sm font-semibold text-foreground mb-2 flex items-center gap-2">
                 <Zap className="w-4 h-4" />
                 Key Skills
               </h4>
               <div className="flex flex-wrap gap-2">
-                {member.skills.slice(0, 2).map((skill: string, skillIndex: number) => (
-                  <motion.div
-                    key={skillIndex}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: skillIndex * 0.1 }}
-                  >
-                    <Badge 
-                      variant="outline" 
-                      className={`text-xs px-2 py-1 ${member.iconColor} border-current bg-current/5 hover:bg-current/10 transition-colors`}
-                    >
+                {member.skills.slice(0, 2).map((skill: string, skillIndex: number) => <motion.div key={skillIndex} initial={{
+              opacity: 0,
+              scale: 0.8
+            }} animate={{
+              opacity: 1,
+              scale: 1
+            }} transition={{
+              delay: skillIndex * 0.1
+            }}>
+                    <Badge variant="outline" className={`text-xs px-2 py-1 ${member.iconColor} border-current bg-current/5 hover:bg-current/10 transition-colors`}>
                       {skill}
                     </Badge>
-                  </motion.div>
-                ))}
+                  </motion.div>)}
               </div>
-            </div>
-          )}
+            </div>}
 
           {/* Quote for Leadership or Projects for Others */}
-          {isLeadership && member.quote && (
-            <motion.blockquote className="text-sm italic text-muted-foreground border-l-4 border-current pl-4 mb-4" animate={hoveredCard === index ? {
-              scale: 1.02
-            } : {
-              scale: 1
-            }}>
+          {isLeadership && member.quote && <motion.blockquote className="text-sm italic text-muted-foreground border-l-4 border-current pl-4 mb-4" animate={hoveredCard === index ? {
+          scale: 1.02
+        } : {
+          scale: 1
+        }}>
               "{member.quote}"
-            </motion.blockquote>
-          )}
+            </motion.blockquote>}
           
-          {!isLeadership && member.projects && (
-            <div className="mb-4">
+          {!isLeadership && member.projects && <div className="mb-4">
               <Badge variant="secondary" className="text-xs px-3 py-1">
                 <Award className="w-3 h-3 mr-1" />
                 {member.projects}
               </Badge>
-            </div>
-          )}
+            </div>}
 
           {/* Social Links */}
           <div className="flex gap-3">
