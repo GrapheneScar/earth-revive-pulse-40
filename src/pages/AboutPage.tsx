@@ -417,13 +417,7 @@ const AboutPage = () => {
                             </motion.div>
                             <span className="text-sm font-medium text-primary">Sustainable Future</span>
                           </div>
-                          <motion.div className="text-xs text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" initial={{
-                          x: 10
-                        }} whileHover={{
-                          x: 0
-                        }}>
-                            Click to explore →
-                          </motion.div>
+                          
                         </div>
                         <motion.div className="w-full h-1 bg-primary/20 rounded-full overflow-hidden mt-2" whileHover={{
                         height: "6px"
