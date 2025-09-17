@@ -172,143 +172,7 @@ const InitiativesPage = () => {
       </section>
 
       {/* Upcoming Events Section */}
-      <section className="py-16 sm:py-20 px-4 bg-gradient-to-br from-secondary/5 to-primary/5" ref={upcomingRef}>
-        <div className="container mx-auto">
-          <motion.div initial={{
-          opacity: 0,
-          y: 30
-        }} animate={isUpcomingInView ? {
-          opacity: 1,
-          y: 0
-        } : {
-          opacity: 0,
-          y: 30
-        }} transition={{
-          duration: 0.8
-        }} className="text-center mb-12 sm:mb-16">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">
-              <span className="bg-gradient-earth bg-clip-text text-transparent">
-                Upcoming Events
-              </span>
-            </h2>
-            <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
-              Join our local climate action initiatives happening this September in Mumbai.
-              These events are part of our school's Climate Action Project in collaboration with community partners.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mb-8 sm:mb-12">
-            {upcomingEvents.map((event, index) => {
-            const isPast = isEventPast(event.date);
-            return <motion.div key={event.id} initial={{
-              opacity: 0,
-              y: 30
-            }} animate={isUpcomingInView ? {
-              opacity: 1,
-              y: 0
-            } : {
-              opacity: 0,
-              y: 30
-            }} transition={{
-              duration: 0.6,
-              delay: index * 0.2
-            }}>
-                  <Card className={`p-4 sm:p-6 lg:p-8 h-full shadow-hero border-2 border-primary/20 bg-gradient-to-br ${event.color} hover:shadow-glow transition-all duration-500 group relative overflow-hidden ${isPast ? 'opacity-80' : ''}`}>
-                    {/* Event Status Badge */}
-                    <div className="absolute top-2 sm:top-4 right-2 sm:right-4">
-                      <Badge className={`font-semibold text-xs sm:text-sm ${isPast ? 'bg-muted text-muted-foreground' : 'bg-gradient-eco text-background animate-pulse'}`}>
-                        {isPast ? 'COMPLETED INITIATIVE' : 'UPCOMING EVENT'}
-                      </Badge>
-                    </div>
-
-                  <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6 mb-4 sm:mb-6 mt-8 sm:mt-0">
-                    <motion.div className={`w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center rounded-3xl bg-gradient-to-br from-background to-background/80 ${event.iconColor} group-hover:scale-110 transition-transform duration-300 shadow-card flex-shrink-0`} whileHover={{
-                    rotate: 10,
-                    scale: 1.1
-                  }}>
-                      <event.icon size={24} className="sm:w-8 sm:h-8" />
-                    </motion.div>
-                    
-                    <div className="flex-1">
-                      <h3 className="font-bold mb-2 sm:mb-3 group-hover:text-primary transition-colors duration-300 text-base sm:text-lg">
-                        {event.title}
-                      </h3>
-                      <p className="text-muted-foreground leading-relaxed mb-3 sm:mb-4 text-sm sm:text-base">
-                        {event.description}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Countdown Timer - Only for upcoming events */}
-                  {!isPast && timeToEvents[event.id] && <div className="bg-background/50 rounded-2xl p-4 mb-6">
-                      <p className="text-sm font-medium text-primary mb-2 text-center">Time until event:</p>
-                      <div className="flex justify-center gap-4">
-                        <div className="text-center">
-                          <div className="text-2xl font-bold text-primary">{timeToEvents[event.id].days}</div>
-                          <div className="text-xs text-muted-foreground">DAYS</div>
-                        </div>
-                        <div className="text-center">
-                          <div className="text-2xl font-bold text-primary">{timeToEvents[event.id].hours}</div>
-                          <div className="text-xs text-muted-foreground">HOURS</div>
-                        </div>
-                        <div className="text-center">
-                          <div className="text-2xl font-bold text-primary">{timeToEvents[event.id].minutes}</div>
-                          <div className="text-xs text-muted-foreground">MINS</div>
-                        </div>
-                      </div>
-                    </div>}
-
-                  {/* Past Event Impact Display */}
-                  {isPast && <div className="bg-primary/10 rounded-2xl p-4 mb-6">
-                      <p className="text-sm font-medium text-primary mb-2 text-center">Initiative Completed!</p>
-                      <p className="text-center text-muted-foreground">Thank you to all participants who made this initiative a success.</p>
-                    </div>}
-
-                  {/* Event Details */}
-                  <div className="space-y-2 sm:space-y-3 mb-4 sm:mb-6">
-                    <div className="flex items-center gap-2 sm:gap-3">
-                      <Calendar className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0" />
-                      <span className="font-semibold text-sm sm:text-base">{event.date}</span>
-                    </div>
-                    <div className="flex items-center gap-2 sm:gap-3">
-                      <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0" />
-                      <span className="text-sm sm:text-base">{event.time}</span>
-                    </div>
-                    <div className="flex items-start gap-2 sm:gap-3">
-                      <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-primary mt-0.5 flex-shrink-0" />
-                      <div>
-                        <div className="font-medium text-sm sm:text-base">{event.location}</div>
-                        <div className="text-xs sm:text-sm text-muted-foreground">Meeting: {event.meetingPoint}</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Additional Info */}
-                  <div className="space-y-1 sm:space-y-2 mb-4 sm:mb-6 text-xs sm:text-sm">
-                    <p><span className="font-medium">Organizer:</span> {event.organizer}</p>
-                    <p><span className="font-medium">Impact:</span> {event.impact}</p>
-                    {event.dressCode && <p><span className="font-medium">Dress Code:</span> {event.dressCode}</p>}
-                    {(event as any).requirements && <p><span className="font-medium">What to bring:</span> {(event as any).requirements}</p>}
-                    {(event as any).materials && <p><span className="font-medium">Materials:</span> {(event as any).materials}</p>}
-                    {(event as any).ageRecommendation && <p><span className="font-medium">Age:</span> {(event as any).ageRecommendation}</p>}
-                    {event.transport && <p><span className="font-medium">Transport:</span> {event.transport}</p>}
-                  </div>
-                  
-                  {/* Registration Button - Conditional based on event status */}
-                  {isPast ? <Button disabled className="w-full bg-muted text-muted-foreground cursor-not-allowed">
-                      Registration Closed
-                    </Button> : <Button asChild className="w-full bg-gradient-eco hover:shadow-glow transition-all duration-300 hover:scale-105 text-background font-semibold">
-                      <a href={event.registrationLink} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
-                        Register Now
-                        <ExternalLink className="w-4 h-4" />
-                      </a>
-                    </Button>}
-                </Card>
-              </motion.div>;
-          })}
-          </div>
-        </div>
-      </section>
+      
 
       {/* Past Initiatives Section */}
       <section className="py-16 sm:py-20 px-4 bg-gradient-to-br from-primary/5 to-secondary/5" ref={ref}>
@@ -418,25 +282,19 @@ const InitiativesPage = () => {
             iconColor: "text-accent"
           }].map((initiative, index) => {
             const isEvenIndex = index % 2 === 0;
-            return (
-              <motion.div 
-                key={initiative.id} 
-                initial={{
-                  opacity: 0,
-                  y: 30
-                }} 
-                animate={isInView ? {
-                  opacity: 1,
-                  y: 0
-                } : {
-                  opacity: 0,
-                  y: 30
-                }} 
-                transition={{
-                  duration: 0.6,
-                  delay: index * 0.1
-                }}
-              >
+            return <motion.div key={initiative.id} initial={{
+              opacity: 0,
+              y: 30
+            }} animate={isInView ? {
+              opacity: 1,
+              y: 0
+            } : {
+              opacity: 0,
+              y: 30
+            }} transition={{
+              duration: 0.6,
+              delay: index * 0.1
+            }}>
                 <Card className={`shadow-hero border-2 border-primary/20 bg-gradient-to-br ${initiative.color} hover:shadow-glow transition-all duration-500 group overflow-hidden`}>
                   <div className={`flex flex-col ${isEvenIndex ? 'lg:flex-row' : 'lg:flex-row-reverse'} h-full`}>
                     {/* Initiative Image */}
@@ -446,72 +304,14 @@ const InitiativesPage = () => {
                           COMPLETED
                         </Badge>
                       </div>
-                      {initiative.id === 'forest-cleanup-drive-2025' ? (
-                        <img 
-                          src="/gallery/forest-cleanup-drive.jpg"
-                          alt="Forest Cleanup Drive 2025 - Students participating in forest restoration and cleanup activities at BNHS Conservation Education Centre"
-                          className="w-full h-full object-cover"
-                        />
-                      ) : initiative.id === 'post-visarjan-beach-cleanup-2025' ? (
-                        <img 
-                          src="/lovable-uploads/ac5a0ffe-a03a-488c-ad6e-ee9e6ff71666.png"
-                          alt="Post-Visarjan Beach Cleanup 2025 - JBCN International School students holding banner during beach cleanup at Chowpatty Beach"
-                          className="w-full h-full object-cover"
-                        />
-                      ) : initiative.id === 'green-initiative' ? (
-                        <img 
-                          src="/lovable-uploads/d7dc9d72-6f8f-42e6-a5eb-3ab3c6198f71.png"
-                          alt="Green Initiative - Students learning gardening and environmental responsibility in an outdoor classroom setting"
-                          className="w-full h-full object-cover"
-                        />
-                      ) : initiative.id === 'beach-cleanup-2023' ? (
-                        <img 
-                          src="/lovable-uploads/6e5750b1-b79d-41a4-939a-303b742736fd.png"
-                          alt="Beach Clean-Up 2023 - Students and volunteers cleaning the shoreline with Mumbai skyline in background"
-                          className="w-full h-full object-cover"
-                        />
-                      ) : initiative.id === 'waste-management' ? (
-                        <img 
-                          src="/lovable-uploads/3c6f412e-57fd-4e87-b17f-1fc0c0fe40f8.png"
-                          alt="Waste Management 2023 - Students attending an educational presentation about waste management and environmental sustainability"
-                          className="w-full h-full object-cover"
-                        />
-                      ) : initiative.id === 'tree-plantation' ? (
-                        <img 
-                          src="/lovable-uploads/eb3af96b-9040-4af6-ac20-ae157e18d16e.png"
-                          alt="Tree Plantation 2023 - Students actively participating in tree planting activities for environmental restoration"
-                          className="w-full h-full object-cover"
-                        />
-                      ) : initiative.id === 'inspirus' ? (
-                        <div className="w-full h-full bg-gradient-to-br from-muted to-muted/50 flex gap-2 p-2">
+                      {initiative.id === 'forest-cleanup-drive-2025' ? <img src="/gallery/forest-cleanup-drive.jpg" alt="Forest Cleanup Drive 2025 - Students participating in forest restoration and cleanup activities at BNHS Conservation Education Centre" className="w-full h-full object-cover" /> : initiative.id === 'post-visarjan-beach-cleanup-2025' ? <img src="/lovable-uploads/ac5a0ffe-a03a-488c-ad6e-ee9e6ff71666.png" alt="Post-Visarjan Beach Cleanup 2025 - JBCN International School students holding banner during beach cleanup at Chowpatty Beach" className="w-full h-full object-cover" /> : initiative.id === 'green-initiative' ? <img src="/lovable-uploads/d7dc9d72-6f8f-42e6-a5eb-3ab3c6198f71.png" alt="Green Initiative - Students learning gardening and environmental responsibility in an outdoor classroom setting" className="w-full h-full object-cover" /> : initiative.id === 'beach-cleanup-2023' ? <img src="/lovable-uploads/6e5750b1-b79d-41a4-939a-303b742736fd.png" alt="Beach Clean-Up 2023 - Students and volunteers cleaning the shoreline with Mumbai skyline in background" className="w-full h-full object-cover" /> : initiative.id === 'waste-management' ? <img src="/lovable-uploads/3c6f412e-57fd-4e87-b17f-1fc0c0fe40f8.png" alt="Waste Management 2023 - Students attending an educational presentation about waste management and environmental sustainability" className="w-full h-full object-cover" /> : initiative.id === 'tree-plantation' ? <img src="/lovable-uploads/eb3af96b-9040-4af6-ac20-ae157e18d16e.png" alt="Tree Plantation 2023 - Students actively participating in tree planting activities for environmental restoration" className="w-full h-full object-cover" /> : initiative.id === 'inspirus' ? <div className="w-full h-full bg-gradient-to-br from-muted to-muted/50 flex gap-2 p-2">
                           <div className="flex-1 rounded-lg overflow-hidden">
-                            <img 
-                              src="/lovable-uploads/4056d3dc-ea87-4364-ac36-e56903620153.png"
-                              alt="InspirUs Art Installation - Students viewing environmental art installation made from waste materials"
-                              className="w-full h-full object-cover"
-                            />
+                            <img src="/lovable-uploads/4056d3dc-ea87-4364-ac36-e56903620153.png" alt="InspirUs Art Installation - Students viewing environmental art installation made from waste materials" className="w-full h-full object-cover" />
                           </div>
                           <div className="flex-1 rounded-lg overflow-hidden">
-                            <img 
-                              src="/lovable-uploads/70ad26d4-635e-438f-b930-8ed17b459df7.png"
-                              alt="InspirUs Beach Cleanup - Large group of participants collecting waste during beach cleanup initiative"
-                              className="w-full h-full object-cover"
-                            />
+                            <img src="/lovable-uploads/70ad26d4-635e-438f-b930-8ed17b459df7.png" alt="InspirUs Beach Cleanup - Large group of participants collecting waste during beach cleanup initiative" className="w-full h-full object-cover" />
                           </div>
-                        </div>
-                      ) : initiative.id === 'beach-cleanup-2022' ? (
-                        <img 
-                          src="/lovable-uploads/4f4f661f-e77f-49ef-9f9f-79a5f4b7abf0.png"
-                          alt="Beach Clean Up 2022 - Students working together to collect large debris during beach cleanup initiative"
-                          className="w-full h-full object-cover"
-                        />
-                      ) : (
-                        <img 
-                          src="/lovable-uploads/e5b71af0-81f1-48bf-9662-02e0470ba336.png"
-                          alt="Earth Day - Nariman Point awareness event with students holding climate action posters and signs"
-                          className="w-full h-full object-cover"
-                        />
-                      )}
+                        </div> : initiative.id === 'beach-cleanup-2022' ? <img src="/lovable-uploads/4f4f661f-e77f-49ef-9f9f-79a5f4b7abf0.png" alt="Beach Clean Up 2022 - Students working together to collect large debris during beach cleanup initiative" className="w-full h-full object-cover" /> : <img src="/lovable-uploads/e5b71af0-81f1-48bf-9662-02e0470ba336.png" alt="Earth Day - Nariman Point awareness event with students holding climate action posters and signs" className="w-full h-full object-cover" />}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
                     </div>
                     
@@ -531,8 +331,7 @@ const InitiativesPage = () => {
                     </div>
                   </div>
                 </Card>
-              </motion.div>
-            );
+              </motion.div>;
           })}
           </div>
         </div>
