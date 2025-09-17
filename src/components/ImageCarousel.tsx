@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import {
   Carousel,
@@ -15,6 +15,8 @@ const ImageCarousel = () => {
   const [api, setApi] = useState<any>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const videoRef = useRef<HTMLIFrameElement>(null);
 
   const carouselItems = [
     {
@@ -37,8 +39,7 @@ const ImageCarousel = () => {
       id: 3,
       title: 'Our Climate Action Journey',
       description: 'Watch our inspiring journey of environmental activism and community engagement',
-      type: 'youtube',
-      videoId: 'vDbhWVTMEb8',
+      type: 'streamable',
       category: 'Documentary'
     },
     {
@@ -63,12 +64,14 @@ const ImageCarousel = () => {
       setCurrent(api.selectedScrollSnap() + 1);
     });
 
-    // Auto-play functionality
+    // Auto-play functionality - pause when video is playing
     const interval = setInterval(() => {
-      if (api.canScrollNext()) {
-        api.scrollNext();
-      } else {
-        api.scrollTo(0);
+      if (!isVideoPlaying) {
+        if (api.canScrollNext()) {
+          api.scrollNext();
+        } else {
+          api.scrollTo(0);
+        }
       }
     }, 5000);
 
@@ -112,15 +115,23 @@ const ImageCarousel = () => {
                   <Card className="shadow-hero overflow-hidden border-0">
                     <CardContent className="p-0">
                       <div className="relative w-full min-h-[200px] sm:min-h-[280px] md:min-h-[380px] lg:min-h-[480px] xl:min-h-[520px] overflow-hidden bg-gradient-earth">
-                        {item.type === 'youtube' ? (
-                          <iframe
-                            src={`https://www.youtube.com/embed/${item.videoId}?autoplay=1&mute=1&controls=1&showinfo=0&rel=0&loop=1`}
-                            title={item.title}
-                            className="absolute inset-0 w-full h-full"
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                          />
+                        {item.type === 'streamable' ? (
+                          <div 
+                            style={{position:'relative', width:'100%', height:'0px', paddingBottom:'56.604%'}}
+                            onMouseEnter={() => setIsVideoPlaying(true)}
+                            onMouseLeave={() => setIsVideoPlaying(false)}
+                          >
+                            <iframe 
+                              ref={videoRef}
+                              allow="fullscreen;autoplay" 
+                              allowFullScreen 
+                              height="100%" 
+                              src="https://streamable.com/e/cw49u8?autoplay=1&nocontrols=1" 
+                              width="100%" 
+                              style={{border:'none', width:'100%', height:'100%', position:'absolute', left:'0px', top:'0px', overflow:'hidden'}}
+                              title={item.title}
+                            />
+                          </div>
                         ) : item.type === 'image' && item.image ? (
                           <img
                             src={item.image}
@@ -149,7 +160,7 @@ const ImageCarousel = () => {
                         )}
                         
                         {/* Fallback gradient for items without images */}
-                        {!item.image && item.type !== 'youtube' && (
+                        {!item.image && item.type !== 'streamable' && (
                           <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-secondary/20 to-accent/20" />
                         )}
                       </div>
