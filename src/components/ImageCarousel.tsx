@@ -66,19 +66,7 @@ const ImageCarousel = () => {
       
       // Control video playback based on current slide
       const currentItem = carouselItems[newCurrent - 1];
-      if (currentItem?.type === 'streamable') {
-        setIsVideoPlaying(true);
-        // Update video src to include autoplay when it becomes active
-        if (videoRef.current) {
-          videoRef.current.src = "https://streamable.com/e/cw49u8?autoplay=1&nocontrols=1";
-        }
-      } else {
-        setIsVideoPlaying(false);
-        // Remove autoplay when video is not active
-        if (videoRef.current) {
-          videoRef.current.src = "https://streamable.com/e/cw49u8?nocontrols=1";
-        }
-      }
+      setIsVideoPlaying(currentItem?.type === 'streamable');
     });
 
     // Auto-play functionality - pause when video is playing
@@ -135,19 +123,30 @@ const ImageCarousel = () => {
                         {item.type === 'streamable' ? (
                           <div 
                             style={{position:'relative', width:'100%', height:'0px', paddingBottom:'56.604%'}}
-                            onMouseEnter={() => setIsVideoPlaying(true)}
-                            onMouseLeave={() => setIsVideoPlaying(false)}
+                            className="bg-gradient-to-br from-primary/20 to-secondary/20"
                           >
-                            <iframe 
-                              ref={videoRef}
-                              allow="fullscreen;autoplay" 
-                              allowFullScreen 
-                              height="100%" 
-                              src="https://streamable.com/e/cw49u8?nocontrols=1" 
-                              width="100%" 
-                              style={{border:'none', width:'100%', height:'100%', position:'absolute', left:'0px', top:'0px', overflow:'hidden'}}
-                              title={item.title}
-                            />
+                            {/* Only load video iframe when this slide is active */}
+                            {current === index + 1 ? (
+                              <iframe 
+                                ref={videoRef}
+                                allow="fullscreen;autoplay" 
+                                allowFullScreen 
+                                height="100%" 
+                                src="https://streamable.com/e/cw49u8?autoplay=1&nocontrols=1" 
+                                width="100%" 
+                                style={{border:'none', width:'100%', height:'100%', position:'absolute', left:'0px', top:'0px', overflow:'hidden'}}
+                                title={item.title}
+                              />
+                            ) : (
+                              // Placeholder when video is not active
+                              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-primary/10 to-secondary/10">
+                                <div className="text-center text-white">
+                                  <Play className="w-16 h-16 mx-auto mb-4 opacity-60" />
+                                  <h3 className="text-xl font-bold mb-2">{item.title}</h3>
+                                  <p className="text-sm opacity-80">{item.description}</p>
+                                </div>
+                              </div>
+                            )}
                           </div>
                         ) : item.type === 'image' && item.image ? (
                           <img
