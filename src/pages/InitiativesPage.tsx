@@ -71,41 +71,8 @@ const InitiativesPage = () => {
   return <div className="min-h-screen bg-background">
       <Navigation />
       
-      {/* Hero Section */}
-      <section className="pt-20 sm:pt-24 pb-16 sm:pb-20 px-4 bg-gradient-to-br from-primary/5 to-secondary/5">
-        <div className="container mx-auto">
-          <motion.div initial={{
-          opacity: 0,
-          y: 30
-        }} animate={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          duration: 0.8
-        }} className="text-center max-w-4xl mx-auto">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 text-balance leading-tight">
-              Our{' '}
-              <span className="bg-gradient-earth bg-clip-text text-transparent">
-                Initiatives
-              </span>
-            </h1>
-            <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-6 sm:mb-8 text-balance max-w-3xl mx-auto">
-              Discover our comprehensive climate action programs making real impact 
-              across communities worldwide.
-            </p>
-            <div className="flex flex-wrap gap-2 sm:gap-4 justify-center">
-              <Badge variant="secondary" className="text-xs sm:text-sm px-2 sm:px-4 py-1 sm:py-2">
-                10 Past Initiatives
-              </Badge>
-              <Badge variant="secondary" className="text-xs sm:text-sm px-2 sm:px-4 py-1 sm:py-2">Active</Badge>
-              <Badge variant="secondary" className="text-xs sm:text-sm px-2 sm:px-4 py-1 sm:py-2">JOIN !!!</Badge>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Past Initiatives Section */}
-      <section className="py-16 sm:py-20 px-4 bg-gradient-to-br from-primary/5 to-secondary/5" ref={ref}>
+      {/* Combined Initiatives Section */}
+      <section className="pt-20 sm:pt-24 pb-16 sm:pb-20 px-4 bg-gradient-to-br from-primary/5 to-secondary/5" ref={ref}>
         <div className="container mx-auto">
           <motion.div initial={{
           opacity: 0,
@@ -119,14 +86,22 @@ const InitiativesPage = () => {
         }} transition={{
           duration: 0.8
         }} className="text-center mb-12 sm:mb-16">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 text-balance leading-tight">
+              Our{' '}
               <span className="bg-gradient-earth bg-clip-text text-transparent">
-                Our Initiatives
+                Initiatives
               </span>
-            </h2>
-            <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
+            </h1>
+            <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-6 sm:mb-8 text-balance max-w-3xl mx-auto">
               Celebrating our completed climate action initiatives that have made a lasting impact on our community and environment.
             </p>
+            <div className="flex flex-wrap gap-2 sm:gap-4 justify-center">
+              <Badge variant="secondary" className="text-xs sm:text-sm px-2 sm:px-4 py-1 sm:py-2">
+                10 Past Initiatives
+              </Badge>
+              <Badge variant="secondary" className="text-xs sm:text-sm px-2 sm:px-4 py-1 sm:py-2">Active</Badge>
+              <Badge variant="secondary" className="text-xs sm:text-sm px-2 sm:px-4 py-1 sm:py-2">JOIN !!!</Badge>
+            </div>
           </motion.div>
 
           <div className="space-y-8">
