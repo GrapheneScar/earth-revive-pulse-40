@@ -37,10 +37,11 @@ const ImageCarousel = () => {
     },
     {
       id: 3,
-      title: 'Our Climate Action Journey',
-      description: 'Watch our inspiring journey of environmental activism and community engagement',
-      type: 'streamable',
-      category: 'Documentary'
+      title: 'Nature Reserve Conservation',
+      description: 'Our dedicated team working together at SGNP Nature Reserve for environmental conservation',
+      type: 'image',
+      image: '/lovable-uploads/nature-reserve-team.jpg',
+      category: 'Conservation'
     },
     {
       id: 4,
