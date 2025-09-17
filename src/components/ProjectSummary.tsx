@@ -38,7 +38,7 @@ const ProjectSummary = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            <Card className="p-6 sm:p-8 shadow-card border-none bg-gradient-to-br from-primary/5 to-background">
+            <Card className="p-6 sm:p-8 shadow-card border-none bg-gradient-to-br from-card to-muted/10 border border-primary/10">
               <p className="text-lg text-muted-foreground leading-relaxed mb-6">
                 The <strong className="text-primary">JBCN Climate Action Project (CAP)</strong> envisions 
                 a generation of young changemakers committed to building a sustainable future. Our mission 
