@@ -57,23 +57,6 @@ const InitiativesPage = () => {
     return eventDate < new Date();
   };
   const upcomingEvents = [{
-    id: 'forest',
-    icon: TreePine,
-    title: "Forest Cleanup Drive",
-    description: "Community initiative to restore and protect local green spaces at BNHS Conservation Education Centre. Help reduce litter and plastic waste while setting an inspiring example.",
-    date: "13th September, 2025",
-    time: "10:00 AM onwards",
-    location: "Temple Trail, BNHS Conservation Education Centre",
-    meetingPoint: "BNHS Conservation Education Centre Main Entrance",
-    requirements: "Bring reusable water bottles, caps, and comfortable shoes",
-    registrationLink: "https://forms.gle/1TmDZQmefSQABu188",
-    color: "from-primary/20 to-primary/5",
-    iconColor: "text-primary",
-    organizer: "Climate Action Project (CAP)",
-    impact: "Restoring natural beauty and forest ecosystems",
-    ageRecommendation: "Grades 8-12 recommended",
-    materials: "Gloves, garbage bags, and cleanup materials provided"
-  }, {
     id: 'beach',
     icon: Waves,
     title: "Post-Visarjan Beach Clean-Up",
@@ -172,10 +155,10 @@ const InitiativesPage = () => {
             </p>
             <div className="flex flex-wrap gap-2 sm:gap-4 justify-center">
               <Badge variant="secondary" className="text-xs sm:text-sm px-2 sm:px-4 py-1 sm:py-2">
-                2 Upcoming Events
+                1 Upcoming Event
               </Badge>
               <Badge variant="secondary" className="text-xs sm:text-sm px-2 sm:px-4 py-1 sm:py-2">
-                8 Past Initiatives
+                9 Past Initiatives
               </Badge>
               <Badge variant="secondary" className="text-xs sm:text-sm px-2 sm:px-4 py-1 sm:py-2">
                 75+ Countries Active
@@ -305,9 +288,9 @@ const InitiativesPage = () => {
                     <p><span className="font-medium">Organizer:</span> {event.organizer}</p>
                     <p><span className="font-medium">Impact:</span> {event.impact}</p>
                     {event.dressCode && <p><span className="font-medium">Dress Code:</span> {event.dressCode}</p>}
-                    {event.requirements && <p><span className="font-medium">What to bring:</span> {event.requirements}</p>}
-                    {event.materials && <p><span className="font-medium">Materials:</span> {event.materials}</p>}
-                    {event.ageRecommendation && <p><span className="font-medium">Age:</span> {event.ageRecommendation}</p>}
+                    {(event as any).requirements && <p><span className="font-medium">What to bring:</span> {(event as any).requirements}</p>}
+                    {(event as any).materials && <p><span className="font-medium">Materials:</span> {(event as any).materials}</p>}
+                    {(event as any).ageRecommendation && <p><span className="font-medium">Age:</span> {(event as any).ageRecommendation}</p>}
                     {event.transport && <p><span className="font-medium">Transport:</span> {event.transport}</p>}
                   </div>
                   
@@ -354,6 +337,14 @@ const InitiativesPage = () => {
 
           <div className="space-y-8">
             {[{
+            id: 'forest-cleanup-drive-2025',
+            icon: TreePine,
+            title: "Forest Cleanup Drive",
+            year: "2025",
+            description: "Community initiative to restore and protect local green spaces at BNHS Conservation Education Centre. Help reduce litter and plastic waste while setting an inspiring example. Thank you to all participants who made this initiative a success.",
+            color: "from-primary/20 to-primary/5",
+            iconColor: "text-primary"
+          }, {
             id: 'post-visarjan-beach-cleanup-2025',
             icon: Waves,
             title: "Post-Visarjan Beach Cleanup 2025",
@@ -455,7 +446,13 @@ const InitiativesPage = () => {
                           COMPLETED
                         </Badge>
                       </div>
-                      {initiative.id === 'post-visarjan-beach-cleanup-2025' ? (
+                      {initiative.id === 'forest-cleanup-drive-2025' ? (
+                        <img 
+                          src="/gallery/forest-cleanup-drive.jpg"
+                          alt="Forest Cleanup Drive 2025 - Students participating in forest restoration and cleanup activities at BNHS Conservation Education Centre"
+                          className="w-full h-full object-cover"
+                        />
+                      ) : initiative.id === 'post-visarjan-beach-cleanup-2025' ? (
                         <img 
                           src="/lovable-uploads/ac5a0ffe-a03a-488c-ad6e-ee9e6ff71666.png"
                           alt="Post-Visarjan Beach Cleanup 2025 - JBCN International School students holding banner during beach cleanup at Chowpatty Beach"
