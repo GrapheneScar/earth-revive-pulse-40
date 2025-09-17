@@ -187,6 +187,70 @@ const GalleryPage = () => {
       category: 'Conservation',
       image: '/gallery/individual-forest-cleanup.jpg',
       size: 'tall'
+    },
+    {
+      id: 21,
+      type: 'image',
+      title: 'Community Cleanup Event',
+      category: 'Events',
+      image: '/gallery/community-cleanup-event.jpg',
+      size: 'wide'
+    },
+    {
+      id: 22,
+      type: 'image',
+      title: 'Environmental Education',
+      category: 'Education',
+      image: '/gallery/environmental-education.jpg',
+      size: 'square'
+    },
+    {
+      id: 23,
+      type: 'image',
+      title: 'Nature Preservation',
+      category: 'Nature',
+      image: '/gallery/nature-preservation.jpg',
+      size: 'tall'
+    },
+    {
+      id: 24,
+      type: 'image',
+      title: 'Cleanup Volunteers Team',
+      category: 'Volunteers',
+      image: '/gallery/cleanup-volunteers-team.jpg',
+      size: 'square'
+    },
+    {
+      id: 25,
+      type: 'image',
+      title: 'Environmental Awareness',
+      category: 'Education',
+      image: '/gallery/environmental-awareness.jpg',
+      size: 'wide'
+    },
+    {
+      id: 26,
+      type: 'image',
+      title: 'Conservation Initiative',
+      category: 'Conservation',
+      image: '/gallery/conservation-initiative.jpg',
+      size: 'square'
+    },
+    {
+      id: 27,
+      type: 'image',
+      title: 'Green Action Team',
+      category: 'Volunteers',
+      image: '/gallery/green-action-team.jpg',
+      size: 'tall'
+    },
+    {
+      id: 28,
+      type: 'image',
+      title: 'Sustainability Project',
+      category: 'Conservation',
+      image: '/gallery/sustainability-project.jpg',
+      size: 'wide'
     }
   ];
 
