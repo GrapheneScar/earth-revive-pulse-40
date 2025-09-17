@@ -354,10 +354,7 @@ const TeamPage = () => {
             </motion.blockquote>}
           
           {!isLeadership && member.projects && <div className="mb-4">
-              <Badge variant="secondary" className="text-xs px-3 py-1">
-                <Award className="w-3 h-3 mr-1" />
-                {member.projects}
-              </Badge>
+              
             </div>}
 
           {/* Social Links */}
