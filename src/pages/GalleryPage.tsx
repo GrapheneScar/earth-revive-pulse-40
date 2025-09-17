@@ -1,289 +1,535 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Play, Download, Share, Eye, Sparkles, Heart, Camera } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { motion, useScroll, useTransform, AnimatePresence, useMotionValue, useSpring } from 'framer-motion';
+import { Play, Download, Share, Eye, Sparkles, Heart, Camera, Zap, Star, Palette, Globe, Leaf } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+
 const GalleryPage = () => {
   const [selectedItem, setSelectedItem] = useState<any>(null);
   const [hoveredItem, setHoveredItem] = useState<number | null>(null);
-  
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isLoaded, setIsLoaded] = useState(false);
+  const containerRef = useRef(null);
+  const { scrollY } = useScroll();
+
+  // Parallax values
+  const y1 = useTransform(scrollY, [0, 1000], [0, -100]);
+  const y2 = useTransform(scrollY, [0, 1000], [0, -200]);
+  const y3 = useTransform(scrollY, [0, 1000], [0, -50]);
+  const rotate = useTransform(scrollY, [0, 1000], [0, 360]);
+
+  // Mouse tracking for magnetic effect
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const springX = useSpring(mouseX, { stiffness: 300, damping: 30 });
+  const springY = useSpring(mouseY, { stiffness: 300, damping: 30 });
+
+  useEffect(() => {
+    setIsLoaded(true);
+    
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [mouseX, mouseY]);
+
   const categoryColors = {
-    'Awareness': 'bg-gradient-to-r from-orange-500/20 to-red-500/20 text-orange-400 border border-orange-500/30',
-    'Events': 'bg-gradient-to-r from-blue-500/20 to-cyan-500/20 text-blue-400 border border-blue-500/30',
-    'Conservation': 'bg-gradient-to-r from-green-500/20 to-emerald-500/20 text-green-400 border border-green-500/30',
-    'Volunteers': 'bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-purple-400 border border-purple-500/30',
-    'Recognition': 'bg-gradient-to-r from-yellow-500/20 to-amber-500/20 text-yellow-400 border border-yellow-500/30',
-    'Nature': 'bg-gradient-to-r from-teal-500/20 to-green-500/20 text-teal-400 border border-teal-500/30'
+    'Awareness': 'from-orange-500 via-red-500 to-pink-500',
+    'Events': 'from-blue-500 via-cyan-500 to-teal-500',
+    'Conservation': 'from-green-500 via-emerald-500 to-teal-500',
+    'Volunteers': 'from-purple-500 via-pink-500 to-rose-500',
+    'Recognition': 'from-yellow-500 via-amber-500 to-orange-500',
+    'Nature': 'from-teal-500 via-green-500 to-emerald-500'
   };
 
-  const galleryItems = [{
-    id: 1,
-    type: 'image',
-    title: 'Environmental Awareness Campaign',
-    category: 'Awareness',
-    image: '/gallery/save-earth-poster.jpeg',
-    views: 1250
-  }, {
-    id: 2,
-    type: 'image',
-    title: 'Beach Cleanup Drive 2024',
-    category: 'Events',
-    image: '/gallery/beach-cleanup-team.jpg',
-    views: 2340
-  }, {
-    id: 3,
-    type: 'image',
-    title: 'Community Beach Cleanup',
-    category: 'Events',
-    image: '/gallery/beach-cleanup-group.jpg',
-    views: 980
-  }, {
-    id: 4,
-    type: 'image',
-    title: 'Ocean Conservation Efforts',
-    category: 'Conservation',
-    image: '/gallery/cleanup-activity.jpg',
-    views: 1850
-  }, {
-    id: 5,
-    type: 'image',
-    title: 'Marine Debris Removal',
-    category: 'Conservation',
-    image: '/gallery/beach-debris-cleanup.jpg',
-    views: 1500
-  }, {
-    id: 6,
-    type: 'image',
-    title: 'Environmental Volunteers',
-    category: 'Volunteers',
-    image: '/gallery/environmental-volunteers.jpg',
-    views: 720
-  }, {
-    id: 7,
-    type: 'image',
-    title: 'Community Clean-up Initiative',
-    category: 'Events',
-    image: '/gallery/community-cleanup.jpg',
-    views: 650
-  }, {
-    id: 8,
-    type: 'image',
-    title: 'Nature Conservation Work',
-    category: 'Conservation',
-    image: '/gallery/nature-conservation.jpg',
-    views: 890
-  }, {
-    id: 9,
-    type: 'image',
-    title: 'Environmental Award Ceremony',
-    category: 'Recognition',
-    image: '/gallery/award-ceremony.jpg',
-    views: 1100
-  }, {
-    id: 10,
-    type: 'image',
-    title: 'Tree Planting Initiative',
-    category: 'Nature',
-    image: '/gallery/tree-planting.jpg',
-    views: 1300
-  }];
+  const galleryItems = [
+    {
+      id: 1,
+      type: 'image',
+      title: 'Environmental Awareness Campaign',
+      category: 'Awareness',
+      image: '/gallery/save-earth-poster.jpeg',
+      size: 'tall'
+    },
+    {
+      id: 2,
+      type: 'image',
+      title: 'Beach Cleanup Drive 2024',
+      category: 'Events',
+      image: '/gallery/beach-cleanup-team.jpg',
+      size: 'wide'
+    },
+    {
+      id: 3,
+      type: 'image',
+      title: 'Community Beach Cleanup',
+      category: 'Events',
+      image: '/gallery/beach-cleanup-group.jpg',
+      size: 'square'
+    },
+    {
+      id: 4,
+      type: 'image',
+      title: 'Ocean Conservation Efforts',
+      category: 'Conservation',
+      image: '/gallery/cleanup-activity.jpg',
+      size: 'tall'
+    },
+    {
+      id: 5,
+      type: 'image',
+      title: 'Marine Debris Removal',
+      category: 'Conservation',
+      image: '/gallery/beach-debris-cleanup.jpg',
+      size: 'square'
+    },
+    {
+      id: 6,
+      type: 'image',
+      title: 'Environmental Volunteers',
+      category: 'Volunteers',
+      image: '/gallery/environmental-volunteers.jpg',
+      size: 'wide'
+    },
+    {
+      id: 7,
+      type: 'image',
+      title: 'Community Clean-up Initiative',
+      category: 'Events',
+      image: '/gallery/community-cleanup.jpg',
+      size: 'square'
+    },
+    {
+      id: 8,
+      type: 'image',
+      title: 'Nature Conservation Work',
+      category: 'Conservation',
+      image: '/gallery/nature-conservation.jpg',
+      size: 'tall'
+    },
+    {
+      id: 9,
+      type: 'image',
+      title: 'Environmental Award Ceremony',
+      category: 'Recognition',
+      image: '/gallery/award-ceremony.jpg',
+      size: 'wide'
+    },
+    {
+      id: 10,
+      type: 'image',
+      title: 'Tree Planting Initiative',
+      category: 'Nature',
+      image: '/gallery/tree-planting.jpg',
+      size: 'square'
+    }
+  ];
+
+  const getGridClasses = (size: string) => {
+    switch (size) {
+      case 'tall': return 'md:row-span-2';
+      case 'wide': return 'md:col-span-2';
+      default: return '';
+    }
+  };
+
   const handleItemClick = (item: any) => {
     setSelectedItem(item);
   };
+
   const closeLightbox = () => {
     setSelectedItem(null);
   };
-  return <>
+
+  return (
+    <>
       <Navigation />
-      <main className="min-h-screen bg-background pt-20 relative overflow-hidden">
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl animate-float"></div>
-          <div className="absolute top-60 right-20 w-96 h-96 bg-accent/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
-          <div className="absolute bottom-20 left-1/3 w-64 h-64 bg-secondary/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '4s' }}></div>
-          {/* Floating Sparkles */}
-          {[...Array(6)].map((_, i) => (
+      
+      {/* Magnetic Cursor */}
+      <motion.div
+        className="fixed w-6 h-6 bg-primary/30 rounded-full pointer-events-none z-50 mix-blend-difference"
+        style={{
+          x: springX,
+          y: springY,
+          translateX: "-50%",
+          translateY: "-50%"
+        }}
+        animate={{
+          scale: hoveredItem ? 2 : 1,
+          opacity: hoveredItem ? 0.8 : 0.3
+        }}
+      />
+
+      <main className="min-h-screen bg-background pt-20 relative overflow-hidden" ref={containerRef}>
+        {/* Dynamic Background */}
+        <div className="fixed inset-0 pointer-events-none">
+          {/* Animated Mesh Gradient */}
+          <motion.div
+            className="absolute inset-0 opacity-20"
+            style={{
+              background: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, 
+                hsl(var(--primary)) 0%, 
+                hsl(var(--accent)) 25%, 
+                transparent 50%)`
+            }}
+          />
+          
+          {/* Floating Orbs */}
+          {[...Array(12)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute"
-              initial={{ opacity: 0 }}
-              animate={{ 
-                opacity: [0, 1, 0],
-                y: [-20, -60, -100],
-                x: [0, 10, -10, 0]
+              className="absolute rounded-full mix-blend-screen"
+              style={{
+                width: Math.random() * 300 + 100,
+                height: Math.random() * 300 + 100,
+                x: Math.random() * window.innerWidth,
+                y: Math.random() * window.innerHeight,
+                background: `linear-gradient(45deg, 
+                  hsl(${Math.random() * 360}, 70%, 50%), 
+                  hsl(${Math.random() * 360}, 70%, 30%))`
+              }}
+              animate={{
+                x: [0, Math.random() * 100 - 50],
+                y: [0, Math.random() * 100 - 50],
+                scale: [0.8, 1.2, 0.8],
+                opacity: [0.1, 0.3, 0.1]
               }}
               transition={{
-                duration: 3,
+                duration: Math.random() * 10 + 10,
                 repeat: Infinity,
-                delay: i * 0.5,
                 ease: "easeInOut"
               }}
-              style={{
-                left: `${20 + i * 15}%`,
-                top: `${30 + (i % 3) * 20}%`
+            />
+          ))}
+
+          {/* Particle System */}
+          {[...Array(50)].map((_, i) => (
+            <motion.div
+              key={`particle-${i}`}
+              className="absolute w-1 h-1 bg-primary/20 rounded-full"
+              initial={{
+                x: Math.random() * window.innerWidth,
+                y: window.innerHeight + 100,
+                opacity: 0
               }}
-            >
-              <Sparkles className="w-4 h-4 text-primary/30" />
-            </motion.div>
+              animate={{
+                y: -100,
+                opacity: [0, 1, 0],
+                scale: [0, 1, 0]
+              }}
+              transition={{
+                duration: Math.random() * 15 + 10,
+                repeat: Infinity,
+                delay: Math.random() * 10,
+                ease: "linear"
+              }}
+            />
           ))}
         </div>
 
-        {/* Hero Section */}
-        <section className="relative py-20 px-4">
+        {/* Hero Section with 3D Elements */}
+        <section className="relative py-32 px-4">
           <div className="container mx-auto text-center relative">
+            {/* 3D Floating Icons */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="absolute -top-10 -right-10 opacity-20"
+              className="absolute inset-0 pointer-events-none"
+              style={{ y: y1 }}
             >
-              <Camera className="w-32 h-32 text-primary" />
-            </motion.div>
-            
-            <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent mb-6"
-            >
-              Our Impact Gallery
-            </motion.h1>
-            
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-xl text-muted-foreground max-w-3xl mx-auto mb-12"
-            >
-              Witness the power of collective action through our visual journey of climate initiatives, 
-              community engagement, and environmental transformation.
-            </motion.p>
-
-            {/* Floating Hearts */}
-            <div className="flex justify-center gap-8 mb-8">
-              {[...Array(3)].map((_, i) => (
+              {[Globe, Leaf, Star, Heart].map((Icon, i) => (
                 <motion.div
                   key={i}
+                  className="absolute"
+                  style={{
+                    left: `${20 + i * 20}%`,
+                    top: `${10 + (i % 2) * 60}%`
+                  }}
                   animate={{
-                    y: [0, -10, 0],
-                    scale: [1, 1.1, 1]
+                    rotateY: [0, 360],
+                    rotateX: [0, 180, 0],
+                    scale: [0.8, 1.2, 0.8]
                   }}
                   transition={{
-                    duration: 2,
+                    duration: 8 + i * 2,
                     repeat: Infinity,
-                    delay: i * 0.3,
                     ease: "easeInOut"
                   }}
                 >
-                  <Heart className="w-6 h-6 text-primary/40" />
+                  <Icon className="w-16 h-16 text-primary/20" />
                 </motion.div>
               ))}
-            </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5, rotateX: -45 }}
+              animate={{ opacity: 1, scale: 1, rotateX: 0 }}
+              transition={{ duration: 1, ease: "easeOut" }}
+              className="relative z-10"
+            >
+              <motion.h1 
+                className="text-5xl md:text-8xl font-black mb-8 relative"
+                style={{ 
+                  background: `linear-gradient(45deg, 
+                    hsl(var(--primary)), 
+                    hsl(var(--accent)), 
+                    hsl(var(--primary))`,
+                  backgroundClip: 'text',
+                  WebkitBackgroundClip: 'text',
+                  color: 'transparent',
+                  backgroundSize: '200% 200%'
+                }}
+                animate={{
+                  backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
+                }}
+                transition={{
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              >
+                Impact Gallery
+                
+                {/* Glowing outline */}
+                <motion.span
+                  className="absolute inset-0 text-5xl md:text-8xl font-black text-primary/20"
+                  style={{
+                    textShadow: `
+                      0 0 10px hsl(var(--primary)),
+                      0 0 20px hsl(var(--primary)),
+                      0 0 40px hsl(var(--primary))
+                    `
+                  }}
+                  animate={{
+                    opacity: [0.3, 0.7, 0.3]
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                >
+                  Impact Gallery
+                </motion.span>
+              </motion.h1>
+              
+              <motion.p
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 0.8 }}
+                className="text-2xl text-muted-foreground max-w-4xl mx-auto mb-16 font-light"
+              >
+                Experience our environmental journey through stunning visuals
+              </motion.p>
+
+              {/* Interactive Stats */}
+              <motion.div
+                className="flex justify-center gap-12 mb-16"
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8 }}
+              >
+                {['10+ Projects', '1000+ Hours', '50+ Volunteers'].map((stat, i) => (
+                  <motion.div
+                    key={i}
+                    className="text-center"
+                    whileHover={{ scale: 1.2, rotateY: 360 }}
+                    transition={{ duration: 0.6 }}
+                  >
+                    <div className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                      {stat.split(' ')[0]}
+                    </div>
+                    <div className="text-muted-foreground text-sm">
+                      {stat.split(' ')[1]}
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </motion.div>
           </div>
         </section>
 
-
-        {/* Gallery Grid */}
-        <section className="px-4 pb-20 relative">
+        {/* Masonry Gallery Grid */}
+        <section className="px-4 pb-32 relative">
           <div className="container mx-auto">
             <motion.div 
-              layout 
-              className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6"
+              className="grid grid-cols-1 md:grid-cols-4 gap-6 auto-rows-[200px]"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: isLoaded ? 1 : 0 }}
+              transition={{ duration: 1 }}
             >
               {galleryItems.map((item, index) => (
                 <motion.div
                   key={item.id}
-                  layout
-                  initial={{ opacity: 0, scale: 0.8, rotateY: -15 }}
-                  animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-                  whileHover={{ 
-                    y: -8, 
-                    rotateY: 5,
-                    transition: { type: "spring", stiffness: 300, damping: 20 }
+                  className={`group relative ${getGridClasses(item.size)}`}
+                  initial={{ 
+                    opacity: 0, 
+                    scale: 0.8, 
+                    rotateX: -20,
+                    z: -100 
                   }}
-                  transition={{ delay: index * 0.1 }}
-                  className="group perspective-1000"
+                  animate={{ 
+                    opacity: 1, 
+                    scale: 1, 
+                    rotateX: 0,
+                    z: 0
+                  }}
+                  whileHover={{ 
+                    scale: 1.05,
+                    rotateY: 10,
+                    z: 50,
+                    transition: { 
+                      type: "spring", 
+                      stiffness: 300, 
+                      damping: 20 
+                    }
+                  }}
+                  transition={{ 
+                    delay: index * 0.1,
+                    duration: 0.8,
+                    ease: "easeOut"
+                  }}
                   onHoverStart={() => setHoveredItem(item.id)}
                   onHoverEnd={() => setHoveredItem(null)}
+                  style={{
+                    transformStyle: 'preserve-3d',
+                    perspective: '1000px'
+                  }}
                 >
-                  <Card className="overflow-hidden shadow-card hover-lift cursor-pointer relative transform-gpu" onClick={() => handleItemClick(item)}>
-                    <CardContent className="p-0 relative">
-                      {/* Animated Border */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg blur-sm"></div>
-                      
-                      {/* Actual Image */}
-                      <div className="aspect-square bg-muted relative overflow-hidden rounded-t-lg">
+                  <Card 
+                    className="h-full overflow-hidden cursor-pointer relative group"
+                    onClick={() => handleItemClick(item)}
+                  >
+                    {/* Animated Gradient Border */}
+                    <motion.div
+                      className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 blur-sm"
+                      style={{
+                        background: `linear-gradient(45deg, ${categoryColors[item.category as keyof typeof categoryColors]})`
+                      }}
+                      animate={{
+                        rotate: hoveredItem === item.id ? 360 : 0
+                      }}
+                      transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                    />
+                    
+                    <CardContent className="p-0 h-full relative">
+                      {/* Main Image */}
+                      <div className="h-full relative overflow-hidden rounded-lg">
                         <motion.img
                           src={item.image}
                           alt={item.title}
                           className="w-full h-full object-cover"
                           loading="lazy"
-                          whileHover={{ scale: 1.1 }}
-                          transition={{ duration: 0.6, ease: "easeOut" }}
+                          whileHover={{ 
+                            scale: 1.2,
+                            rotate: 5
+                          }}
+                          transition={{ duration: 0.8, ease: "easeOut" }}
                         />
                         
-                        {/* Animated Overlay */}
+                        {/* Holographic Overlay */}
                         <motion.div
-                          className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 flex items-center justify-center"
-                          initial={false}
-                          animate={{
-                            opacity: hoveredItem === item.id ? 1 : 0,
-                            scale: hoveredItem === item.id ? 1 : 0.8
+                          className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none"
+                          style={{
+                            background: `linear-gradient(
+                              45deg,
+                              transparent 30%,
+                              rgba(255,255,255,0.3) 50%,
+                              transparent 70%
+                            )`,
+                            backgroundSize: '200% 200%'
                           }}
-                          transition={{ duration: 0.3 }}
-                        >
-                          <div className="flex gap-3">
-                            <motion.div
-                              whileHover={{ scale: 1.2, rotate: 360 }}
-                              transition={{ duration: 0.3 }}
-                            >
-                              <Button size="sm" variant="secondary" className="rounded-full bg-white/20 backdrop-blur-sm border-white/30 hover:bg-white/30">
-                                <Eye className="w-4 h-4" />
-                              </Button>
-                            </motion.div>
-                            <motion.div
-                              whileHover={{ scale: 1.2, rotate: -360 }}
-                              transition={{ duration: 0.3, delay: 0.1 }}
-                            >
-                              <Button size="sm" variant="secondary" className="rounded-full bg-white/20 backdrop-blur-sm border-white/30 hover:bg-white/30">
-                                <Download className="w-4 h-4" />
-                              </Button>
-                            </motion.div>
-                            <motion.div
-                              whileHover={{ scale: 1.2, rotate: 360 }}
-                              transition={{ duration: 0.3, delay: 0.2 }}
-                            >
-                              <Button size="sm" variant="secondary" className="rounded-full bg-white/20 backdrop-blur-sm border-white/30 hover:bg-white/30">
-                                <Share className="w-4 h-4" />
-                              </Button>
-                            </motion.div>
-                          </div>
-                        </motion.div>
+                          animate={{
+                            backgroundPosition: hoveredItem === item.id ? 
+                              ['0% 0%', '100% 100%'] : ['0% 0%']
+                          }}
+                          transition={{ 
+                            duration: 1.5, 
+                            ease: "easeInOut"
+                          }}
+                        />
 
                         {/* Floating Category Badge */}
                         <motion.div
-                          className="absolute top-3 left-3"
-                          whileHover={{ scale: 1.1 }}
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: index * 0.1 + 0.3 }}
-                        >
-                          <span className={`px-3 py-1 rounded-full text-xs font-medium backdrop-blur-sm ${categoryColors[item.category as keyof typeof categoryColors] || 'bg-primary/20 text-primary border border-primary/30'}`}>
-                            {item.category}
-                          </span>
-                        </motion.div>
-                      </div>
-                      
-                      {/* Content */}
-                      <div className="p-4 bg-card/50 backdrop-blur-sm">
-                        <motion.h3
-                          className="font-semibold text-foreground mb-2 line-clamp-2"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
+                          className="absolute top-4 left-4"
+                          initial={{ opacity: 0, scale: 0 }}
+                          animate={{ opacity: 1, scale: 1 }}
                           transition={{ delay: index * 0.1 + 0.5 }}
+                          whileHover={{ 
+                            scale: 1.2,
+                            rotate: [0, -10, 10, 0]
+                          }}
                         >
-                          {item.title}
-                        </motion.h3>
+                          <div 
+                            className="px-3 py-1 rounded-full text-xs font-bold text-white backdrop-blur-md border border-white/30"
+                            style={{
+                              background: `linear-gradient(135deg, ${categoryColors[item.category as keyof typeof categoryColors]})`
+                            }}
+                          >
+                            {item.category}
+                          </div>
+                        </motion.div>
+
+                        {/* Interactive Action Buttons */}
+                        <AnimatePresence>
+                          {hoveredItem === item.id && (
+                            <motion.div
+                              className="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center"
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              exit={{ opacity: 0 }}
+                            >
+                              <div className="flex gap-4">
+                                {[Eye, Download, Share].map((Icon, i) => (
+                                  <motion.div
+                                    key={i}
+                                    initial={{ scale: 0, rotate: -180 }}
+                                    animate={{ 
+                                      scale: 1, 
+                                      rotate: 0,
+                                      y: [0, -5, 0]
+                                    }}
+                                    transition={{ 
+                                      delay: i * 0.1,
+                                      y: {
+                                        duration: 2,
+                                        repeat: Infinity,
+                                        ease: "easeInOut"
+                                      }
+                                    }}
+                                    whileHover={{ 
+                                      scale: 1.3,
+                                      rotate: 360
+                                    }}
+                                  >
+                                    <Button 
+                                      size="sm" 
+                                      className="rounded-full bg-white/20 backdrop-blur-md border border-white/30 hover:bg-white/30"
+                                    >
+                                      <Icon className="w-4 h-4" />
+                                    </Button>
+                                  </motion.div>
+                                ))}
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+
+                        {/* Title Overlay */}
+                        <motion.div
+                          className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent"
+                          initial={{ y: 100, opacity: 0 }}
+                          animate={{ y: 0, opacity: 1 }}
+                          transition={{ delay: index * 0.1 + 0.7 }}
+                        >
+                          <h3 className="text-white font-semibold text-sm md:text-base line-clamp-2">
+                            {item.title}
+                          </h3>
+                        </motion.div>
                       </div>
                     </CardContent>
                   </Card>
@@ -293,117 +539,192 @@ const GalleryPage = () => {
           </div>
         </section>
 
-        {/* Enhanced Lightbox Modal */}
-        {selectedItem && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/95 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-            onClick={closeLightbox}
-          >
-            {/* Animated Background Particles */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-              {[...Array(8)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute w-2 h-2 bg-primary/20 rounded-full"
-                  initial={{ 
-                    x: Math.random() * window.innerWidth,
-                    y: Math.random() * window.innerHeight,
-                    scale: 0
-                  }}
-                  animate={{
-                    scale: [0, 1, 0],
-                    opacity: [0, 0.8, 0]
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    delay: i * 0.4,
-                    ease: "easeInOut"
-                  }}
-                />
-              ))}
-            </div>
-
+        {/* Epic Lightbox Modal */}
+        <AnimatePresence>
+          {selectedItem && (
             <motion.div
-              initial={{ scale: 0.8, rotateY: -15 }}
-              animate={{ scale: 1, rotateY: 0 }}
-              exit={{ scale: 0.8, rotateY: 15 }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="max-w-4xl w-full bg-card/90 backdrop-blur-md rounded-2xl overflow-hidden border border-primary/20 shadow-2xl"
-              onClick={(e) => e.stopPropagation()}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/95 backdrop-blur-xl z-50 flex items-center justify-center p-4"
+              onClick={closeLightbox}
             >
-              {/* Image Container */}
-              <div className="aspect-video bg-muted relative overflow-hidden">
-                <motion.img
-                  src={selectedItem.image}
-                  alt={selectedItem.title}
-                  className="w-full h-full object-contain"
-                  initial={{ scale: 1.1, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ duration: 0.6 }}
-                />
-                
-                {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+              {/* Dynamic Particle Background */}
+              <div className="absolute inset-0 overflow-hidden">
+                {[...Array(20)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    className="absolute w-1 h-1 bg-primary/40 rounded-full"
+                    initial={{ 
+                      x: Math.random() * window.innerWidth,
+                      y: Math.random() * window.innerHeight,
+                      scale: 0
+                    }}
+                    animate={{
+                      scale: [0, 1, 0],
+                      opacity: [0, 1, 0],
+                      rotate: 360
+                    }}
+                    transition={{
+                      duration: 4,
+                      repeat: Infinity,
+                      delay: i * 0.2,
+                      ease: "easeInOut"
+                    }}
+                  />
+                ))}
               </div>
 
-              {/* Content */}
-              <div className="p-8 relative">
-                {/* Floating Badge */}
-                <motion.div
-                  initial={{ y: -20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  className="absolute -top-4 left-8"
-                >
-                  <span className={`px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm ${categoryColors[selectedItem.category as keyof typeof categoryColors] || 'bg-primary/20 text-primary border border-primary/30'}`}>
-                    {selectedItem.category}
-                  </span>
-                </motion.div>
-
-                <motion.h2
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.1 }}
-                  className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-6 mt-4"
-                >
-                  {selectedItem.title}
-                </motion.h2>
-
-                <motion.div
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.2 }}
-                  className="flex gap-4"
-                >
-                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                    <Button className="bg-gradient-to-r from-primary to-accent hover:from-primary/80 hover:to-accent/80">
-                      <Download className="w-4 h-4 mr-2" />
-                      Download
-                    </Button>
-                  </motion.div>
+              <motion.div
+                initial={{ 
+                  scale: 0.5, 
+                  rotateY: -90,
+                  opacity: 0
+                }}
+                animate={{ 
+                  scale: 1, 
+                  rotateY: 0,
+                  opacity: 1
+                }}
+                exit={{ 
+                  scale: 0.5, 
+                  rotateY: 90,
+                  opacity: 0
+                }}
+                transition={{ 
+                  type: "spring", 
+                  damping: 25, 
+                  stiffness: 300 
+                }}
+                className="max-w-6xl w-full bg-card/90 backdrop-blur-2xl rounded-3xl overflow-hidden border border-primary/20 shadow-2xl"
+                onClick={(e) => e.stopPropagation()}
+                style={{
+                  boxShadow: `
+                    0 0 60px hsl(var(--primary) / 0.3),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.1)
+                  `
+                }}
+              >
+                {/* Image Container */}
+                <div className="aspect-video bg-muted relative overflow-hidden">
+                  <motion.img
+                    src={selectedItem.image}
+                    alt={selectedItem.title}
+                    className="w-full h-full object-contain"
+                    initial={{ scale: 1.2, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ duration: 0.8 }}
+                  />
                   
-                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                    <Button variant="outline" className="border-primary/30 hover:bg-primary/10">
-                      <Share className="w-4 h-4 mr-2" />
-                      Share
-                    </Button>
+                  {/* Epic Gradient Overlay */}
+                  <motion.div
+                    className="absolute inset-0 opacity-30"
+                    style={{
+                      background: `linear-gradient(135deg, ${categoryColors[selectedItem.category as keyof typeof categoryColors]})`
+                    }}
+                    animate={{
+                      opacity: [0.1, 0.3, 0.1]
+                    }}
+                    transition={{
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  />
+                </div>
+
+                {/* Content */}
+                <div className="p-8 relative">
+                  {/* Category Badge */}
+                  <motion.div
+                    initial={{ y: -30, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    className="absolute -top-6 left-8"
+                  >
+                    <div 
+                      className="px-6 py-3 rounded-full text-white font-bold backdrop-blur-md border border-white/30"
+                      style={{
+                        background: `linear-gradient(135deg, ${categoryColors[selectedItem.category as keyof typeof categoryColors]})`
+                      }}
+                    >
+                      {selectedItem.category}
+                    </div>
                   </motion.div>
-                  
-                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                    <Button variant="outline" onClick={closeLightbox} className="border-muted-foreground/30 hover:bg-muted/10">
-                      Close
-                    </Button>
+
+                  <motion.h2
+                    initial={{ y: 30, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.2 }}
+                    className="text-4xl font-black mb-8 mt-4"
+                    style={{
+                      background: `linear-gradient(135deg, ${categoryColors[selectedItem.category as keyof typeof categoryColors]})`,
+                      backgroundClip: 'text',
+                      WebkitBackgroundClip: 'text',
+                      color: 'transparent'
+                    }}
+                  >
+                    {selectedItem.title}
+                  </motion.h2>
+
+                  <motion.div
+                    initial={{ y: 30, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.4 }}
+                    className="flex gap-6"
+                  >
+                    {[
+                      { icon: Download, label: 'Download' },
+                      { icon: Share, label: 'Share' },
+                      { icon: Heart, label: 'Like' }
+                    ].map(({ icon: Icon, label }, i) => (
+                      <motion.div
+                        key={label}
+                        whileHover={{ scale: 1.1, y: -5 }}
+                        whileTap={{ scale: 0.95 }}
+                        transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                      >
+                        <Button 
+                          size="lg"
+                          className="rounded-full px-8 py-6 text-lg font-semibold"
+                          style={{
+                            background: i === 0 ? 
+                              `linear-gradient(135deg, ${categoryColors[selectedItem.category as keyof typeof categoryColors]})` :
+                              'transparent',
+                            border: i > 0 ? 
+                              `2px solid hsl(var(--primary))` : 
+                              'none'
+                          }}
+                        >
+                          <Icon className="w-5 h-5 mr-3" />
+                          {label}
+                        </Button>
+                      </motion.div>
+                    ))}
+                    
+                    <motion.div
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <Button 
+                        variant="ghost" 
+                        size="lg"
+                        onClick={closeLightbox}
+                        className="rounded-full px-8 py-6 text-lg"
+                      >
+                        Close
+                      </Button>
+                    </motion.div>
                   </motion.div>
-                </motion.div>
-              </div>
+                </div>
+              </motion.div>
             </motion.div>
-          </motion.div>
-        )}
+          )}
+        </AnimatePresence>
       </main>
+      
       <Footer />
-    </>;
+    </>
+  );
 };
+
 export default GalleryPage;
