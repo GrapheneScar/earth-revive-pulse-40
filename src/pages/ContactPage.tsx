@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
-import { MapPin, Mail, Clock, Send, Instagram } from 'lucide-react';
+import { MapPin, Mail, Send, Instagram } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
@@ -94,11 +94,6 @@ const ContactPage = () => {
     title: "Email Us",
     details: ["jbcnparelclimateactionproject@gmail.com", "General & Support Inquiries", "Response within 24 hours"],
     color: "text-accent"
-  }, {
-    icon: Clock,
-    title: "Office Hours",
-    details: ["Monday - Friday: 9AM - 6PM IST", "Saturday: 10AM - 4PM IST", "Sunday: Closed"],
-    color: "text-muted-foreground"
   }];
   const socialLinks = [{
     icon: Instagram,
