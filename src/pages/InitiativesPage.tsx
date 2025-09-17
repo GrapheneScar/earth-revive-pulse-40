@@ -97,12 +97,8 @@ const InitiativesPage = () => {
               <Badge variant="secondary" className="text-xs sm:text-sm px-2 sm:px-4 py-1 sm:py-2">
                 10 Past Initiatives
               </Badge>
-              <Badge variant="secondary" className="text-xs sm:text-sm px-2 sm:px-4 py-1 sm:py-2">
-                75+ Countries Active
-              </Badge>
-              <Badge variant="secondary" className="text-xs sm:text-sm px-2 sm:px-4 py-1 sm:py-2">
-                500K+ Lives Impacted
-              </Badge>
+              <Badge variant="secondary" className="text-xs sm:text-sm px-2 sm:px-4 py-1 sm:py-2">Active</Badge>
+              <Badge variant="secondary" className="text-xs sm:text-sm px-2 sm:px-4 py-1 sm:py-2">JOIN !!!</Badge>
             </div>
           </motion.div>
         </div>
@@ -216,25 +212,19 @@ const InitiativesPage = () => {
             iconColor: "text-accent"
           }].map((initiative, index) => {
             const isEvenIndex = index % 2 === 0;
-            return (
-              <motion.div 
-                key={initiative.id} 
-                initial={{
-                  opacity: 0,
-                  y: 30
-                }} 
-                animate={isInView ? {
-                  opacity: 1,
-                  y: 0
-                } : {
-                  opacity: 0,
-                  y: 30
-                }} 
-                transition={{
-                  duration: 0.6,
-                  delay: index * 0.1
-                }}
-              >
+            return <motion.div key={initiative.id} initial={{
+              opacity: 0,
+              y: 30
+            }} animate={isInView ? {
+              opacity: 1,
+              y: 0
+            } : {
+              opacity: 0,
+              y: 30
+            }} transition={{
+              duration: 0.6,
+              delay: index * 0.1
+            }}>
                 <Card className={`shadow-hero border-2 border-primary/20 bg-gradient-to-br ${initiative.color} hover:shadow-glow transition-all duration-500 group overflow-hidden`}>
                   <div className={`flex flex-col ${isEvenIndex ? 'lg:flex-row' : 'lg:flex-row-reverse'} h-full`}>
                     {/* Initiative Image */}
@@ -244,72 +234,14 @@ const InitiativesPage = () => {
                           COMPLETED
                         </Badge>
                       </div>
-                      {initiative.id === 'forest-cleanup-drive-2025' ? (
-                        <img 
-                          src="/gallery/forest-cleanup-drive.jpg"
-                          alt="Forest Cleanup Drive 2025 - Students participating in forest restoration and cleanup activities at BNHS Conservation Education Centre"
-                          className="w-full h-full object-cover"
-                        />
-                      ) : initiative.id === 'post-visarjan-beach-cleanup-2025' ? (
-                        <img 
-                          src="/lovable-uploads/ac5a0ffe-a03a-488c-ad6e-ee9e6ff71666.png"
-                          alt="Post-Visarjan Beach Cleanup 2025 - JBCN International School students holding banner during beach cleanup at Chowpatty Beach"
-                          className="w-full h-full object-cover"
-                        />
-                      ) : initiative.id === 'green-initiative' ? (
-                        <img 
-                          src="/lovable-uploads/d7dc9d72-6f8f-42e6-a5eb-3ab3c6198f71.png"
-                          alt="Green Initiative - Students learning gardening and environmental responsibility in an outdoor classroom setting"
-                          className="w-full h-full object-cover"
-                        />
-                      ) : initiative.id === 'beach-cleanup-2023' ? (
-                        <img 
-                          src="/lovable-uploads/6e5750b1-b79d-41a4-939a-303b742736fd.png"
-                          alt="Beach Clean-Up 2023 - Students and volunteers cleaning the shoreline with Mumbai skyline in background"
-                          className="w-full h-full object-cover"
-                        />
-                      ) : initiative.id === 'waste-management' ? (
-                        <img 
-                          src="/lovable-uploads/3c6f412e-57fd-4e87-b17f-1fc0c0fe40f8.png"
-                          alt="Waste Management 2023 - Students attending an educational presentation about waste management and environmental sustainability"
-                          className="w-full h-full object-cover"
-                        />
-                      ) : initiative.id === 'tree-plantation' ? (
-                        <img 
-                          src="/lovable-uploads/eb3af96b-9040-4af6-ac20-ae157e18d16e.png"
-                          alt="Tree Plantation 2023 - Students actively participating in tree planting activities for environmental restoration"
-                          className="w-full h-full object-cover"
-                        />
-                      ) : initiative.id === 'inspirus' ? (
-                        <div className="w-full h-full bg-gradient-to-br from-muted to-muted/50 flex gap-2 p-2">
+                      {initiative.id === 'forest-cleanup-drive-2025' ? <img src="/gallery/forest-cleanup-drive.jpg" alt="Forest Cleanup Drive 2025 - Students participating in forest restoration and cleanup activities at BNHS Conservation Education Centre" className="w-full h-full object-cover" /> : initiative.id === 'post-visarjan-beach-cleanup-2025' ? <img src="/lovable-uploads/ac5a0ffe-a03a-488c-ad6e-ee9e6ff71666.png" alt="Post-Visarjan Beach Cleanup 2025 - JBCN International School students holding banner during beach cleanup at Chowpatty Beach" className="w-full h-full object-cover" /> : initiative.id === 'green-initiative' ? <img src="/lovable-uploads/d7dc9d72-6f8f-42e6-a5eb-3ab3c6198f71.png" alt="Green Initiative - Students learning gardening and environmental responsibility in an outdoor classroom setting" className="w-full h-full object-cover" /> : initiative.id === 'beach-cleanup-2023' ? <img src="/lovable-uploads/6e5750b1-b79d-41a4-939a-303b742736fd.png" alt="Beach Clean-Up 2023 - Students and volunteers cleaning the shoreline with Mumbai skyline in background" className="w-full h-full object-cover" /> : initiative.id === 'waste-management' ? <img src="/lovable-uploads/3c6f412e-57fd-4e87-b17f-1fc0c0fe40f8.png" alt="Waste Management 2023 - Students attending an educational presentation about waste management and environmental sustainability" className="w-full h-full object-cover" /> : initiative.id === 'tree-plantation' ? <img src="/lovable-uploads/eb3af96b-9040-4af6-ac20-ae157e18d16e.png" alt="Tree Plantation 2023 - Students actively participating in tree planting activities for environmental restoration" className="w-full h-full object-cover" /> : initiative.id === 'inspirus' ? <div className="w-full h-full bg-gradient-to-br from-muted to-muted/50 flex gap-2 p-2">
                           <div className="flex-1 rounded-lg overflow-hidden">
-                            <img 
-                              src="/lovable-uploads/4056d3dc-ea87-4364-ac36-e56903620153.png"
-                              alt="InspirUs Art Installation - Students viewing environmental art installation made from waste materials"
-                              className="w-full h-full object-cover"
-                            />
+                            <img src="/lovable-uploads/4056d3dc-ea87-4364-ac36-e56903620153.png" alt="InspirUs Art Installation - Students viewing environmental art installation made from waste materials" className="w-full h-full object-cover" />
                           </div>
                           <div className="flex-1 rounded-lg overflow-hidden">
-                            <img 
-                              src="/lovable-uploads/70ad26d4-635e-438f-b930-8ed17b459df7.png"
-                              alt="InspirUs Beach Cleanup - Large group of participants collecting waste during beach cleanup initiative"
-                              className="w-full h-full object-cover"
-                            />
+                            <img src="/lovable-uploads/70ad26d4-635e-438f-b930-8ed17b459df7.png" alt="InspirUs Beach Cleanup - Large group of participants collecting waste during beach cleanup initiative" className="w-full h-full object-cover" />
                           </div>
-                        </div>
-                      ) : initiative.id === 'beach-cleanup-2022' ? (
-                        <img 
-                          src="/lovable-uploads/4f4f661f-e77f-49ef-9f9f-79a5f4b7abf0.png"
-                          alt="Beach Clean Up 2022 - Students working together to collect large debris during beach cleanup initiative"
-                          className="w-full h-full object-cover"
-                        />
-                      ) : (
-                        <img 
-                          src="/lovable-uploads/e5b71af0-81f1-48bf-9662-02e0470ba336.png"
-                          alt="Earth Day - Nariman Point awareness event with students holding climate action posters and signs"
-                          className="w-full h-full object-cover"
-                        />
-                      )}
+                        </div> : initiative.id === 'beach-cleanup-2022' ? <img src="/lovable-uploads/4f4f661f-e77f-49ef-9f9f-79a5f4b7abf0.png" alt="Beach Clean Up 2022 - Students working together to collect large debris during beach cleanup initiative" className="w-full h-full object-cover" /> : <img src="/lovable-uploads/e5b71af0-81f1-48bf-9662-02e0470ba336.png" alt="Earth Day - Nariman Point awareness event with students holding climate action posters and signs" className="w-full h-full object-cover" />}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
                     </div>
                     
@@ -329,8 +261,7 @@ const InitiativesPage = () => {
                     </div>
                   </div>
                 </Card>
-              </motion.div>
-            );
+              </motion.div>;
           })}
           </div>
         </div>
