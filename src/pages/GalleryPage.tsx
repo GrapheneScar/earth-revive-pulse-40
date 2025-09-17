@@ -167,70 +167,18 @@ const GalleryPage = () => {
       />
 
       <main className="min-h-screen bg-background pt-20 relative overflow-hidden" ref={containerRef}>
-        {/* Dynamic Background */}
+        {/* Subtle Background */}
         <div className="fixed inset-0 pointer-events-none">
-          {/* Animated Mesh Gradient */}
-          <motion.div
-            className="absolute inset-0 opacity-20"
+          {/* Clean Gradient */}
+          <div
+            className="absolute inset-0 opacity-30"
             style={{
-              background: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, 
-                hsl(var(--primary)) 0%, 
-                hsl(var(--accent)) 25%, 
-                transparent 50%)`
+              background: `linear-gradient(135deg, 
+                hsl(var(--primary) / 0.1) 0%, 
+                hsl(var(--accent) / 0.1) 50%, 
+                hsl(var(--background)) 100%)`
             }}
           />
-          
-          {/* Floating Orbs */}
-          {[...Array(12)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute rounded-full mix-blend-screen"
-              style={{
-                width: Math.random() * 300 + 100,
-                height: Math.random() * 300 + 100,
-                x: Math.random() * window.innerWidth,
-                y: Math.random() * window.innerHeight,
-                background: `linear-gradient(45deg, 
-                  hsl(${Math.random() * 360}, 70%, 50%), 
-                  hsl(${Math.random() * 360}, 70%, 30%))`
-              }}
-              animate={{
-                x: [0, Math.random() * 100 - 50],
-                y: [0, Math.random() * 100 - 50],
-                scale: [0.8, 1.2, 0.8],
-                opacity: [0.1, 0.3, 0.1]
-              }}
-              transition={{
-                duration: Math.random() * 10 + 10,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            />
-          ))}
-
-          {/* Particle System */}
-          {[...Array(50)].map((_, i) => (
-            <motion.div
-              key={`particle-${i}`}
-              className="absolute w-1 h-1 bg-primary/20 rounded-full"
-              initial={{
-                x: Math.random() * window.innerWidth,
-                y: window.innerHeight + 100,
-                opacity: 0
-              }}
-              animate={{
-                y: -100,
-                opacity: [0, 1, 0],
-                scale: [0, 1, 0]
-              }}
-              transition={{
-                duration: Math.random() * 15 + 10,
-                repeat: Infinity,
-                delay: Math.random() * 10,
-                ease: "linear"
-              }}
-            />
-          ))}
         </div>
 
         {/* Hero Section with 3D Elements */}
@@ -549,31 +497,6 @@ const GalleryPage = () => {
               className="fixed inset-0 bg-black/95 backdrop-blur-xl z-50 flex items-center justify-center p-4"
               onClick={closeLightbox}
             >
-              {/* Dynamic Particle Background */}
-              <div className="absolute inset-0 overflow-hidden">
-                {[...Array(20)].map((_, i) => (
-                  <motion.div
-                    key={i}
-                    className="absolute w-1 h-1 bg-primary/40 rounded-full"
-                    initial={{ 
-                      x: Math.random() * window.innerWidth,
-                      y: Math.random() * window.innerHeight,
-                      scale: 0
-                    }}
-                    animate={{
-                      scale: [0, 1, 0],
-                      opacity: [0, 1, 0],
-                      rotate: 360
-                    }}
-                    transition={{
-                      duration: 4,
-                      repeat: Infinity,
-                      delay: i * 0.2,
-                      ease: "easeInOut"
-                    }}
-                  />
-                ))}
-              </div>
 
               <motion.div
                 initial={{ 
@@ -606,12 +529,12 @@ const GalleryPage = () => {
                 }}
               >
                 {/* Image Container */}
-                <div className="aspect-video bg-muted relative overflow-hidden">
+                <div className="w-full h-auto bg-muted relative overflow-hidden">
                   <motion.img
                     src={selectedItem.image}
                     alt={selectedItem.title}
-                    className="w-full h-full object-contain"
-                    initial={{ scale: 1.2, opacity: 0 }}
+                    className="w-full h-auto object-cover max-h-[90vh]"
+                    initial={{ scale: 1.1, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     transition={{ duration: 0.8 }}
                   />
@@ -666,55 +589,6 @@ const GalleryPage = () => {
                     {selectedItem.title}
                   </motion.h2>
 
-                  <motion.div
-                    initial={{ y: 30, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.4 }}
-                    className="flex gap-6"
-                  >
-                    {[
-                      { icon: Download, label: 'Download' },
-                      { icon: Share, label: 'Share' },
-                      { icon: Heart, label: 'Like' }
-                    ].map(({ icon: Icon, label }, i) => (
-                      <motion.div
-                        key={label}
-                        whileHover={{ scale: 1.1, y: -5 }}
-                        whileTap={{ scale: 0.95 }}
-                        transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                      >
-                        <Button 
-                          size="lg"
-                          className="rounded-full px-8 py-6 text-lg font-semibold"
-                          style={{
-                            background: i === 0 ? 
-                              `linear-gradient(135deg, ${categoryColors[selectedItem.category as keyof typeof categoryColors]})` :
-                              'transparent',
-                            border: i > 0 ? 
-                              `2px solid hsl(var(--primary))` : 
-                              'none'
-                          }}
-                        >
-                          <Icon className="w-5 h-5 mr-3" />
-                          {label}
-                        </Button>
-                      </motion.div>
-                    ))}
-                    
-                    <motion.div
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <Button 
-                        variant="ghost" 
-                        size="lg"
-                        onClick={closeLightbox}
-                        className="rounded-full px-8 py-6 text-lg"
-                      >
-                        Close
-                      </Button>
-                    </motion.div>
-                  </motion.div>
                 </div>
               </motion.div>
             </motion.div>
