@@ -1,5 +1,5 @@
 import { motion, useInView } from "framer-motion";
-import { useRef, useEffect, useState } from "react";
+import { useRef } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -7,37 +7,16 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import PartnershipCard from "@/components/PartnershipCard";
 import { Globe, Users, Award, MapPin, ExternalLink, Sparkles, TreePine, Target, Calendar, Building2, Leaf } from "lucide-react";
-import { removeBackground, loadImage } from "@/utils/backgroundRemoval";
 
 const CollaboratorsPage = () => {
   const heroRef = useRef(null);
   const partnershipsRef = useRef(null);
   const mentorRef = useRef(null);
-  const [processedBadge, setProcessedBadge] = useState<string | null>(null);
   
   const heroInView = useInView(heroRef, { once: true });
   const partnershipsInView = useInView(partnershipsRef, { once: true });
   const mentorInView = useInView(mentorRef, { once: true });
 
-  // Process mentor badge to remove background
-  useEffect(() => {
-    const processBadge = async () => {
-      try {
-        const response = await fetch('/lovable-uploads/mentor-badge.png');
-        const blob = await response.blob();
-        const image = await loadImage(blob);
-        const processedBlob = await removeBackground(image);
-        const url = URL.createObjectURL(processedBlob);
-        setProcessedBadge(url);
-      } catch (error) {
-        console.error('Failed to process badge:', error);
-        // Fallback to original image
-        setProcessedBadge('/lovable-uploads/mentor-badge.png');
-      }
-    };
-
-    processBadge();
-  }, []);
 
   const partnerships = [
     {
@@ -379,26 +358,24 @@ const CollaboratorsPage = () => {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                     </div>
-                    {processedBadge && (
-                      <motion.div
-                        className="absolute -top-4 -right-4 w-20 h-20"
-                        animate={{ 
-                          rotate: [0, 5, -5, 0],
-                          scale: [1, 1.1, 1],
-                        }}
-                        transition={{ 
-                          duration: 4, 
-                          repeat: Infinity,
-                          ease: "easeInOut"
-                        }}
-                      >
-                        <img
-                          src={processedBadge}
-                          alt="Climate Action Schools Mentor Badge"
-                          className="w-full h-full drop-shadow-2xl"
-                        />
-                      </motion.div>
-                    )}
+                    <motion.div
+                      className="absolute -top-4 -right-4 w-20 h-20"
+                      animate={{ 
+                        rotate: [0, 5, -5, 0],
+                        scale: [1, 1.1, 1],
+                      }}
+                      transition={{ 
+                        duration: 4, 
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                    >
+                      <img
+                        src="/lovable-uploads/mentor-badge.png"
+                        alt="Climate Action Schools Mentor Badge"
+                        className="w-full h-full drop-shadow-2xl"
+                      />
+                    </motion.div>
                   </motion.div>
 
                   <div className="flex-1 space-y-6">
