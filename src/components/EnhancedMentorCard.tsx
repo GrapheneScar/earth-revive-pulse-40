@@ -112,38 +112,81 @@ const EnhancedMentorCard = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
                 </div>
 
-                {/* Enhanced Badge */}
+                {/* Sophisticated Badge */}
                 <motion.div
-                  className="absolute -top-6 -right-6 w-24 h-24"
+                  className="absolute -top-8 -right-8 w-32 h-32"
                   animate={{ 
-                    rotate: [0, 10, -10, 0],
-                    scale: [1, 1.1, 1],
+                    rotate: [0, 15, -15, 0],
+                    scale: [1, 1.15, 1],
                   }}
                   transition={{ 
-                    duration: 5, 
+                    duration: 8, 
                     repeat: Infinity,
                     ease: "easeInOut"
                   }}
-                  whileHover={{ scale: 1.2, rotate: 15 }}
+                  whileHover={{ scale: 1.3, rotate: 25 }}
                 >
                   <div className="relative w-full h-full">
+                    {/* Multiple glow layers for luxury effect */}
                     <motion.div
-                      className="absolute -inset-2 bg-gradient-to-r from-yellow-400 via-amber-500 to-orange-500 rounded-full opacity-50 blur-lg"
+                      className="absolute -inset-6 bg-gradient-to-r from-yellow-300 via-amber-400 to-orange-400 rounded-full opacity-30 blur-2xl"
                       animate={{
-                        scale: [1, 1.2, 1],
-                        opacity: [0.3, 0.6, 0.3],
+                        scale: [1, 1.4, 1],
+                        opacity: [0.2, 0.5, 0.2],
                       }}
                       transition={{
-                        duration: 3,
+                        duration: 4,
                         repeat: Infinity,
                         ease: "easeInOut"
                       }}
                     />
-                    <img
-                      src="/lovable-uploads/mentor-badge-clean.png"
-                      alt="Climate Action Schools Mentor Badge"
-                      className="relative w-full h-full drop-shadow-2xl"
+                    <motion.div
+                      className="absolute -inset-4 bg-gradient-to-r from-amber-400 via-orange-500 to-red-500 rounded-full opacity-40 blur-xl"
+                      animate={{
+                        scale: [1, 1.2, 1],
+                        opacity: [0.3, 0.7, 0.3],
+                        rotate: [0, 180, 360],
+                      }}
+                      transition={{
+                        duration: 6,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
                     />
+                    
+                    {/* Premium border effect */}
+                    <div className="absolute inset-0 rounded-full border-4 border-gradient-to-r from-gold to-amber-400 shadow-2xl" style={{
+                      background: 'linear-gradient(45deg, rgba(245, 158, 11, 0.1), rgba(251, 191, 36, 0.1), rgba(245, 158, 11, 0.1))',
+                      borderImage: 'linear-gradient(45deg, #f59e0b, #fbbf24, #f59e0b) 1'
+                    }} />
+                    
+                    <img
+                      src="/lovable-uploads/image_-_Edited.png"
+                      alt="Climate Action Schools Mentor Badge"
+                      className="relative w-full h-full object-contain drop-shadow-2xl filter brightness-110 contrast-110"
+                    />
+                    
+                    {/* Sparkle effects */}
+                    {[...Array(8)].map((_, i) => (
+                      <motion.div
+                        key={i}
+                        className="absolute w-2 h-2 bg-white rounded-full opacity-80"
+                        style={{
+                          top: `${20 + Math.random() * 60}%`,
+                          left: `${20 + Math.random() * 60}%`,
+                        }}
+                        animate={{
+                          scale: [0, 1, 0],
+                          opacity: [0, 1, 0],
+                        }}
+                        transition={{
+                          duration: 2,
+                          repeat: Infinity,
+                          delay: i * 0.3,
+                          ease: "easeInOut"
+                        }}
+                      />
+                    ))}
                   </div>
                 </motion.div>
 
