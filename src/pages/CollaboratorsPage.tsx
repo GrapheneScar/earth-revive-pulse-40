@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import PartnershipCard from "@/components/PartnershipCard";
+import PartnershipFlow from "@/components/PartnershipFlow";
+import EnhancedMentorCard from "@/components/EnhancedMentorCard";
 import { Globe, Users, Award, MapPin, ExternalLink, Sparkles, TreePine, Target, Calendar, Building2, Leaf } from "lucide-react";
 
 const CollaboratorsPage = () => {
@@ -253,6 +255,9 @@ const CollaboratorsPage = () => {
         ))}
       </section>
 
+      {/* Partnership Flow Animation */}
+      <PartnershipFlow />
+
       {/* Partnership Cards Grid */}
       <section ref={partnershipsRef} className="py-20 px-4">
         <div className="max-w-7xl mx-auto">
@@ -263,10 +268,10 @@ const CollaboratorsPage = () => {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-emerald-400 to-teal-500 bg-clip-text text-transparent">
-              Our Partnership Ecosystem
+              Detailed Partnership Insights
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Explore the organizations and initiatives that make our global climate action network possible
+              Deep dive into each partnership and discover the impact we're creating together
             </p>
           </motion.div>
 
@@ -283,8 +288,8 @@ const CollaboratorsPage = () => {
       </section>
 
       {/* Enhanced Mentor Spotlight */}
-      <section ref={mentorRef} className="py-20 px-4 bg-gradient-to-br from-amber-500/5 via-orange-500/5 to-red-500/5">
-        <div className="max-w-5xl mx-auto">
+      <section ref={mentorRef} className="py-20 px-4">
+        <div className="max-w-7xl mx-auto">
           <motion.div
             className="text-center mb-16"
             initial={{ opacity: 0, y: 30 }}
@@ -292,147 +297,14 @@ const CollaboratorsPage = () => {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-amber-400 via-orange-500 to-red-500 bg-clip-text text-transparent">
-              Leadership Spotlight
+              Visionary Leadership
             </h2>
-            <p className="text-xl text-muted-foreground">
-              Meet the visionary leader driving India's climate education revolution
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Meet the exceptional leader driving India's climate education revolution and inspiring the next generation of environmental champions
             </p>
           </motion.div>
 
-          <motion.div
-            className="relative"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={mentorInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.8, delay: 0.3 }}
-          >
-            <Card className="p-8 hover-glow relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-amber-500/10 via-orange-500/10 to-red-500/10" />
-              
-              {/* Dynamic Background Pattern */}
-              <div className="absolute inset-0 opacity-5">
-                {[...Array(20)].map((_, i) => (
-                  <motion.div
-                    key={i}
-                    className="absolute w-32 h-32 border border-amber-400/20 rounded-full"
-                    style={{
-                      left: `${Math.random() * 100}%`,
-                      top: `${Math.random() * 100}%`,
-                    }}
-                    animate={{
-                      scale: [1, 1.2, 1],
-                      opacity: [0.1, 0.3, 0.1],
-                    }}
-                    transition={{
-                      duration: 4 + Math.random() * 2,
-                      repeat: Infinity,
-                      delay: Math.random() * 2,
-                    }}
-                  />
-                ))}
-              </div>
-
-              {/* Pulse Animation Border */}
-              <motion.div
-                className="absolute inset-0 border-2 border-transparent bg-gradient-to-r from-amber-400 via-orange-500 to-red-500 rounded-lg"
-                style={{
-                  background: 'linear-gradient(90deg, transparent, transparent), linear-gradient(90deg, #f59e0b, #f97316, #ef4444)',
-                  backgroundClip: 'padding-box, border-box',
-                  backgroundOrigin: 'padding-box, border-box',
-                }}
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 3, repeat: Infinity }}
-              />
-
-              <div className="relative z-10">
-                <div className="flex flex-col lg:flex-row items-center gap-8">
-                  <motion.div
-                    className="relative"
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <div className="w-56 h-56 rounded-2xl overflow-hidden shadow-elegant relative">
-                      <img
-                        src="/lovable-uploads/gagandeep-sir.jpg"
-                        alt="Gagandeep Sir"
-                        className="w-full h-full object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-                    </div>
-                    <motion.div
-                      className="absolute -top-4 -right-4 w-20 h-20"
-                      animate={{ 
-                        rotate: [0, 5, -5, 0],
-                        scale: [1, 1.1, 1],
-                      }}
-                      transition={{ 
-                        duration: 4, 
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                      }}
-                    >
-                      <img
-                        src="/lovable-uploads/mentor-badge.png"
-                        alt="Climate Action Schools Mentor Badge"
-                        className="w-full h-full drop-shadow-2xl"
-                      />
-                    </motion.div>
-                  </motion.div>
-
-                  <div className="flex-1 space-y-6">
-                    <div>
-                      <h3 className="text-4xl font-bold mb-3 bg-gradient-to-r from-amber-400 via-orange-500 to-red-500 bg-clip-text text-transparent">
-                        Gagandeep Singh
-                      </h3>
-                      <p className="text-xl text-primary mb-2 font-semibold">
-                        National Leader & Climate Education Pioneer
-                      </p>
-                      <p className="text-muted-foreground">
-                        Climate Action Project India • JBCN International School Mentor
-                      </p>
-                    </div>
-
-                    <div className="space-y-4">
-                      <p className="text-muted-foreground leading-relaxed">
-                        As the National Leader of the Climate Action Project in India, Gagandeep Sir has revolutionized climate education across the nation. His visionary leadership has transformed how over 50,000 students approach environmental challenges.
-                      </p>
-                      
-                      <div className="grid grid-cols-2 gap-4">
-                        <div className="bg-amber-50 dark:bg-amber-950/20 p-4 rounded-lg border border-amber-200/50 dark:border-amber-800/50">
-                          <div className="text-2xl font-bold text-amber-600">10+</div>
-                          <div className="text-sm text-muted-foreground">Top Schools Guided</div>
-                        </div>
-                        <div className="bg-orange-50 dark:bg-orange-950/20 p-4 rounded-lg border border-orange-200/50 dark:border-orange-800/50">
-                          <div className="text-2xl font-bold text-orange-600">50K+</div>
-                          <div className="text-sm text-muted-foreground">Students Inspired</div>
-                        </div>
-                      </div>
-
-                      <div className="space-y-2">
-                        <h4 className="font-semibold flex items-center gap-2">
-                          <Users className="w-4 h-4 text-primary" />
-                          Leadership Impact
-                        </h4>
-                        <ul className="space-y-1 text-sm">
-                          <li className="flex items-start gap-2">
-                            <Award className="w-3 h-3 text-amber-500 mt-1 flex-shrink-0" />
-                            Spearheaded India's largest school climate action network
-                          </li>
-                          <li className="flex items-start gap-2">
-                            <TreePine className="w-3 h-3 text-emerald-500 mt-1 flex-shrink-0" />
-                            Developed curriculum framework adopted nationally
-                          </li>
-                          <li className="flex items-start gap-2">
-                            <Target className="w-3 h-3 text-blue-500 mt-1 flex-shrink-0" />
-                            Achieved 95% student engagement rate in climate programs
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Card>
-          </motion.div>
+          <EnhancedMentorCard />
         </div>
       </section>
 
