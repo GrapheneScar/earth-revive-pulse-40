@@ -27,6 +27,7 @@ const Navigation = () => {
     { name: 'About Us', href: '/about' },
     { name: 'Our Team', href: '/team' },
     { name: 'Initiatives', href: '/initiatives' },
+    { name: 'Our Collaborators', href: '/collaborators' },
     { name: 'Gallery', href: '/gallery' },
     { name: 'Contact', href: '/contact' },
   ];
