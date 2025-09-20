@@ -161,8 +161,8 @@ const EnhancedMentorCard = () => {
                     }} />
                     
                     <img
-                      src="/lovable-uploads/image_-_Edited.png"
-                      alt="Climate Action Schools Mentor Badge"
+                      src="/lovable-uploads/mentor-badge-2026.png"
+                      alt="Climate Action Schools Mentor Badge 2026"
                       className="relative w-full h-full object-contain drop-shadow-2xl filter brightness-110 contrast-110"
                     />
                     

@@ -266,26 +266,54 @@ const CollaboratorsPage = () => {
               initial={{ opacity: 0, x: -100 }}
               animate={partnershipsInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.2 }}
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.05, rotateY: 5 }}
             >
-              <Card className="w-80 h-64 bg-gradient-to-br from-emerald-50 to-teal-50 border-emerald-200 hover:border-emerald-300 transition-all duration-300 hover:shadow-xl">
-                <CardContent className="p-6 h-full flex flex-col">
+              <Card className="w-80 h-72 bg-gradient-to-br from-emerald-50 via-emerald-100 to-teal-50 border-emerald-200 hover:border-emerald-400 transition-all duration-500 hover:shadow-2xl relative overflow-hidden">
+                {/* Background Pattern */}
+                <div className="absolute inset-0 opacity-10">
+                  <div className="absolute top-4 right-4 w-16 h-16 bg-emerald-300 rounded-full blur-xl"></div>
+                  <div className="absolute bottom-6 left-6 w-12 h-12 bg-teal-300 rounded-full blur-lg"></div>
+                </div>
+                
+                <CardContent className="p-6 h-full flex flex-col relative z-10">
                   <div className="flex items-center gap-3 mb-4">
-                    <TreePine className="w-8 h-8 text-emerald-600" />
-                    <h3 className="text-xl font-bold text-emerald-800">JBCN International</h3>
+                    <motion.div
+                      className="p-2 bg-emerald-100 rounded-xl group-hover:bg-emerald-200 transition-colors duration-300"
+                      whileHover={{ rotate: 360 }}
+                      transition={{ duration: 0.6 }}
+                    >
+                      <TreePine className="w-8 h-8 text-emerald-600" />
+                    </motion.div>
+                    <div>
+                      <h3 className="text-xl font-bold text-emerald-800 group-hover:text-emerald-900 transition-colors">JBCN International</h3>
+                      <p className="text-xs text-emerald-600 font-medium">Parel, Mumbai</p>
+                    </div>
                   </div>
-                  <p className="text-emerald-700 text-sm mb-4 flex-1">
-                    Pioneer in Climate Education Excellence
+                  
+                  <p className="text-emerald-700 text-sm mb-4 flex-1 leading-relaxed">
+                    Pioneer in Climate Education Excellence. Leading India's first carbon-neutral school initiative with student-driven sustainability programs.
                   </p>
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="text-center">
+                  
+                  <div className="grid grid-cols-2 gap-4 mb-3">
+                    <motion.div 
+                      className="text-center p-2 bg-emerald-50 rounded-lg border border-emerald-100"
+                      whileHover={{ scale: 1.05 }}
+                    >
                       <div className="text-lg font-bold text-emerald-800">1,200+</div>
-                      <div className="text-xs text-emerald-600">Students</div>
-                    </div>
-                    <div className="text-center">
+                      <div className="text-xs text-emerald-600">Students Engaged</div>
+                    </motion.div>
+                    <motion.div 
+                      className="text-center p-2 bg-emerald-50 rounded-lg border border-emerald-100"
+                      whileHover={{ scale: 1.05 }}
+                    >
                       <div className="text-lg font-bold text-emerald-800">8+</div>
-                      <div className="text-xs text-emerald-600">Years</div>
-                    </div>
+                      <div className="text-xs text-emerald-600">Years Active</div>
+                    </motion.div>
+                  </div>
+                  
+                  <div className="flex gap-1 justify-center">
+                    <div className="px-2 py-1 bg-emerald-200 text-emerald-800 text-xs rounded-full font-medium">Carbon Neutral</div>
+                    <div className="px-2 py-1 bg-teal-200 text-teal-800 text-xs rounded-full font-medium">Award Winner</div>
                   </div>
                 </CardContent>
               </Card>
@@ -307,26 +335,54 @@ const CollaboratorsPage = () => {
               initial={{ opacity: 0, x: 100 }}
               animate={partnershipsInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.4 }}
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.05, rotateY: -5 }}
             >
-              <Card className="w-80 h-64 bg-gradient-to-br from-blue-50 to-cyan-50 border-blue-200 hover:border-blue-300 transition-all duration-300 hover:shadow-xl">
-                <CardContent className="p-6 h-full flex flex-col">
+              <Card className="w-80 h-72 bg-gradient-to-br from-blue-50 via-cyan-50 to-blue-100 border-blue-200 hover:border-blue-400 transition-all duration-500 hover:shadow-2xl relative overflow-hidden">
+                {/* Background Pattern */}
+                <div className="absolute inset-0 opacity-10">
+                  <div className="absolute top-4 left-4 w-16 h-16 bg-blue-300 rounded-full blur-xl"></div>
+                  <div className="absolute bottom-6 right-6 w-12 h-12 bg-cyan-300 rounded-full blur-lg"></div>
+                </div>
+                
+                <CardContent className="p-6 h-full flex flex-col relative z-10">
                   <div className="flex items-center gap-3 mb-4">
-                    <Globe className="w-8 h-8 text-blue-600" />
-                    <h3 className="text-xl font-bold text-blue-800">Take Action Global</h3>
-                  </div>
-                  <p className="text-blue-700 text-sm mb-4 flex-1">
-                    Global Network for Climate Action
-                  </p>
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="text-center">
-                      <div className="text-lg font-bold text-blue-800">500+</div>
-                      <div className="text-xs text-blue-600">Schools</div>
+                    <motion.div
+                      className="p-2 bg-blue-100 rounded-xl group-hover:bg-blue-200 transition-colors duration-300"
+                      whileHover={{ rotate: -360 }}
+                      transition={{ duration: 0.6 }}
+                    >
+                      <Globe className="w-8 h-8 text-blue-600" />
+                    </motion.div>
+                    <div>
+                      <h3 className="text-xl font-bold text-blue-800 group-hover:text-blue-900 transition-colors">Take Action Global</h3>
+                      <p className="text-xs text-blue-600 font-medium">Global Network</p>
                     </div>
-                    <div className="text-center">
+                  </div>
+                  
+                  <p className="text-blue-700 text-sm mb-4 flex-1 leading-relaxed">
+                    Revolutionary platform connecting schools worldwide for climate action through cutting-edge technology and collaborative learning.
+                  </p>
+                  
+                  <div className="grid grid-cols-2 gap-4 mb-3">
+                    <motion.div 
+                      className="text-center p-2 bg-blue-50 rounded-lg border border-blue-100"
+                      whileHover={{ scale: 1.05 }}
+                    >
+                      <div className="text-lg font-bold text-blue-800">500+</div>
+                      <div className="text-xs text-blue-600">Schools Connected</div>
+                    </motion.div>
+                    <motion.div 
+                      className="text-center p-2 bg-blue-50 rounded-lg border border-blue-100"
+                      whileHover={{ scale: 1.05 }}
+                    >
                       <div className="text-lg font-bold text-blue-800">40</div>
                       <div className="text-xs text-blue-600">Countries</div>
-                    </div>
+                    </motion.div>
+                  </div>
+                  
+                  <div className="flex gap-1 justify-center">
+                    <div className="px-2 py-1 bg-blue-200 text-blue-800 text-xs rounded-full font-medium">Global Network</div>
+                    <div className="px-2 py-1 bg-cyan-200 text-cyan-800 text-xs rounded-full font-medium">Tech Leader</div>
                   </div>
                 </CardContent>
               </Card>
@@ -403,26 +459,53 @@ const CollaboratorsPage = () => {
               initial={{ opacity: 0, y: 100 }}
               animate={partnershipsInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 1.4 }}
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.05, rotateX: 5 }}
             >
-              <Card className="h-64 bg-gradient-to-br from-purple-50 to-indigo-50 border-purple-200 hover:border-purple-300 transition-all duration-300 hover:shadow-xl">
-                <CardContent className="p-6 h-full flex flex-col">
+              <Card className="h-80 bg-gradient-to-br from-purple-50 via-indigo-50 to-purple-100 border-purple-200 hover:border-purple-400 transition-all duration-500 hover:shadow-2xl relative overflow-hidden">
+                {/* Background Pattern */}
+                <div className="absolute inset-0 opacity-10">
+                  <div className="absolute top-4 right-4 w-20 h-20 bg-purple-300 rounded-full blur-xl"></div>
+                  <div className="absolute bottom-4 left-4 w-16 h-16 bg-indigo-300 rounded-full blur-lg"></div>
+                </div>
+                
+                <CardContent className="p-6 h-full flex flex-col relative z-10">
                   <div className="flex items-center gap-3 mb-4">
-                    <Target className="w-8 h-8 text-purple-600" />
-                    <h3 className="text-xl font-bold text-purple-800">Climate Action Project</h3>
+                    <motion.div
+                      className="p-3 bg-purple-100 rounded-xl group-hover:bg-purple-200 transition-colors duration-300"
+                      whileHover={{ scale: 1.1, rotate: 15 }}
+                    >
+                      <Target className="w-8 h-8 text-purple-600" />
+                    </motion.div>
+                    <div className="flex-1">
+                      <h3 className="text-xl font-bold text-purple-800 group-hover:text-purple-900 transition-colors">Climate Action Project</h3>
+                      <p className="text-xs text-purple-600 font-medium">Global Collaboration Program</p>
+                    </div>
                   </div>
-                  <p className="text-purple-700 text-sm mb-4 flex-1">
-                    One-Month Global Collaboration Program
+                  
+                  <p className="text-purple-700 text-sm mb-4 flex-1 leading-relaxed">
+                    Intensive month-long global collaboration where students from different continents design and implement real climate solutions through peer-to-peer learning.
                   </p>
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="text-center">
-                      <div className="text-lg font-bold text-purple-800">100K+</div>
-                      <div className="text-xs text-purple-600">Participants</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-lg font-bold text-purple-800">30+</div>
-                      <div className="text-xs text-purple-600">Languages</div>
-                    </div>
+                  
+                  <div className="space-y-3 mb-4">
+                    <motion.div 
+                      className="flex justify-between items-center p-2 bg-purple-50 rounded-lg border border-purple-100"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <span className="text-xs text-purple-600">Participants</span>
+                      <span className="text-lg font-bold text-purple-800">100K+</span>
+                    </motion.div>
+                    <motion.div 
+                      className="flex justify-between items-center p-2 bg-purple-50 rounded-lg border border-purple-100"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <span className="text-xs text-purple-600">Languages</span>
+                      <span className="text-lg font-bold text-purple-800">30+</span>
+                    </motion.div>
+                  </div>
+                  
+                  <div className="flex gap-1 justify-center flex-wrap">
+                    <div className="px-2 py-1 bg-purple-200 text-purple-800 text-xs rounded-full font-medium">UNESCO Partner</div>
+                    <div className="px-2 py-1 bg-indigo-200 text-indigo-800 text-xs rounded-full font-medium">Global Impact</div>
                   </div>
                 </CardContent>
               </Card>
@@ -434,26 +517,62 @@ const CollaboratorsPage = () => {
               initial={{ opacity: 0, y: 100 }}
               animate={partnershipsInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 1.6 }}
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.05, rotateX: -5 }}
             >
-              <Card className="h-64 bg-gradient-to-br from-amber-50 to-orange-50 border-amber-200 hover:border-amber-300 transition-all duration-300 hover:shadow-xl">
-                <CardContent className="p-6 h-full flex flex-col">
+              <Card className="h-80 bg-gradient-to-br from-amber-50 via-orange-50 to-amber-100 border-amber-200 hover:border-amber-400 transition-all duration-500 hover:shadow-2xl relative overflow-hidden">
+                {/* Background Pattern */}
+                <div className="absolute inset-0 opacity-10">
+                  <div className="absolute top-4 left-4 w-20 h-20 bg-amber-300 rounded-full blur-xl"></div>
+                  <div className="absolute bottom-4 right-4 w-16 h-16 bg-orange-300 rounded-full blur-lg"></div>
+                </div>
+                
+                {/* Certificate Image */}
+                <div className="absolute top-2 right-2 w-16 h-16 opacity-20">
+                  <img 
+                    src="/lovable-uploads/climate-action-certificate.jpg" 
+                    alt="Certificate" 
+                    className="w-full h-full object-cover rounded-lg"
+                  />
+                </div>
+                
+                <CardContent className="p-6 h-full flex flex-col relative z-10">
                   <div className="flex items-center gap-3 mb-4">
-                    <Award className="w-8 h-8 text-amber-600" />
-                    <h3 className="text-xl font-bold text-amber-800">Climate Action Schools</h3>
+                    <motion.div
+                      className="p-3 bg-amber-100 rounded-xl group-hover:bg-amber-200 transition-colors duration-300"
+                      whileHover={{ scale: 1.1, rotate: -15 }}
+                    >
+                      <Award className="w-8 h-8 text-amber-600" />
+                    </motion.div>
+                    <div className="flex-1">
+                      <h3 className="text-xl font-bold text-amber-800 group-hover:text-amber-900 transition-colors">Climate Action Schools</h3>
+                      <p className="text-xs text-amber-600 font-medium">Excellence Recognition Program</p>
+                    </div>
                   </div>
-                  <p className="text-amber-700 text-sm mb-4 flex-1">
-                    Three-Year Excellence Recognition
+                  
+                  <p className="text-amber-700 text-sm mb-4 flex-1 leading-relaxed">
+                    Prestigious recognition for three consecutive years (2022-2025) demonstrating unwavering commitment to environmental education and measurable impact.
                   </p>
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="text-center">
-                      <div className="text-lg font-bold text-amber-800">3</div>
-                      <div className="text-xs text-amber-600">Years</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-lg font-bold text-amber-800">Top 5%</div>
-                      <div className="text-xs text-amber-600">Global</div>
-                    </div>
+                  
+                  <div className="space-y-3 mb-4">
+                    <motion.div 
+                      className="flex justify-between items-center p-2 bg-amber-50 rounded-lg border border-amber-100"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <span className="text-xs text-amber-600">Recognition Years</span>
+                      <span className="text-lg font-bold text-amber-800">3 Consecutive</span>
+                    </motion.div>
+                    <motion.div 
+                      className="flex justify-between items-center p-2 bg-amber-50 rounded-lg border border-amber-100"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <span className="text-xs text-amber-600">Global Ranking</span>
+                      <span className="text-lg font-bold text-amber-800">Top 5%</span>
+                    </motion.div>
+                  </div>
+                  
+                  <div className="flex gap-1 justify-center flex-wrap">
+                    <div className="px-2 py-1 bg-amber-200 text-amber-800 text-xs rounded-full font-medium">Certified Excellence</div>
+                    <div className="px-2 py-1 bg-orange-200 text-orange-800 text-xs rounded-full font-medium">Leader</div>
                   </div>
                 </CardContent>
               </Card>
