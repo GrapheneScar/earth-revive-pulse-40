@@ -369,59 +369,60 @@ const CollaboratorsPage = () => {
           >
             <Card className="bg-card/50 backdrop-blur-sm border-border/50 hover:shadow-glow transition-all duration-500 overflow-hidden">
               <CardContent className="p-0">
-                <div className="flex flex-col lg:flex-row">
-                  {/* Certificate Image */}
-                  <div className="lg:w-1/2 relative">
+                <div className="flex flex-col">
+                  {/* Certificate Image - Full Width */}
+                  <div className="w-full relative">
                     <img
                       src="/public/lovable-uploads/climate-action-certificate.jpg"
                       alt="Climate Action Certificate"
-                      className="w-full h-full object-cover"
+                      className="w-full h-auto object-contain max-h-[600px]"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 opacity-0 hover:opacity-100 transition-opacity duration-500" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-secondary/10 opacity-0 hover:opacity-100 transition-opacity duration-500" />
                   </div>
 
-                  {/* Certificate Details */}
-                  <div className="lg:w-1/2 p-8 lg:p-12">
+                  {/* Certificate Details - Below Image */}
+                  <div className="w-full p-8 lg:p-12">
                     <motion.div
-                      initial={{ opacity: 0, x: 50 }}
-                      animate={certificateInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
+                      initial={{ opacity: 0, y: 50 }}
+                      animate={certificateInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
                       transition={{ duration: 0.6, delay: 0.2 }}
+                      className="max-w-4xl mx-auto text-center"
                     >
-                      <div className="flex items-center gap-3 mb-6">
+                      <div className="flex items-center justify-center gap-3 mb-6">
                         <div className="p-3 rounded-full bg-primary/20">
                           <Award className="w-8 h-8 text-primary" />
                         </div>
                         <div>
-                          <CardTitle className="text-3xl font-bold text-foreground mb-2">
+                          <CardTitle className="text-3xl md:text-4xl font-bold text-foreground mb-2">
                             Climate Action Certificate
                           </CardTitle>
-                          <CardDescription className="text-lg text-muted-foreground">
+                          <CardDescription className="text-lg md:text-xl text-muted-foreground">
                             Three Years of Excellence (2022-2025)
                           </CardDescription>
                         </div>
                       </div>
 
-                      <p className="text-foreground/90 mb-8 leading-relaxed text-lg">
+                      <p className="text-foreground/90 mb-8 leading-relaxed text-lg max-w-3xl mx-auto">
                         This prestigious certification recognizes JBCN International School's outstanding commitment to climate education and environmental stewardship. Our comprehensive approach integrates sustainability across curriculum, operations, and community engagement, making us a leader in climate action education.
                       </p>
 
                       {/* Achievement Highlights */}
-                      <div className="space-y-4 mb-8">
-                        <div className="flex items-center gap-3 p-3 bg-primary/10 rounded-lg">
-                          <Leaf className="w-5 h-5 text-primary flex-shrink-0" />
-                          <span className="text-foreground">Carbon-neutral campus operations since 2022</span>
+                      <div className="grid md:grid-cols-3 gap-4 mb-8 max-w-4xl mx-auto">
+                        <div className="flex flex-col items-center gap-3 p-4 bg-primary/10 rounded-lg">
+                          <Leaf className="w-6 h-6 text-primary" />
+                          <span className="text-foreground text-center">Carbon-neutral campus operations since 2022</span>
                         </div>
-                        <div className="flex items-center gap-3 p-3 bg-secondary/10 rounded-lg">
-                          <Building2 className="w-5 h-5 text-secondary flex-shrink-0" />
-                          <span className="text-foreground">Mentored 15+ schools in sustainability practices</span>
+                        <div className="flex flex-col items-center gap-3 p-4 bg-secondary/10 rounded-lg">
+                          <Building2 className="w-6 h-6 text-secondary" />
+                          <span className="text-foreground text-center">Mentored 15+ schools in sustainability practices</span>
                         </div>
-                        <div className="flex items-center gap-3 p-3 bg-accent/10 rounded-lg">
-                          <Zap className="w-5 h-5 text-accent flex-shrink-0" />
-                          <span className="text-foreground">40% reduction in energy consumption</span>
+                        <div className="flex flex-col items-center gap-3 p-4 bg-accent/10 rounded-lg">
+                          <Zap className="w-6 h-6 text-accent" />
+                          <span className="text-foreground text-center">40% reduction in energy consumption</span>
                         </div>
                       </div>
 
-                      <div className="flex flex-wrap gap-3">
+                      <div className="flex flex-wrap justify-center gap-3">
                         <span className="px-4 py-2 bg-primary/20 text-primary rounded-full border border-primary/30 font-semibold">
                           Excellence Award
                         </span>
