@@ -112,20 +112,8 @@ const EnhancedMentorCard = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
                 </div>
 
-                {/* Sophisticated Badge */}
-                <motion.div
-                  className="absolute -top-8 -right-8 w-32 h-32"
-                  animate={{ 
-                    rotate: [0, 15, -15, 0],
-                    scale: [1, 1.15, 1],
-                  }}
-                  transition={{ 
-                    duration: 8, 
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                  whileHover={{ scale: 1.3, rotate: 25 }}
-                >
+                {/* Static Badge - Bottom Right */}
+                <div className="absolute -bottom-8 -right-8 w-32 h-32">
                   <div className="relative w-full h-full">
                     {/* Multiple glow layers for luxury effect */}
                     <motion.div
@@ -182,7 +170,7 @@ const EnhancedMentorCard = () => {
                       />
                     ))}
                   </div>
-                </motion.div>
+                </div>
 
                 {/* Floating achievement icons */}
                 <motion.div
