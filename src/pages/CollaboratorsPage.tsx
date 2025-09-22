@@ -373,9 +373,14 @@ const CollaboratorsPage = () => {
                   {/* Certificate Image - Full Width */}
                   <div className="w-full relative">
                     <img
-                      src="/public/lovable-uploads/climate-action-certificate.jpg"
+                      src="/lovable-uploads/climate-action-certificate.jpg"
                       alt="Climate Action Certificate"
-                      className="w-full h-auto object-contain max-h-[600px]"
+                      className="w-full h-auto object-contain max-h-[600px] md:max-h-[700px] lg:max-h-[800px]"
+                      loading="lazy"
+                      onError={(e) => {
+                        console.error('Certificate image failed to load:', e);
+                        e.currentTarget.style.display = 'none';
+                      }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-secondary/10 opacity-0 hover:opacity-100 transition-opacity duration-500" />
                   </div>
