@@ -103,7 +103,7 @@ const EnhancedMentorCard = () => {
                   }}
                 />
                 
-                <div className="relative w-64 h-64 rounded-3xl overflow-hidden border-4 border-gradient-to-br from-amber-300 to-orange-400 shadow-2xl">
+                <div className="relative w-56 h-56 rounded-3xl overflow-hidden border-4 border-gradient-to-br from-amber-300 to-orange-400 shadow-2xl">
                   <img
                     src="/lovable-uploads/gagandeep-sir.jpg"
                     alt="Gagandeep Singh"
@@ -161,7 +161,7 @@ const EnhancedMentorCard = () => {
                     }} />
                     
                     <img
-                      src="/lovable-uploads/mentor-badge-2026.png"
+                      src="/lovable-uploads/mentor-badge-updated-2026.png"
                       alt="Climate Action Schools Mentor Badge 2026"
                       className="relative w-full h-full object-contain drop-shadow-2xl filter brightness-110 contrast-110"
                     />
@@ -235,13 +235,13 @@ const EnhancedMentorCard = () => {
               {/* Name and Title */}
               <div className="space-y-4">
                 <motion.h3
-                  className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-amber-400 via-orange-500 to-red-500 bg-clip-text text-transparent"
+                  className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-amber-400 via-orange-500 to-red-500 bg-clip-text text-transparent"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.8 }}
                   viewport={{ once: true }}
                 >
-                  Gagandeep Singh
+                  GAGANDEEP CHOPRA
                 </motion.h3>
                 
                 <motion.div
@@ -287,7 +287,7 @@ const EnhancedMentorCard = () => {
                 transition={{ duration: 0.6, delay: 1.1 }}
                 viewport={{ once: true }}
               >
-                As the National Leader of the Climate Action Project in India, Gagandeep Sir has revolutionized climate education across the nation. His visionary leadership has transformed how over 50,000 students approach environmental challenges, making him one of the most influential climate educators in Asia.
+                As the National Leader of the Climate Action Project in India, Gagandeep Chopra Sir has revolutionized climate education across the nation. His visionary leadership has transformed how over 50,000 students approach environmental challenges, making him one of the most influential climate educators in Asia.
               </motion.p>
 
               {/* Stats Grid */}

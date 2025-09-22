@@ -8,7 +8,7 @@ import Footer from "@/components/Footer";
 import PartnershipCard from "@/components/PartnershipCard";
 import PartnershipFlow from "@/components/PartnershipFlow";
 import EnhancedMentorCard from "@/components/EnhancedMentorCard";
-import { Globe, Users, Award, MapPin, ExternalLink, Sparkles, TreePine, Target, Calendar, Building2, Leaf } from "lucide-react";
+import { Globe, Users, Award, MapPin, ExternalLink, Sparkles, TreePine, Target, Calendar, Building2, Leaf, Star } from "lucide-react";
 
 const CollaboratorsPage = () => {
   const heroRef = useRef(null);
@@ -260,7 +260,7 @@ const CollaboratorsPage = () => {
         <div className="max-w-6xl mx-auto">
           {/* Top Row - JBCN × TAG */}
           <div className="flex items-center justify-center mb-24">
-            {/* JBCN Card */}
+            {/* JBCN Card - Enhanced */}
             <motion.div
               className="group relative"
               initial={{ opacity: 0, x: -100 }}
@@ -268,52 +268,89 @@ const CollaboratorsPage = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
               whileHover={{ scale: 1.05, rotateY: 5 }}
             >
-              <Card className="w-80 h-72 bg-gradient-to-br from-emerald-50 via-emerald-100 to-teal-50 border-emerald-200 hover:border-emerald-400 transition-all duration-500 hover:shadow-2xl relative overflow-hidden">
-                {/* Background Pattern */}
+              <Card className="w-80 h-80 bg-gradient-to-br from-emerald-50 via-emerald-100 to-teal-50 border-emerald-200 hover:border-emerald-400 transition-all duration-500 hover:shadow-2xl relative overflow-hidden">
+                {/* Enhanced Background Pattern */}
                 <div className="absolute inset-0 opacity-10">
-                  <div className="absolute top-4 right-4 w-16 h-16 bg-emerald-300 rounded-full blur-xl"></div>
-                  <div className="absolute bottom-6 left-6 w-12 h-12 bg-teal-300 rounded-full blur-lg"></div>
+                  <motion.div 
+                    className="absolute top-4 right-4 w-20 h-20 bg-emerald-300 rounded-full blur-xl"
+                    animate={{ 
+                      scale: [1, 1.2, 1],
+                      opacity: [0.1, 0.2, 0.1]
+                    }}
+                    transition={{ 
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  />
+                  <motion.div 
+                    className="absolute bottom-6 left-6 w-16 h-16 bg-teal-300 rounded-full blur-lg"
+                    animate={{ 
+                      scale: [1, 1.1, 1],
+                      opacity: [0.1, 0.15, 0.1]
+                    }}
+                    transition={{ 
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: 1
+                    }}
+                  />
+                  <motion.div 
+                    className="absolute top-1/2 left-1/2 w-12 h-12 bg-emerald-400 rounded-full blur-md transform -translate-x-1/2 -translate-y-1/2"
+                    animate={{ 
+                      scale: [0.8, 1.3, 0.8],
+                      opacity: [0.05, 0.15, 0.05]
+                    }}
+                    transition={{ 
+                      duration: 5,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: 2
+                    }}
+                  />
                 </div>
                 
                 <CardContent className="p-6 h-full flex flex-col relative z-10">
                   <div className="flex items-center gap-3 mb-4">
                     <motion.div
-                      className="p-2 bg-emerald-100 rounded-xl group-hover:bg-emerald-200 transition-colors duration-300"
-                      whileHover={{ rotate: 360 }}
+                      className="p-3 bg-emerald-100 rounded-xl group-hover:bg-emerald-200 transition-colors duration-300"
+                      whileHover={{ rotate: 360, scale: 1.1 }}
                       transition={{ duration: 0.6 }}
                     >
                       <TreePine className="w-8 h-8 text-emerald-600" />
                     </motion.div>
-                    <div>
+                    <div className="flex-1">
                       <h3 className="text-xl font-bold text-emerald-800 group-hover:text-emerald-900 transition-colors">JBCN International</h3>
                       <p className="text-xs text-emerald-600 font-medium">Parel, Mumbai</p>
                     </div>
                   </div>
                   
                   <p className="text-emerald-700 text-sm mb-4 flex-1 leading-relaxed">
-                    Pioneer in Climate Education Excellence. Leading India's first carbon-neutral school initiative with student-driven sustainability programs.
+                    Pioneer in Climate Education Excellence. Leading India's first carbon-neutral school initiative with award-winning student-driven sustainability programs.
                   </p>
                   
-                  <div className="grid grid-cols-2 gap-4 mb-3">
+                  <div className="space-y-3 mb-4">
                     <motion.div 
-                      className="text-center p-2 bg-emerald-50 rounded-lg border border-emerald-100"
-                      whileHover={{ scale: 1.05 }}
+                      className="flex justify-between items-center p-2 bg-emerald-50 rounded-lg border border-emerald-100"
+                      whileHover={{ scale: 1.02 }}
                     >
-                      <div className="text-lg font-bold text-emerald-800">1,200+</div>
-                      <div className="text-xs text-emerald-600">Students Engaged</div>
+                      <span className="text-xs text-emerald-600">Students Engaged</span>
+                      <span className="text-lg font-bold text-emerald-800">1,200+</span>
                     </motion.div>
                     <motion.div 
-                      className="text-center p-2 bg-emerald-50 rounded-lg border border-emerald-100"
-                      whileHover={{ scale: 1.05 }}
+                      className="flex justify-between items-center p-2 bg-emerald-50 rounded-lg border border-emerald-100"
+                      whileHover={{ scale: 1.02 }}
                     >
-                      <div className="text-lg font-bold text-emerald-800">8+</div>
-                      <div className="text-xs text-emerald-600">Years Active</div>
+                      <span className="text-xs text-emerald-600">CO₂ Reduced</span>
+                      <span className="text-lg font-bold text-emerald-800">15 tons</span>
                     </motion.div>
                   </div>
                   
-                  <div className="flex gap-1 justify-center">
+                  <div className="flex gap-1 justify-center flex-wrap">
                     <div className="px-2 py-1 bg-emerald-200 text-emerald-800 text-xs rounded-full font-medium">Carbon Neutral</div>
                     <div className="px-2 py-1 bg-teal-200 text-teal-800 text-xs rounded-full font-medium">Award Winner</div>
+                    <div className="px-2 py-1 bg-green-200 text-green-800 text-xs rounded-full font-medium">Innovation</div>
                   </div>
                 </CardContent>
               </Card>
@@ -389,64 +426,137 @@ const CollaboratorsPage = () => {
             </motion.div>
           </div>
 
-          {/* Animated Branches */}
+          {/* Enhanced Animated Branches */}
           <div className="relative flex justify-center mb-16">
             <motion.svg
-              width="400"
-              height="120"
+              width="500"
+              height="150"
               className="absolute"
               initial={{ opacity: 0 }}
               animate={partnershipsInView ? { opacity: 1 } : {}}
               transition={{ duration: 1, delay: 0.8 }}
             >
-              {/* Central trunk */}
+              {/* Central trunk with gradient */}
+              <defs>
+                <linearGradient id="branchGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.8" />
+                  <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="1" />
+                </linearGradient>
+                <filter id="glow">
+                  <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                  <feMerge>
+                    <feMergeNode in="coloredBlur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+              </defs>
+              
               <motion.line
-                x1="200"
+                x1="250"
                 y1="0"
-                x2="200"
-                y2="60"
-                stroke="hsl(var(--primary))"
-                strokeWidth="3"
+                x2="250"
+                y2="80"
+                stroke="url(#branchGradient)"
+                strokeWidth="4"
+                filter="url(#glow)"
                 initial={{ pathLength: 0 }}
                 animate={partnershipsInView ? { pathLength: 1 } : {}}
-                transition={{ duration: 0.8, delay: 1 }}
+                transition={{ duration: 1.2, delay: 1, ease: "easeInOut" }}
               />
               
-              {/* Left branch */}
-              <motion.line
-                x1="200"
-                y1="60"
-                x2="120"
-                y2="120"
-                stroke="hsl(var(--primary))"
-                strokeWidth="3"
+              {/* Left branch with curve */}
+              <motion.path
+                d="M 250 80 Q 200 100 150 150"
+                stroke="url(#branchGradient)"
+                strokeWidth="4"
+                fill="none"
+                filter="url(#glow)"
                 initial={{ pathLength: 0 }}
                 animate={partnershipsInView ? { pathLength: 1 } : {}}
-                transition={{ duration: 0.8, delay: 1.2 }}
+                transition={{ duration: 1, delay: 1.4, ease: "easeInOut" }}
               />
               
-              {/* Right branch */}
-              <motion.line
-                x1="200"
-                y1="60"
-                x2="280"
-                y2="120"
-                stroke="hsl(var(--primary))"
-                strokeWidth="3"
+              {/* Right branch with curve */}
+              <motion.path
+                d="M 250 80 Q 300 100 350 150"
+                stroke="url(#branchGradient)"
+                strokeWidth="4"
+                fill="none"
+                filter="url(#glow)"
                 initial={{ pathLength: 0 }}
                 animate={partnershipsInView ? { pathLength: 1 } : {}}
-                transition={{ duration: 0.8, delay: 1.2 }}
+                transition={{ duration: 1, delay: 1.4, ease: "easeInOut" }}
               />
               
-              {/* Animated dots */}
+              {/* Animated connection points */}
               <motion.circle
-                cx="200"
-                cy="60"
+                cx="250"
+                cy="80"
+                r="8"
+                fill="hsl(var(--primary))"
+                filter="url(#glow)"
+                initial={{ scale: 0 }}
+                animate={partnershipsInView ? { scale: 1 } : {}}
+                transition={{ duration: 0.6, delay: 2 }}
+              />
+              
+              <motion.circle
+                cx="150"
+                cy="150"
                 r="6"
                 fill="hsl(var(--primary))"
                 initial={{ scale: 0 }}
                 animate={partnershipsInView ? { scale: 1 } : {}}
-                transition={{ duration: 0.4, delay: 1.6 }}
+                transition={{ duration: 0.4, delay: 2.2 }}
+              />
+              
+              <motion.circle
+                cx="350"
+                cy="150"
+                r="6"
+                fill="hsl(var(--primary))"
+                initial={{ scale: 0 }}
+                animate={partnershipsInView ? { scale: 1 } : {}}
+                transition={{ duration: 0.4, delay: 2.2 }}
+              />
+              
+              {/* Flowing particles along branches */}
+              <motion.circle
+                cx="250"
+                cy="0"
+                r="3"
+                fill="hsl(var(--primary))"
+                opacity="0.7"
+                animate={{
+                  cy: [0, 80, 150],
+                  cx: [250, 250, 350],
+                  opacity: [0, 1, 0]
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  delay: 2.5,
+                  ease: "easeInOut"
+                }}
+              />
+              
+              <motion.circle
+                cx="250"
+                cy="0"
+                r="3"
+                fill="hsl(var(--primary))"
+                opacity="0.7"
+                animate={{
+                  cy: [0, 80, 150],
+                  cx: [250, 250, 150],
+                  opacity: [0, 1, 0]
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  delay: 3.5,
+                  ease: "easeInOut"
+                }}
               />
             </motion.svg>
           </div>
@@ -522,16 +632,30 @@ const CollaboratorsPage = () => {
               <Card className="h-80 bg-gradient-to-br from-amber-50 via-orange-50 to-amber-100 border-amber-200 hover:border-amber-400 transition-all duration-500 hover:shadow-2xl relative overflow-hidden">
                 {/* Background Pattern */}
                 <div className="absolute inset-0 opacity-10">
-                  <div className="absolute top-4 left-4 w-20 h-20 bg-amber-300 rounded-full blur-xl"></div>
-                  <div className="absolute bottom-4 right-4 w-16 h-16 bg-orange-300 rounded-full blur-lg"></div>
-                </div>
-                
-                {/* Certificate Image */}
-                <div className="absolute top-2 right-2 w-16 h-16 opacity-20">
-                  <img 
-                    src="/lovable-uploads/climate-action-certificate.jpg" 
-                    alt="Certificate" 
-                    className="w-full h-full object-cover rounded-lg"
+                  <motion.div 
+                    className="absolute top-4 left-4 w-20 h-20 bg-amber-300 rounded-full blur-xl"
+                    animate={{ 
+                      scale: [1, 1.2, 1],
+                      opacity: [0.1, 0.2, 0.1]
+                    }}
+                    transition={{ 
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  />
+                  <motion.div 
+                    className="absolute bottom-4 right-4 w-16 h-16 bg-orange-300 rounded-full blur-lg"
+                    animate={{ 
+                      scale: [1, 1.15, 1],
+                      opacity: [0.1, 0.18, 0.1]
+                    }}
+                    transition={{ 
+                      duration: 3.5,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: 1
+                    }}
                   />
                 </div>
                 
@@ -578,6 +702,155 @@ const CollaboratorsPage = () => {
               </Card>
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* Climate Action Certificate Showcase */}
+      <section className="py-20 px-4 bg-gradient-to-br from-amber-50/50 via-orange-50/30 to-red-50/50">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 bg-clip-text text-transparent">
+              Certificate of Excellence
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Three consecutive years of Climate Action Schools recognition - a testament to unwavering commitment to environmental education
+            </p>
+          </motion.div>
+
+          <motion.div
+            className="relative max-w-6xl mx-auto"
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <Card className="overflow-hidden bg-gradient-to-br from-background via-amber-50/30 to-orange-50/30 border-2 border-gradient-to-r from-amber-200 to-orange-200 shadow-2xl">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
+                {/* Certificate Image Section */}
+                <motion.div 
+                  className="relative overflow-hidden bg-gradient-to-br from-amber-100 to-orange-100 p-8 flex items-center justify-center"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="relative w-full max-w-md">
+                    <motion.div
+                      className="absolute -inset-4 bg-gradient-to-r from-amber-400 via-orange-500 to-red-500 rounded-lg opacity-20 blur-xl"
+                      animate={{
+                        scale: [1, 1.05, 1],
+                        opacity: [0.15, 0.25, 0.15],
+                      }}
+                      transition={{
+                        duration: 4,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                    />
+                    <img 
+                      src="/lovable-uploads/climate-action-certificate.jpg" 
+                      alt="Climate Action Schools Recognition Certificate"
+                      className="relative w-full h-auto object-contain rounded-lg shadow-xl border-4 border-white/50"
+                    />
+                    {/* Sparkle effects */}
+                    {[...Array(6)].map((_, i) => (
+                      <motion.div
+                        key={i}
+                        className="absolute w-2 h-2 bg-amber-400 rounded-full"
+                        style={{
+                          top: `${20 + Math.random() * 60}%`,
+                          left: `${20 + Math.random() * 60}%`,
+                        }}
+                        animate={{
+                          scale: [0, 1, 0],
+                          opacity: [0, 1, 0],
+                        }}
+                        transition={{
+                          duration: 2,
+                          repeat: Infinity,
+                          delay: i * 0.4,
+                          ease: "easeInOut"
+                        }}
+                      />
+                    ))}
+                  </div>
+                </motion.div>
+
+                {/* Content Section */}
+                <div className="p-8 lg:p-12 flex flex-col justify-center">
+                  <motion.div
+                    className="space-y-6"
+                    initial={{ opacity: 0, x: 50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.8, delay: 0.4 }}
+                    viewport={{ once: true }}
+                  >
+                    <div className="flex items-center gap-3 mb-6">
+                      <motion.div
+                        className="p-3 bg-amber-100 rounded-xl"
+                        whileHover={{ scale: 1.1, rotate: 15 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <Award className="w-8 h-8 text-amber-600" />
+                      </motion.div>
+                      <div>
+                        <h3 className="text-2xl font-bold text-amber-800">Climate Action Schools Recognition</h3>
+                        <p className="text-amber-600 font-medium">2022 • 2023 • 2024 • 2025</p>
+                      </div>
+                    </div>
+
+                    <p className="text-lg text-muted-foreground leading-relaxed">
+                      JBCN International School has achieved the prestigious Climate Action Schools recognition for <strong>four consecutive years</strong>, 
+                      demonstrating exceptional commitment to environmental education and measurable climate impact. This certification recognizes schools 
+                      that successfully integrate climate action into their core curriculum and demonstrate tangible environmental results.
+                    </p>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <motion.div 
+                        className="text-center p-4 bg-amber-50 rounded-xl border border-amber-200"
+                        whileHover={{ scale: 1.05 }}
+                      >
+                        <div className="text-2xl font-bold text-amber-700 mb-1">4</div>
+                        <div className="text-sm text-amber-600">Consecutive Years</div>
+                      </motion.div>
+                      <motion.div 
+                        className="text-center p-4 bg-orange-50 rounded-xl border border-orange-200"
+                        whileHover={{ scale: 1.05 }}
+                      >
+                        <div className="text-2xl font-bold text-orange-700 mb-1">Top 5%</div>
+                        <div className="text-sm text-orange-600">Global Ranking</div>
+                      </motion.div>
+                    </div>
+
+                    <div className="space-y-3">
+                      <h4 className="font-semibold text-amber-800 flex items-center gap-2">
+                        <Star className="w-4 h-4" />
+                        Key Achievements
+                      </h4>
+                      <ul className="space-y-2 text-sm text-muted-foreground">
+                        <li className="flex items-start gap-2">
+                          <div className="w-1.5 h-1.5 bg-amber-500 rounded-full mt-2 flex-shrink-0"></div>
+                          Only school in Maharashtra with four consecutive recognitions
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <div className="w-1.5 h-1.5 bg-orange-500 rounded-full mt-2 flex-shrink-0"></div>
+                          Mentored 15 other schools to achieve certification
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <div className="w-1.5 h-1.5 bg-red-500 rounded-full mt-2 flex-shrink-0"></div>
+                          Curriculum framework adopted by 50+ schools nationally
+                        </li>
+                      </ul>
+                    </div>
+                  </motion.div>
+                </div>
+              </div>
+            </Card>
+          </motion.div>
         </div>
       </section>
 
