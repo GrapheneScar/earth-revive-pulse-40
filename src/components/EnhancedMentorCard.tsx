@@ -96,15 +96,15 @@ const EnhancedMentorCard = () => {
                   <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-secondary/10 opacity-0 hover:opacity-100 transition-opacity duration-500" />
                 </div>
 
-                {/* Static Badge - Bottom Right - Smaller */}
-                <div className="absolute -bottom-2 -right-2 w-16 h-16 lg:w-20 lg:h-20">
+                {/* Static Badge - Overlapping Image */}
+                <div className="absolute -bottom-6 -right-6 w-20 h-20 lg:w-24 lg:h-24 z-10">
                   <div className="relative w-full h-full">
                     {/* Glow effects */}
                     <motion.div
-                      className="absolute -inset-2 bg-gradient-to-r from-primary via-secondary to-primary rounded-full opacity-30 blur-lg"
+                      className="absolute -inset-3 bg-gradient-to-r from-primary via-secondary to-primary rounded-full opacity-40 blur-lg"
                       animate={{
-                        scale: [1, 1.1, 1],
-                        opacity: [0.3, 0.5, 0.3],
+                        scale: [1, 1.15, 1],
+                        opacity: [0.4, 0.7, 0.4],
                         rotate: [0, 180, 360],
                       }}
                       transition={{
@@ -117,14 +117,14 @@ const EnhancedMentorCard = () => {
                     <img
                       src="/lovable-uploads/mentor-badge-updated-2026.png"
                       alt="Climate Action Schools Mentor Badge 2026"
-                      className="relative w-full h-full object-contain drop-shadow-lg filter brightness-110 contrast-110"
+                      className="relative w-full h-full object-contain drop-shadow-xl filter brightness-110 contrast-110"
                     />
                     
-                    {/* Sparkle effects - Reduced */}
+                    {/* Sparkle effects */}
                     {[...Array(4)].map((_, i) => (
                       <motion.div
                         key={i}
-                        className="absolute w-1 h-1 bg-white rounded-full opacity-80"
+                        className="absolute w-1.5 h-1.5 bg-white rounded-full opacity-90"
                         style={{
                           top: `${25 + Math.random() * 50}%`,
                           left: `${25 + Math.random() * 50}%`,
@@ -283,39 +283,6 @@ const EnhancedMentorCard = () => {
                   <div className="bg-primary/15 p-3 rounded-xl border border-primary/30">
                     <div className="text-2xl font-bold text-primary mb-1">5+</div>
                     <div className="text-xs text-muted-foreground">Years Leadership</div>
-                  </div>
-                </motion.div>
-
-                {/* Achievements - Condensed */}
-                <motion.div
-                  className="space-y-2"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 1.3 }}
-                  viewport={{ once: true }}
-                >
-                  <h5 className="text-sm font-semibold flex items-center gap-2">
-                    <Users className="w-4 h-4 text-primary" />
-                    Leadership Impact
-                  </h5>
-                  <div className="space-y-2">
-                    {[
-                      { icon: Award, text: "Spearheaded India's largest climate action network", color: "text-primary" },
-                      { icon: TreePine, text: "Developed nationally adopted curriculum framework", color: "text-secondary" },
-                      { icon: Target, text: "Achieved 95% engagement in climate programs", color: "text-accent" }
-                    ].map((achievement, index) => (
-                      <motion.div
-                        key={index}
-                        className="flex items-start gap-2 p-2 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors"
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.5, delay: 1.4 + index * 0.1 }}
-                        viewport={{ once: true }}
-                      >
-                        <achievement.icon className={`w-3 h-3 mt-0.5 flex-shrink-0 ${achievement.color}`} />
-                        <span className="text-xs">{achievement.text}</span>
-                      </motion.div>
-                    ))}
                   </div>
                 </motion.div>
               </motion.div>
