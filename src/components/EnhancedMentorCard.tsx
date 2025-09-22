@@ -154,12 +154,6 @@ const EnhancedMentorCard = () => {
                       }}
                     />
                     
-                    {/* Premium border effect */}
-                    <div className="absolute inset-0 rounded-full border-4 border-gradient-to-r from-gold to-amber-400 shadow-2xl" style={{
-                      background: 'linear-gradient(45deg, rgba(245, 158, 11, 0.1), rgba(251, 191, 36, 0.1), rgba(245, 158, 11, 0.1))',
-                      borderImage: 'linear-gradient(45deg, #f59e0b, #fbbf24, #f59e0b) 1'
-                    }} />
-                    
                     <img
                       src="/lovable-uploads/mentor-badge-updated-2026.png"
                       alt="Climate Action Schools Mentor Badge 2026"
