@@ -15,28 +15,28 @@ const EnhancedMentorCard = () => {
       {/* Elegant Background with floating elements */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/5 to-primary/5 rounded-3xl" />
       
-      {/* Floating geometric shapes */}
-      {[...Array(15)].map((_, i) => (
+      {/* Floating geometric shapes - Reduced and repositioned */}
+      {[...Array(10)].map((_, i) => (
         <motion.div
           key={i}
-          className={`absolute w-6 h-6 ${
-            i % 3 === 0 ? 'bg-primary/10' : 
-            i % 3 === 1 ? 'bg-secondary/10' : 'bg-primary/15'
+          className={`absolute w-4 h-4 ${
+            i % 3 === 0 ? 'bg-primary/8' : 
+            i % 3 === 1 ? 'bg-secondary/8' : 'bg-primary/12'
           } rounded-full blur-sm`}
           style={{
-            left: `${10 + Math.random() * 80}%`,
-            top: `${10 + Math.random() * 80}%`,
+            left: `${15 + Math.random() * 70}%`,
+            top: `${15 + Math.random() * 70}%`,
           }}
           animate={{
-            y: [0, -20, 0],
-            x: [0, Math.random() * 10 - 5, 0],
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.6, 0.3],
+            y: [0, -10, 0],
+            x: [0, Math.random() * 5 - 2.5, 0],
+            scale: [1, 1.1, 1],
+            opacity: [0.3, 0.5, 0.3],
           }}
           transition={{
-            duration: 4 + Math.random() * 2,
+            duration: 3 + Math.random() * 1,
             repeat: Infinity,
-            delay: Math.random() * 2,
+            delay: Math.random() * 1,
             ease: "easeInOut"
           }}
         />
@@ -69,10 +69,10 @@ const EnhancedMentorCard = () => {
               <div className="relative h-[400px] lg:h-[600px]">
                 {/* Background glow */}
                 <motion.div
-                  className="absolute -inset-4 bg-gradient-to-r from-primary via-secondary to-primary rounded-3xl opacity-20 blur-xl"
+                  className="absolute -inset-2 bg-gradient-to-r from-primary via-secondary to-primary rounded-2xl opacity-20 blur-lg"
                   animate={{
-                    scale: [1, 1.05, 1],
-                    opacity: [0.2, 0.3, 0.2],
+                    scale: [1, 1.02, 1],
+                    opacity: [0.2, 0.25, 0.2],
                   }}
                   transition={{
                     duration: 4,
@@ -96,15 +96,15 @@ const EnhancedMentorCard = () => {
                   <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-secondary/10 opacity-0 hover:opacity-100 transition-opacity duration-500" />
                 </div>
 
-                {/* Static Badge - Bottom Right */}
-                <div className="absolute -bottom-4 -right-4 w-24 h-24 lg:w-32 lg:h-32">
+                {/* Static Badge - Bottom Right - Smaller */}
+                <div className="absolute -bottom-2 -right-2 w-16 h-16 lg:w-20 lg:h-20">
                   <div className="relative w-full h-full">
                     {/* Glow effects */}
                     <motion.div
-                      className="absolute -inset-4 bg-gradient-to-r from-primary via-secondary to-primary rounded-full opacity-30 blur-xl"
+                      className="absolute -inset-2 bg-gradient-to-r from-primary via-secondary to-primary rounded-full opacity-30 blur-lg"
                       animate={{
-                        scale: [1, 1.2, 1],
-                        opacity: [0.3, 0.6, 0.3],
+                        scale: [1, 1.1, 1],
+                        opacity: [0.3, 0.5, 0.3],
                         rotate: [0, 180, 360],
                       }}
                       transition={{
@@ -117,17 +117,17 @@ const EnhancedMentorCard = () => {
                     <img
                       src="/lovable-uploads/mentor-badge-updated-2026.png"
                       alt="Climate Action Schools Mentor Badge 2026"
-                      className="relative w-full h-full object-contain drop-shadow-2xl filter brightness-110 contrast-110"
+                      className="relative w-full h-full object-contain drop-shadow-lg filter brightness-110 contrast-110"
                     />
                     
-                    {/* Sparkle effects */}
-                    {[...Array(6)].map((_, i) => (
+                    {/* Sparkle effects - Reduced */}
+                    {[...Array(4)].map((_, i) => (
                       <motion.div
                         key={i}
-                        className="absolute w-1.5 h-1.5 bg-white rounded-full opacity-80"
+                        className="absolute w-1 h-1 bg-white rounded-full opacity-80"
                         style={{
-                          top: `${20 + Math.random() * 60}%`,
-                          left: `${20 + Math.random() * 60}%`,
+                          top: `${25 + Math.random() * 50}%`,
+                          left: `${25 + Math.random() * 50}%`,
                         }}
                         animate={{
                           scale: [0, 1, 0],
@@ -136,7 +136,7 @@ const EnhancedMentorCard = () => {
                         transition={{
                           duration: 2,
                           repeat: Infinity,
-                          delay: i * 0.3,
+                          delay: i * 0.5,
                           ease: "easeInOut"
                         }}
                       />
@@ -144,36 +144,36 @@ const EnhancedMentorCard = () => {
                   </div>
                 </div>
 
-                {/* Floating achievement icons */}
+                {/* Floating achievement icons - Smaller and repositioned */}
                 <motion.div
-                  className="absolute bottom-6 left-6 w-12 h-12 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center shadow-lg"
+                  className="absolute bottom-4 left-4 w-8 h-8 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center shadow-lg"
                   animate={{
-                    y: [0, -8, 0],
-                    rotate: [0, 360],
+                    y: [0, -4, 0],
+                    rotate: [0, 180],
                   }}
                   transition={{
-                    duration: 6,
+                    duration: 4,
                     repeat: Infinity,
                     ease: "easeInOut"
                   }}
                 >
-                  <Globe2 className="w-6 h-6 text-white" />
+                  <Globe2 className="w-4 h-4 text-white" />
                 </motion.div>
 
                 <motion.div
-                  className="absolute top-6 left-6 w-10 h-10 bg-gradient-to-r from-secondary to-accent rounded-full flex items-center justify-center shadow-lg"
+                  className="absolute top-4 left-4 w-7 h-7 bg-gradient-to-r from-secondary to-accent rounded-full flex items-center justify-center shadow-lg"
                   animate={{
-                    y: [0, -6, 0],
-                    x: [0, 4, 0],
+                    y: [0, -3, 0],
+                    x: [0, 2, 0],
                   }}
                   transition={{
-                    duration: 4,
+                    duration: 3,
                     repeat: Infinity,
                     ease: "easeInOut",
                     delay: 1
                   }}
                 >
-                  <Star className="w-5 h-5 text-white" />
+                  <Star className="w-3 h-3 text-white" />
                 </motion.div>
               </div>
             </div>
