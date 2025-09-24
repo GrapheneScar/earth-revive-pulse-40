@@ -1,9 +1,16 @@
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Users, Award, TreePine, Target, Star, Crown, Globe2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import { Users, Award, TreePine, Target, Star, Crown, Globe2, ChevronDown, ChevronUp } from "lucide-react";
 
 const EnhancedMentorCard = () => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  
+  const fullBio = "Greetings Everyone, I am Gagan Deep, Senior Mathematics Teacher with over 18 years of experience in education, currently serving as CAS Coordinator at JBCN International School and Program Coordinator for Climate Action Schools and projects at JBCN. I am deeply passionate about climate and the environment, and over the years I have also been actively involved in community and service projects that nurture responsibility and empathy in learners. In my role, I focus on creating opportunities for learner leadership and engaging students in meaningful climate action initiatives. I am also privileged to serve as a Climate Action Mentor and Team Lead for new Climate Action Schools in India, where I guide, support, and encourage schools at every stage of their journey while sharing insights with the facilitator team to enhance the program's impact. I look forward to inspiring young changemakers and building strong collaborations with learners and schools, so together we can create meaningful and lasting change for a sustainable future.";
+  
+  const shortBio = "Greetings Everyone, I am Gagan Deep, Senior Mathematics Teacher with over 18 years of experience in education, currently serving as CAS Coordinator at JBCN International School and Program Coordinator for Climate Action Schools and projects at JBCN. I am deeply passionate about climate and the environment...";
   return (
     <motion.div
       className="relative max-w-7xl mx-auto"
@@ -59,8 +66,9 @@ const EnhancedMentorCard = () => {
                   <img
                     src="/lovable-uploads/gagandeep-sir.jpg"
                     alt="Gagandeep Chopra"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover object-center"
                     loading="lazy"
+                    style={{ objectPosition: 'center top' }}
                     onError={(e) => {
                       console.error('Mentor image failed to load:', e);
                       e.currentTarget.style.display = 'none';
@@ -192,16 +200,37 @@ const EnhancedMentorCard = () => {
                   </Badge>
                 </motion.div>
 
-                {/* Description */}
-                <motion.p
-                  className="text-muted-foreground leading-relaxed text-sm lg:text-base"
+                {/* Description - Collapsible */}
+                <motion.div
+                  className="space-y-2"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 1.1 }}
                   viewport={{ once: true }}
                 >
-                  Greetings Everyone, I am Gagan Deep, Senior Mathematics Teacher with over 18 years of experience in education, currently serving as CAS Coordinator at JBCN International School and Program Coordinator for Climate Action Schools and projects at JBCN. I am deeply passionate about climate and the environment, and over the years I have also been actively involved in community and service projects that nurture responsibility and empathy in learners. In my role, I focus on creating opportunities for learner leadership and engaging students in meaningful climate action initiatives. I am also privileged to serve as a Climate Action Mentor and Team Lead for new Climate Action Schools in India, where I guide, support, and encourage schools at every stage of their journey while sharing insights with the facilitator team to enhance the program's impact. I look forward to inspiring young changemakers and building strong collaborations with learners and schools, so together we can create meaningful and lasting change for a sustainable future.
-                </motion.p>
+                  <p className="text-muted-foreground leading-relaxed text-sm lg:text-base">
+                    {isExpanded ? fullBio : shortBio}
+                  </p>
+                  
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setIsExpanded(!isExpanded)}
+                    className="text-primary hover:text-primary/80 hover:bg-primary/10 p-1 h-auto font-medium text-xs flex items-center gap-1"
+                  >
+                    {isExpanded ? (
+                      <>
+                        Read Less
+                        <ChevronUp className="w-3 h-3" />
+                      </>
+                    ) : (
+                      <>
+                        Read More
+                        <ChevronDown className="w-3 h-3" />
+                      </>
+                    )}
+                  </Button>
+                </motion.div>
 
                 {/* Stats Grid */}
                 <motion.div
