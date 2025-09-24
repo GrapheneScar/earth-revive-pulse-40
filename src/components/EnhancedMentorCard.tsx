@@ -15,32 +15,6 @@ const EnhancedMentorCard = () => {
       {/* Elegant Background with floating elements */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/5 to-primary/5 rounded-3xl" />
       
-      {/* Floating geometric shapes - Reduced and repositioned */}
-      {[...Array(10)].map((_, i) => (
-        <motion.div
-          key={i}
-          className={`absolute w-4 h-4 ${
-            i % 3 === 0 ? 'bg-primary/8' : 
-            i % 3 === 1 ? 'bg-secondary/8' : 'bg-primary/12'
-          } rounded-full blur-sm`}
-          style={{
-            left: `${15 + Math.random() * 70}%`,
-            top: `${15 + Math.random() * 70}%`,
-          }}
-          animate={{
-            y: [0, -10, 0],
-            x: [0, Math.random() * 5 - 2.5, 0],
-            scale: [1, 1.1, 1],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{
-            duration: 3 + Math.random() * 1,
-            repeat: Infinity,
-            delay: Math.random() * 1,
-            ease: "easeInOut"
-          }}
-        />
-      ))}
 
       <Card className="relative overflow-hidden border-2 border-transparent bg-card/50 backdrop-blur-sm shadow-glow">
         {/* Sophisticated border animation */}
@@ -66,7 +40,7 @@ const EnhancedMentorCard = () => {
           <div className="flex flex-col lg:flex-row">
             {/* Image Section - Left Side */}
             <div className="lg:w-2/5 relative">
-              <div className="relative h-[400px] lg:h-[600px]">
+              <div className="relative h-[300px] sm:h-[350px] md:h-[400px] lg:h-[500px]">
                 {/* Background glow */}
                 <motion.div
                   className="absolute -inset-2 bg-gradient-to-r from-primary via-secondary to-primary rounded-2xl opacity-20 blur-lg"
@@ -97,7 +71,7 @@ const EnhancedMentorCard = () => {
                 </div>
 
                 {/* Static Badge - Overlapping Image */}
-                <div className="absolute -bottom-6 -right-6 w-20 h-20 lg:w-24 lg:h-24 z-10">
+                <div className="absolute -bottom-3 -right-3 w-16 h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 lg:w-24 lg:h-24 z-10">
                   <div className="relative w-full h-full">
                     {/* Glow effects */}
                     <motion.div
@@ -144,42 +118,11 @@ const EnhancedMentorCard = () => {
                   </div>
                 </div>
 
-                {/* Floating achievement icons - Smaller and repositioned */}
-                <motion.div
-                  className="absolute bottom-4 left-4 w-8 h-8 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center shadow-lg"
-                  animate={{
-                    y: [0, -4, 0],
-                    rotate: [0, 180],
-                  }}
-                  transition={{
-                    duration: 4,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                >
-                  <Globe2 className="w-4 h-4 text-white" />
-                </motion.div>
-
-                <motion.div
-                  className="absolute top-4 left-4 w-7 h-7 bg-gradient-to-r from-secondary to-accent rounded-full flex items-center justify-center shadow-lg"
-                  animate={{
-                    y: [0, -3, 0],
-                    x: [0, 2, 0],
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: 1
-                  }}
-                >
-                  <Star className="w-3 h-3 text-white" />
-                </motion.div>
               </div>
             </div>
 
             {/* Content Section - Right Side */}
-            <div className="lg:w-3/5 p-6 lg:p-8 flex flex-col justify-center h-[400px] lg:h-[600px]">
+            <div className="lg:w-3/5 p-4 sm:p-6 lg:p-8 flex flex-col justify-center min-h-[300px] sm:min-h-[350px] md:min-h-[400px] lg:min-h-[500px]">
               {/* Header with crown icon */}
               <motion.div
                 className="flex items-center justify-center lg:justify-start mb-4"
@@ -221,11 +164,11 @@ const EnhancedMentorCard = () => {
                     transition={{ duration: 0.6, delay: 0.9 }}
                     viewport={{ once: true }}
                   >
-                    <h4 className="text-lg lg:text-xl font-semibold text-primary">
-                      National Leader & Climate Education Pioneer
+                    <h4 className="text-base sm:text-lg lg:text-xl font-semibold text-primary">
+                      Senior Mathematics Teacher & CAS Coordinator
                     </h4>
-                    <p className="text-muted-foreground font-medium text-sm">
-                      Climate Action Project India • JBCN International School Mentor
+                    <p className="text-muted-foreground font-medium text-xs sm:text-sm">
+                      JBCN International School • Climate Action Schools Mentor
                     </p>
                   </motion.div>
                 </div>
@@ -238,14 +181,14 @@ const EnhancedMentorCard = () => {
                   transition={{ duration: 0.6, delay: 1 }}
                   viewport={{ once: true }}
                 >
-                  <Badge className="bg-primary/20 text-primary border border-primary/30 px-3 py-1 text-xs">
-                    National Leader
+                  <Badge className="bg-primary/20 text-primary border border-primary/30 px-2 py-1 text-xs">
+                    18+ Years Experience
                   </Badge>
-                  <Badge className="bg-secondary/20 text-secondary border border-secondary/30 px-3 py-1 text-xs">
-                    Mentor Excellence
+                  <Badge className="bg-secondary/20 text-secondary border border-secondary/30 px-2 py-1 text-xs">
+                    Team Lead
                   </Badge>
-                  <Badge className="bg-accent/20 text-accent border border-accent/30 px-3 py-1 text-xs">
-                    Climate Champion
+                  <Badge className="bg-accent/20 text-accent border border-accent/30 px-2 py-1 text-xs">
+                    Climate Mentor
                   </Badge>
                 </motion.div>
 
@@ -257,7 +200,7 @@ const EnhancedMentorCard = () => {
                   transition={{ duration: 0.6, delay: 1.1 }}
                   viewport={{ once: true }}
                 >
-                  As the National Leader of the Climate Action Project in India, Gagandeep Chopra has revolutionized climate education across the nation. His visionary leadership has transformed how over 50,000 students approach environmental challenges.
+                  Greetings Everyone, I am Gagan Deep, Senior Mathematics Teacher with over 18 years of experience in education, currently serving as CAS Coordinator at JBCN International School and Program Coordinator for Climate Action Schools and projects at JBCN. I am deeply passionate about climate and the environment, and over the years I have also been actively involved in community and service projects that nurture responsibility and empathy in learners. In my role, I focus on creating opportunities for learner leadership and engaging students in meaningful climate action initiatives. I am also privileged to serve as a Climate Action Mentor and Team Lead for new Climate Action Schools in India, where I guide, support, and encourage schools at every stage of their journey while sharing insights with the facilitator team to enhance the program's impact. I look forward to inspiring young changemakers and building strong collaborations with learners and schools, so together we can create meaningful and lasting change for a sustainable future.
                 </motion.p>
 
                 {/* Stats Grid */}
@@ -268,21 +211,21 @@ const EnhancedMentorCard = () => {
                   transition={{ duration: 0.6, delay: 1.2 }}
                   viewport={{ once: true }}
                 >
-                  <div className="bg-primary/10 p-3 rounded-xl border border-primary/20">
-                    <div className="text-2xl font-bold text-primary mb-1">10+</div>
-                    <div className="text-xs text-muted-foreground">Premier Schools</div>
+                  <div className="bg-primary/10 p-2 sm:p-3 rounded-xl border border-primary/20">
+                    <div className="text-lg sm:text-2xl font-bold text-primary mb-1">18+</div>
+                    <div className="text-xs text-muted-foreground">Years Experience</div>
                   </div>
-                  <div className="bg-secondary/10 p-3 rounded-xl border border-secondary/20">
-                    <div className="text-2xl font-bold text-secondary mb-1">50K+</div>
-                    <div className="text-xs text-muted-foreground">Students Inspired</div>
+                  <div className="bg-secondary/10 p-2 sm:p-3 rounded-xl border border-secondary/20">
+                    <div className="text-lg sm:text-2xl font-bold text-secondary mb-1">CAS</div>
+                    <div className="text-xs text-muted-foreground">Coordinator</div>
                   </div>
-                  <div className="bg-accent/10 p-3 rounded-xl border border-accent/20">
-                    <div className="text-2xl font-bold text-accent mb-1">95%</div>
-                    <div className="text-xs text-muted-foreground">Engagement Rate</div>
+                  <div className="bg-accent/10 p-2 sm:p-3 rounded-xl border border-accent/20">
+                    <div className="text-lg sm:text-2xl font-bold text-accent mb-1">Team</div>
+                    <div className="text-xs text-muted-foreground">Lead</div>
                   </div>
-                  <div className="bg-primary/15 p-3 rounded-xl border border-primary/30">
-                    <div className="text-2xl font-bold text-primary mb-1">5+</div>
-                    <div className="text-xs text-muted-foreground">Years Leadership</div>
+                  <div className="bg-primary/15 p-2 sm:p-3 rounded-xl border border-primary/30">
+                    <div className="text-lg sm:text-2xl font-bold text-primary mb-1">100+</div>
+                    <div className="text-xs text-muted-foreground">Schools Guided</div>
                   </div>
                 </motion.div>
               </motion.div>
