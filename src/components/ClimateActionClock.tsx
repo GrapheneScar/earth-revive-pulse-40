@@ -132,8 +132,8 @@ const ClimateActionClock = () => {
                 <Globe className="w-8 h-8 text-white" />
               </motion.div>
               <div>
-                <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-green-600 via-blue-600 to-green-600 bg-clip-text text-transparent">
-                  Climate Action Time
+                <h2 className="text-4xl md:text-5xl font-black tracking-wider bg-gradient-to-r from-green-600 via-blue-600 to-green-600 bg-clip-text text-transparent drop-shadow-lg">
+                  CLIMATE ACTION CLOCK
                 </h2>
                 <motion.p
                   key={activeVision}
