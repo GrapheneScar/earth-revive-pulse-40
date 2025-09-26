@@ -9,6 +9,7 @@ import AboutSection from '@/components/AboutSection';
 import ImpactSection from '@/components/ImpactSection';
 import GetInvolvedSection from '@/components/GetInvolvedSection';
 import Footer from '@/components/Footer';
+import VisitorCounter from '@/components/VisitorCounter';
 
 const Index = () => {
   const [showIntro, setShowIntro] = useState(true);
@@ -46,6 +47,7 @@ const Index = () => {
       {!showIntro && (
         <>
           <Navigation />
+          <VisitorCounter />
           <main className="overflow-x-hidden relative">
             <HeroSection />
             <ProjectSummary />

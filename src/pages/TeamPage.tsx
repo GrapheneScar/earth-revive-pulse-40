@@ -77,7 +77,7 @@ const TeamPage = () => {
     glowColor: "shadow-secondary/20",
     category: "creative",
     skills: ["UI/UX Design", "Brand Identity", "Creative Direction", "Visual Storytelling"],
-    projects: "15+ Design Projects",
+    quote: "Design is not just what it looks like, it's how it works for our planet.",
     image: "/lovable-uploads/0258641a-e856-4804-8881-042244ae3ea8.png"
   }, {
     name: "Jash Shah",
@@ -91,7 +91,7 @@ const TeamPage = () => {
     glowColor: "shadow-secondary/20",
     category: "creative",
     skills: ["Environmental Photography", "Event Documentation", "Social Media Content", "Visual Storytelling"],
-    projects: "500+ Photos Captured",
+    quote: "Every photograph tells a story of our planet's beauty and our responsibility to protect it.",
     image: "/lovable-uploads/0c5a70c8-f770-490d-a259-1dfa344194bb.png"
   }, {
     name: "Yuvna Lamba",
@@ -105,7 +105,7 @@ const TeamPage = () => {
     glowColor: "shadow-secondary/20",
     category: "operations",
     skills: ["Project Management", "Team Coordination", "Impact Assessment", "Resource Planning"],
-    projects: "25+ Projects Managed",
+    quote: "Success is not just about completing projects, it's about creating lasting environmental impact.",
     image: "/lovable-uploads/03b0b31a-2e7a-45c0-ba61-0674f9ac0b86.png"
   }, {
     name: "Vaishnavi Nishanth",
@@ -119,7 +119,7 @@ const TeamPage = () => {
     glowColor: "shadow-secondary/20",
     category: "operations",
     skills: ["Project Support", "Team Coordination", "Strategic Planning", "Quality Assurance"],
-    projects: "15+ Projects Assisted",
+    quote: "Behind every successful project is a team that believes in making a difference.",
     image: "/lovable-uploads/7b7507a5-84b5-4046-8f57-b662d2b285cc.png"
   }, {
     name: "Navyapriya Baid",
@@ -133,7 +133,7 @@ const TeamPage = () => {
     glowColor: "shadow-secondary/20",
     category: "digital-tech",
     skills: ["Social Media Strategy", "Content Creation", "Community Management", "Digital Marketing"],
-    projects: "100K+ Followers Reached",
+    quote: "Every post, every story, every interaction is an opportunity to inspire climate action.",
     image: "/lovable-uploads/d675ad8f-b130-4226-8095-76e2a0fc5885.png"
   }, {
     name: "Anushka Shinde",
@@ -147,7 +147,7 @@ const TeamPage = () => {
     glowColor: "shadow-secondary/20",
     category: "digital-tech",
     skills: ["Content Creation", "Social Media Management", "Visual Design", "Community Engagement"],
-    projects: "50K+ Engagement Generated",
+    quote: "Creating content that not only engages but educates and empowers climate action.",
     image: "/lovable-uploads/06c99bab-5b4e-4d00-a994-3445f8a81c80.png"
   }];
 
@@ -164,7 +164,7 @@ const TeamPage = () => {
     glowColor: "shadow-secondary/20",
     category: "digital-tech",
     skills: ["Backend Development", "Cloud Architecture", "DevOps", "Security"],
-    projects: "12+ Systems Deployed",
+    quote: "Technology is our tool to amplify environmental impact across the globe.",
     image: "/lovable-uploads/9413211a-4571-4a26-b70b-25d6db812458.png"
   }, {
     name: "Naaham Shah",
@@ -178,7 +178,7 @@ const TeamPage = () => {
     glowColor: "shadow-secondary/20",
     category: "digital-tech",
     skills: ["Full Stack Development", "Database Design", "API Integration", "Performance Optimization"],
-    projects: "8+ Applications Built",
+    quote: "Building digital bridges that connect communities in the fight against climate change.",
     image: "/lovable-uploads/78dc6bfc-436f-4e9e-935b-85c13aeb284e.png"
   }, {
     name: "Dhir Jain",
@@ -192,7 +192,7 @@ const TeamPage = () => {
     glowColor: "shadow-secondary/20",
     category: "digital-tech",
     skills: ["Content Management", "UI Design"],
-    projects: "10+ Web Projects",
+    quote: "Every line of code is written with the hope of creating a better tomorrow.",
     image: "/lovable-uploads/72eede36-376c-4854-aa5b-8c6c85b1c530.png"
   }];
   const allMembers = [...leadership, ...departmentHeads, ...techTeam];
@@ -353,9 +353,12 @@ const TeamPage = () => {
               "{member.quote}"
             </motion.blockquote>}
           
-          {!isLeadership && member.projects && <div className="mb-4">
-              
-            </div>}
+          {!isLeadership && member.quote && <motion.blockquote 
+              className="text-sm italic text-muted-foreground border-l-4 border-current pl-4 mb-4 bg-muted/30 p-3 rounded-r-lg"
+              animate={hoveredCard === index ? { scale: 1.02 } : { scale: 1 }}
+            >
+              "{member.quote}"
+            </motion.blockquote>}
 
           {/* Social Links */}
           <div className="flex gap-3">
