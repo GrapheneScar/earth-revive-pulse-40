@@ -10,7 +10,7 @@ const EnhancedMentorCard = () => {
   
   const fullBio = "Greetings Everyone, I am Gagan Deep, Senior Mathematics Teacher with over 18 years of experience in education, currently serving as CAS Coordinator at JBCN International School and Program Coordinator for Climate Action Schools and projects at JBCN. I am deeply passionate about climate and the environment, and over the years I have also been actively involved in community and service projects that nurture responsibility and empathy in learners. In my role, I focus on creating opportunities for learner leadership and engaging students in meaningful climate action initiatives. I am also privileged to serve as a Climate Action Mentor and Team Lead for new Climate Action Schools in India, where I guide, support, and encourage schools at every stage of their journey while sharing insights with the facilitator team to enhance the program's impact. I look forward to inspiring young changemakers and building strong collaborations with learners and schools, so together we can create meaningful and lasting change for a sustainable future.";
   
-  const shortBio = "Greetings Everyone, I am Gagan Deep, Senior Mathematics Teacher with over 18 years of experience in education, currently serving as CAS Coordinator at JBCN International School and Program Coordinator for Climate Action Schools and projects at JBCN.";
+  const shortBio = "Greetings Everyone, I am Gagan Deep, Senior Mathematics Teacher with over 18 years of experience in education, currently serving as CAS Coordinator at JBCN International School...";
   return (
     <motion.div
       className="relative max-w-7xl mx-auto"
@@ -47,7 +47,7 @@ const EnhancedMentorCard = () => {
           <div className="flex flex-col lg:flex-row">
             {/* Image Section - Left Side */}
             <div className="lg:w-2/5 relative">
-              <div className="relative h-[300px] sm:h-[350px] md:h-[400px] lg:h-[500px]">
+              <div className="relative h-full min-h-[400px] lg:min-h-[500px]">
                 {/* Background glow */}
                 <motion.div
                   className="absolute -inset-2 bg-gradient-to-r from-primary via-secondary to-primary rounded-2xl opacity-20 blur-lg"
@@ -130,7 +130,7 @@ const EnhancedMentorCard = () => {
             </div>
 
             {/* Content Section - Right Side */}
-            <div className="lg:w-3/5 p-4 sm:p-6 lg:p-8 flex flex-col justify-center min-h-[300px] sm:min-h-[350px] md:min-h-[400px] lg:min-h-[500px]">
+            <div className="lg:w-3/5 p-4 sm:p-6 lg:p-8 flex flex-col justify-center min-h-[400px] lg:min-h-[500px]">
               {/* Header with crown icon */}
               <motion.div
                 className="flex items-center justify-center lg:justify-start mb-4"
