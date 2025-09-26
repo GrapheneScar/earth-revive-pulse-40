@@ -44,6 +44,10 @@ const CollaboratorsPage = () => {
       label: "Projects",
       value: "50+"
     }],
+    links: [{
+      title: "Explore More",
+      url: "https://www.jbcnschool.edu.in/parel/"
+    }],
     badges: ["Carbon Neutral", "Green Campus", "Innovation Leader"],
     icon: <TreePine className="w-8 h-8" />,
     color: "primary"
@@ -124,6 +128,10 @@ const CollaboratorsPage = () => {
       label: "Impact Score",
       value: "A+"
     }],
+    links: [{
+      title: "Explore More",
+      url: "https://www.climateactionschools.org/"
+    }],
     badges: ["Excellence Award", "Mentorship Leader", "Curriculum Pioneer"],
     icon: <Award className="w-8 h-8" />,
     color: "primary"
@@ -147,6 +155,10 @@ const CollaboratorsPage = () => {
     }, {
       label: "People Reached",
       value: "50K+"
+    }],
+    links: [{
+      title: "Explore More", 
+      url: "https://www.instagram.com/change.is.us/?hl=en"
     }],
     badges: ["Student-Led", "Community Impact", "Environmental Action"],
     icon: <Users className="w-8 h-8" />,
