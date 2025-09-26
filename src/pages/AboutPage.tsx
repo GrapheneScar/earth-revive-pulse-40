@@ -10,6 +10,7 @@ import LeadershipCards from '@/components/LeadershipCards';
 import CarbonFootprintSection from '@/components/CarbonFootprintCalculator';
 import PledgeForFuture from '@/components/PledgeForFuture';
 import EcoNewsUpdates from '@/components/EcoNewsUpdates';
+import ClimateActionClock from '@/components/ClimateActionClock';
 const AboutPage = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, {
@@ -540,6 +541,27 @@ const AboutPage = () => {
                 </Card>
               </motion.div>)}
           </div>
+        </div>
+      </section>
+
+      {/* Climate Action Clock Section */}
+      <section className="py-20 px-4 bg-gradient-to-br from-background via-primary/5 to-secondary/5 relative">
+        <div className="container mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
+              Real-Time Climate Status
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Monitor the urgent countdown to climate action targets and track key environmental metrics.
+            </p>
+          </motion.div>
+          <ClimateActionClock />
         </div>
       </section>
 

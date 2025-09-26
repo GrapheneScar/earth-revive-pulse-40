@@ -17,7 +17,8 @@ const Footer = () => {
       { name: "About", href: "/about" },
       { name: "Initiatives", href: "/initiatives" },
       { name: "Gallery", href: "/gallery" },
-      { name: "Team", href: "/team" }
+      { name: "Team", href: "/team" },
+      { name: "Collaborators", href: "/collaborators" }
     ],
     "Get Involved": [
       { name: "Contact Us", href: "/contact" },
