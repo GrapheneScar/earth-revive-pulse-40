@@ -443,9 +443,6 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* Climate Data Section */}
-      <ClimateDataSection />
-
       {/* Timeline */}
       
 
@@ -566,6 +563,9 @@ const AboutPage = () => {
             </p>
           </motion.div>
           <ClimateActionClock />
+          
+          {/* Climate Data Statistics - Below Clock */}
+          <ClimateDataSection />
         </div>
       </section>
 
