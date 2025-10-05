@@ -11,6 +11,7 @@ import CarbonFootprintSection from '@/components/CarbonFootprintCalculator';
 import PledgeForFuture from '@/components/PledgeForFuture';
 import EcoNewsUpdates from '@/components/EcoNewsUpdates';
 import ClimateActionClock from '@/components/ClimateActionClock';
+import ClimateDataSection from '@/components/ClimateDataSection';
 const AboutPage = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, {
@@ -441,6 +442,9 @@ const AboutPage = () => {
           </div>
         </div>
       </section>
+
+      {/* Climate Data Section */}
+      <ClimateDataSection />
 
       {/* Timeline */}
       
