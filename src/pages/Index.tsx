@@ -10,6 +10,7 @@ import ImpactSection from '@/components/ImpactSection';
 import GetInvolvedSection from '@/components/GetInvolvedSection';
 import Footer from '@/components/Footer';
 import VisitorCounter from '@/components/VisitorCounter';
+import ClimateCountdownClock from '@/components/ClimateCountdownClock';
 
 const Index = () => {
   const [showIntro, setShowIntro] = useState(true);
@@ -50,6 +51,7 @@ const Index = () => {
           <VisitorCounter />
           <main className="overflow-x-hidden relative">
             <HeroSection />
+            <ClimateCountdownClock />
             <ProjectSummary />
             <ImageCarousel />
             <AboutSection />
