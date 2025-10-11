@@ -112,7 +112,7 @@ const ClimateCountdownClock = () => {
       
       <div className="container mx-auto max-w-6xl relative z-10">
         <Card className="bg-gradient-to-br from-green-950/30 via-card/50 to-green-950/20 backdrop-blur-sm border-green-500/20 shadow-2xl overflow-hidden">
-          <div className="p-8 md:p-12">
+          <div className="p-4 sm:p-6 md:p-12">
             {/* Header */}
             <motion.div initial={{
             opacity: 0,
@@ -123,13 +123,13 @@ const ClimateCountdownClock = () => {
           }} transition={{
             delay: 0.2
           }} className="text-center mb-8">
-              <div className="flex items-center justify-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center">
-                  <AlertTriangle className="w-6 h-6 text-green-500" />
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-green-500/20 flex items-center justify-center">
+                  <AlertTriangle className="w-5 h-5 sm:w-6 sm:h-6 text-green-500" />
                 </div>
-                <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-green-400 via-green-500 to-green-600 bg-clip-text text-transparent">Climate Action Countdown </h2>
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-green-400 via-green-500 to-green-600 bg-clip-text text-transparent text-center sm:text-left">Climate Action Countdown</h2>
               </div>
-              <p className="text-muted-foreground text-sm md:text-base max-w-2xl mx-auto">
+              <p className="text-muted-foreground text-xs sm:text-sm md:text-base max-w-2xl mx-auto px-2">
                 Time remaining to limit global warming to 1.5°C under the Paris Agreement
               </p>
             </motion.div>
@@ -144,14 +144,14 @@ const ClimateCountdownClock = () => {
           }} transition={{
             delay: 0.4
           }} className="mb-8">
-              <div className="flex items-center justify-center mb-4">
-                <Badge variant="secondary" className="bg-yellow-500/20 text-yellow-400 border-yellow-500/30">
+              <div className="flex items-center justify-center mb-3 sm:mb-4">
+                <Badge variant="secondary" className="bg-yellow-500/20 text-yellow-400 border-yellow-500/30 text-[10px] sm:text-xs px-2 py-1">
                   <AlertTriangle className="w-3 h-3 mr-1" />
                   URGENT: 2030 Climate Target
                 </Badge>
               </div>
               
-              <div className="grid grid-cols-5 gap-2 md:gap-4">
+              <div className="grid grid-cols-5 gap-1.5 sm:gap-2 md:gap-4">
                 {timeUnits.map((unit, index) => <motion.div key={unit.label} initial={{
                 opacity: 0,
                 y: 20
@@ -160,7 +160,7 @@ const ClimateCountdownClock = () => {
                 y: 0
               }} transition={{
                 delay: 0.5 + index * 0.1
-              }} className="bg-gradient-to-br from-green-950/50 to-green-900/30 backdrop-blur-sm rounded-lg p-3 md:p-6 border border-green-500/20">
+              }} className="bg-gradient-to-br from-green-950/50 to-green-900/30 backdrop-blur-sm rounded-md sm:rounded-lg p-2 sm:p-3 md:p-6 border border-green-500/20">
                     <motion.div key={unit.value} initial={{
                   scale: 1.2,
                   opacity: 0
@@ -169,10 +169,10 @@ const ClimateCountdownClock = () => {
                   opacity: 1
                 }} transition={{
                   duration: 0.3
-                }} className="text-2xl md:text-5xl font-bold text-green-400 mb-1 md:mb-2 font-mono">
+                }} className="text-lg sm:text-2xl md:text-5xl font-bold text-green-400 mb-0.5 sm:mb-1 md:mb-2 font-mono">
                       {String(unit.value).padStart(2, '0')}
                     </motion.div>
-                    <div className="text-[10px] md:text-xs text-muted-foreground font-semibold tracking-wider">
+                    <div className="text-[8px] sm:text-[10px] md:text-xs text-muted-foreground font-semibold tracking-wider leading-tight">
                       {unit.label}
                     </div>
                   </motion.div>)}
@@ -188,7 +188,7 @@ const ClimateCountdownClock = () => {
             y: 0
           }} transition={{
             delay: 0.8
-          }} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          }} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-8">
               {climateMetrics.map((metric, index) => <motion.div key={metric.label} initial={{
               opacity: 0,
               y: 20
@@ -197,10 +197,10 @@ const ClimateCountdownClock = () => {
               y: 0
             }} transition={{
               delay: 0.9 + index * 0.1
-            }} className="bg-gradient-to-br from-card/80 to-card/40 backdrop-blur-sm rounded-lg p-4 border border-border/50 hover:border-green-500/30 transition-colors">
-                  <div className="flex items-start justify-between mb-3">
-                    <div className={`w-10 h-10 rounded-full ${metric.bgColor} flex items-center justify-center`}>
-                      <metric.icon className={`w-5 h-5 ${metric.iconColor}`} />
+            }} className="bg-gradient-to-br from-card/80 to-card/40 backdrop-blur-sm rounded-lg p-3 sm:p-4 border border-border/50 hover:border-green-500/30 transition-colors">
+                  <div className="flex items-start justify-between mb-2 sm:mb-3">
+                    <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full ${metric.bgColor} flex items-center justify-center`}>
+                      <metric.icon className={`w-4 h-4 sm:w-5 sm:h-5 ${metric.iconColor}`} />
                     </div>
                     <TooltipProvider>
                       <Tooltip>
@@ -217,10 +217,10 @@ const ClimateCountdownClock = () => {
                     </TooltipProvider>
                   </div>
                   
-                  <div className="text-2xl md:text-3xl font-bold text-foreground mb-1">
+                  <div className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-0.5 sm:mb-1">
                     {metric.value}
                   </div>
-                  <div className="text-xs font-semibold text-muted-foreground mb-2">
+                  <div className="text-[11px] sm:text-xs font-semibold text-muted-foreground mb-1.5 sm:mb-2">
                     {metric.label}
                   </div>
                   <div className={`flex items-center gap-1 text-xs ${metric.trend === 'up' ? metric.label === 'Renewable Energy' ? 'text-green-500' : 'text-red-500' : 'text-red-500'}`}>
@@ -237,11 +237,11 @@ const ClimateCountdownClock = () => {
             opacity: 1
           }} transition={{
             delay: 1.2
-          }} className="text-center border-t border-border/50 pt-6">
-              <p className="text-foreground mb-3 text-sm md:text-base">
+          }} className="text-center border-t border-border/50 pt-4 sm:pt-6">
+              <p className="text-foreground mb-2 sm:mb-3 text-xs sm:text-sm md:text-base px-2">
                 Every second counts in our fight against climate change. Join the movement today.
               </p>
-              <div className="flex flex-wrap items-center justify-center gap-3 text-xs text-muted-foreground">
+              <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-[10px] sm:text-xs text-muted-foreground">
                 <div className="flex items-center gap-1">
                   <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
                   <span>Real-time data tracking</span>
