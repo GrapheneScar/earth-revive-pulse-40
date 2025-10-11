@@ -151,7 +151,7 @@ const ClimateCountdownClock = () => {
                 </Badge>
               </div>
               
-              <div className="grid grid-cols-5 gap-1.5 sm:gap-2 md:gap-4">
+              <div className="grid grid-cols-5 gap-1 sm:gap-2 md:gap-4">
                 {timeUnits.map((unit, index) => <motion.div key={unit.label} initial={{
                 opacity: 0,
                 y: 20
@@ -160,7 +160,7 @@ const ClimateCountdownClock = () => {
                 y: 0
               }} transition={{
                 delay: 0.5 + index * 0.1
-              }} className="bg-gradient-to-br from-green-950/50 to-green-900/30 backdrop-blur-sm rounded-md sm:rounded-lg p-2 sm:p-3 md:p-6 border border-green-500/20">
+              }} className="bg-gradient-to-br from-green-950/50 to-green-900/30 backdrop-blur-sm rounded-md sm:rounded-lg p-2.5 sm:p-3 md:p-6 border border-green-500/20 flex flex-col items-center justify-center min-h-[60px] sm:min-h-[80px] md:min-h-auto">
                     <motion.div key={unit.value} initial={{
                   scale: 1.2,
                   opacity: 0
@@ -169,10 +169,10 @@ const ClimateCountdownClock = () => {
                   opacity: 1
                 }} transition={{
                   duration: 0.3
-                }} className="text-lg sm:text-2xl md:text-5xl font-bold text-green-400 mb-0.5 sm:mb-1 md:mb-2 font-mono">
+                }} className="text-base sm:text-2xl md:text-5xl font-bold text-green-400 mb-0.5 sm:mb-1 md:mb-2 font-mono leading-none">
                       {String(unit.value).padStart(2, '0')}
                     </motion.div>
-                    <div className="text-[8px] sm:text-[10px] md:text-xs text-muted-foreground font-semibold tracking-wider leading-tight">
+                    <div className="text-[8px] sm:text-[10px] md:text-xs text-muted-foreground font-semibold tracking-wider leading-tight text-center">
                       {unit.label}
                     </div>
                   </motion.div>)}
