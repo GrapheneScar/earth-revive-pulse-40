@@ -29,7 +29,7 @@ const PledgeForFuture = () => {
       transition={{ duration: 0.6 }}
       className="w-full max-w-md mx-auto"
     >
-      <Card className="p-6 sm:p-8 text-center shadow-card border-none bg-gradient-to-br from-primary/5 to-background hover-lift relative overflow-hidden border-t-4 border-t-primary">
+      <Card className="h-full p-6 sm:p-8 text-center shadow-card border-none bg-gradient-to-br from-primary/5 to-background hover-lift relative overflow-hidden border-t-4 border-t-primary flex flex-col">
         {/* Animated shimmer effect */}
         <motion.div 
           className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent opacity-0"
@@ -44,7 +44,7 @@ const PledgeForFuture = () => {
           }}
         />
         
-        <div className="relative z-10">
+        <div className="relative z-10 flex flex-col h-full justify-between">
           <motion.h2 
             className="text-xl sm:text-2xl font-bold mb-4 text-primary"
             animate={{
