@@ -1,13 +1,33 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
-import { Menu, X, Leaf, Instagram, Heart } from 'lucide-react';
+import { useState, useRef } from 'react';
+import { Menu, X, Leaf, Instagram, Heart, ChevronDown } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showHeartAnimation, setShowHeartAnimation] = useState(false);
   const [lastTap, setLastTap] = useState(0);
+  const [showInitiativesDropdown, setShowInitiativesDropdown] = useState(false);
+  const dropdownTimeout = useRef<NodeJS.Timeout | null>(null);
   const location = useLocation();
+
+  const handleDropdownEnter = () => {
+    if (dropdownTimeout.current) {
+      clearTimeout(dropdownTimeout.current);
+    }
+    dropdownTimeout.current = setTimeout(() => {
+      setShowInitiativesDropdown(true);
+    }, 150);
+  };
+
+  const handleDropdownLeave = () => {
+    if (dropdownTimeout.current) {
+      clearTimeout(dropdownTimeout.current);
+    }
+    dropdownTimeout.current = setTimeout(() => {
+      setShowInitiativesDropdown(false);
+    }, 200);
+  };
 
   const handleInstagramDoubleClick = () => {
     const now = Date.now();
@@ -21,8 +41,6 @@ const Navigation = () => {
     
     setLastTap(now);
   };
-
-  const [showInitiativesDropdown, setShowInitiativesDropdown] = useState(false);
 
   const navItems = [
     { name: 'Home', href: '/' },
@@ -61,52 +79,92 @@ const Navigation = () => {
               <div 
                 key={item.name}
                 className="relative"
-                onMouseEnter={() => item.children && setShowInitiativesDropdown(true)}
-                onMouseLeave={() => item.children && setShowInitiativesDropdown(false)}
+                onMouseEnter={() => item.children && handleDropdownEnter()}
+                onMouseLeave={() => item.children && handleDropdownLeave()}
               >
-                <Link
-                  to={item.href}
-                  className={`text-sm font-medium transition-colors duration-200 relative group ${
-                    isActive(item.href) || (item.children && isInitiativesActive)
-                      ? 'text-primary' 
-                      : 'text-muted-foreground hover:text-foreground'
-                  }`}
-                >
-                  {item.name}
-                  {(isActive(item.href) || (item.children && isInitiativesActive)) && (
+                {item.children ? (
+                  <button
+                    className={`flex items-center gap-1 text-sm font-medium transition-colors duration-200 relative group ${
+                      isInitiativesActive
+                        ? 'text-primary' 
+                        : 'text-muted-foreground hover:text-foreground'
+                    }`}
+                  >
+                    {item.name}
                     <motion.div
-                      layoutId="activeTab"
-                      className="absolute -bottom-6 left-0 right-0 h-0.5 bg-primary rounded-full"
-                      initial={false}
-                      transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                    />
-                  )}
-                </Link>
+                      animate={{ rotate: showInitiativesDropdown ? 180 : 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <ChevronDown className="w-4 h-4" />
+                    </motion.div>
+                    {isInitiativesActive && (
+                      <motion.div
+                        layoutId="activeTab"
+                        className="absolute -bottom-6 left-0 right-0 h-0.5 bg-primary rounded-full"
+                        initial={false}
+                        transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                      />
+                    )}
+                  </button>
+                ) : (
+                  <Link
+                    to={item.href}
+                    className={`text-sm font-medium transition-colors duration-200 relative group ${
+                      isActive(item.href)
+                        ? 'text-primary' 
+                        : 'text-muted-foreground hover:text-foreground'
+                    }`}
+                  >
+                    {item.name}
+                    {isActive(item.href) && (
+                      <motion.div
+                        layoutId="activeTab"
+                        className="absolute -bottom-6 left-0 right-0 h-0.5 bg-primary rounded-full"
+                        initial={false}
+                        transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                      />
+                    )}
+                  </Link>
+                )}
 
                 {/* Dropdown Menu */}
-                {item.children && showInitiativesDropdown && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.2 }}
-                    className="absolute top-full left-0 mt-2 w-48 bg-background border border-border rounded-lg shadow-lg overflow-hidden z-50"
-                  >
-                    {item.children.map((child) => (
+                <AnimatePresence>
+                  {item.children && showInitiativesDropdown && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute top-full left-0 mt-2 w-56 bg-background border border-border rounded-lg shadow-xl overflow-hidden z-50"
+                      onMouseEnter={handleDropdownEnter}
+                      onMouseLeave={handleDropdownLeave}
+                    >
                       <Link
-                        key={child.name}
-                        to={child.href}
-                        className={`block px-4 py-2 text-sm font-medium transition-colors duration-200 ${
-                          isActive(child.href)
+                        to={item.href}
+                        className={`block px-4 py-3 text-sm font-medium transition-colors duration-200 border-b border-border ${
+                          isActive(item.href)
                             ? 'text-primary bg-primary/10'
                             : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
                         }`}
                       >
-                        {child.name}
+                        All Initiatives
                       </Link>
-                    ))}
-                  </motion.div>
-                )}
+                      {item.children.map((child) => (
+                        <Link
+                          key={child.name}
+                          to={child.href}
+                          className={`block px-4 py-3 text-sm font-medium transition-colors duration-200 ${
+                            isActive(child.href)
+                              ? 'text-primary bg-primary/10'
+                              : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                          }`}
+                        >
+                          {child.name}
+                        </Link>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             ))}
             
@@ -304,18 +362,19 @@ const Navigation = () => {
                 <Link
                   to={item.href}
                   onClick={() => !item.children && setIsOpen(false)}
-                  className={`block px-4 py-2 text-sm font-medium transition-colors duration-200 ${
+                  className={`flex items-center justify-between px-4 py-2 text-sm font-medium transition-colors duration-200 ${
                     isActive(item.href) || (item.children && isInitiativesActive)
                       ? 'text-primary bg-primary/10'
                       : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
                   }`}
                 >
                   {item.name}
+                  {item.children && <ChevronDown className="w-4 h-4" />}
                 </Link>
                 
                 {/* Mobile Submenu */}
                 {item.children && (
-                  <div className="pl-4 space-y-1 mt-1">
+                  <div className="pl-4 space-y-1 mt-1 border-l-2 border-primary/20 ml-4">
                     {item.children.map((child) => (
                       <Link
                         key={child.name}
