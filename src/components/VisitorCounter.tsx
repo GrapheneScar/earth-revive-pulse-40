@@ -33,8 +33,6 @@ const VisitorCounter = () => {
           .eq('session_id', sessionId)
           .maybeSingle();
 
-        const isNewVisitor = !existingSession;
-
         // Upsert session (create or update)
         await supabase
           .from('visitor_sessions')
@@ -45,43 +43,53 @@ const VisitorCounter = () => {
             onConflict: 'session_id'
           });
 
-        // If new visitor, increment total count
-        if (isNewVisitor) {
-          const { data: stats } = await supabase
-            .from('visitor_stats')
-            .select('total_visitors')
-            .limit(1)
-            .single();
-
-          if (stats) {
-            await supabase
-              .from('visitor_stats')
-              .update({ 
-                total_visitors: stats.total_visitors + 1,
-                updated_at: new Date().toISOString()
-              })
-              .eq('id', (await supabase.from('visitor_stats').select('id').limit(1).single()).data?.id);
-          }
-        }
-
-        // Fetch current stats
+        // Fetch current stats with simulated growth for total
         const fetchStats = async () => {
-          // Get total visitors
+          // Get base total visitors from database
           const { data: stats } = await supabase
             .from('visitor_stats')
-            .select('total_visitors')
+            .select('total_visitors, updated_at')
             .limit(1)
             .maybeSingle();
 
           if (stats) {
-            setTotalVisitors(stats.total_visitors);
+            // Calculate simulated growth based on time passed
+            const lastUpdate = new Date(stats.updated_at);
+            const now = new Date();
+            const daysPassed = Math.floor((now.getTime() - lastUpdate.getTime()) / (1000 * 60 * 60 * 24));
+            
+            // Add 5-12 visitors per day that passed
+            const dailyGrowth = daysPassed * (5 + Math.floor(Math.random() * 8));
+            const displayTotal = stats.total_visitors + dailyGrowth;
+            
+            setTotalVisitors(displayTotal);
+            
+            // Periodically update the database with the simulated growth (once per day max)
+            if (daysPassed >= 1) {
+              const { data: statsId } = await supabase
+                .from('visitor_stats')
+                .select('id')
+                .limit(1)
+                .single();
+              
+              if (statsId) {
+                await supabase
+                  .from('visitor_stats')
+                  .update({ 
+                    total_visitors: displayTotal,
+                    updated_at: now.toISOString()
+                  })
+                  .eq('id', statsId.id);
+              }
+            }
           }
 
-          // Get active visitors (sessions in last 5 minutes)
-          const { data: activeSessions, count } = await supabase
+          // Get REAL active visitors (sessions in last 5 minutes)
+          const fiveMinAgo = new Date(Date.now() - 5 * 60 * 1000).toISOString();
+          const { count } = await supabase
             .from('visitor_sessions')
             .select('*', { count: 'exact', head: true })
-            .gte('last_seen', fiveMinutesAgo);
+            .gte('last_seen', fiveMinAgo);
 
           setVisitors(count || 0);
         };
@@ -95,12 +103,9 @@ const VisitorCounter = () => {
             .from('visitor_sessions')
             .update({ last_seen: new Date().toISOString() })
             .eq('session_id', sessionId);
-
-          // Refresh stats
-          await fetchStats();
         }, 30000);
 
-        // Refresh active visitors count more frequently
+        // Refresh stats every 15 seconds
         const refreshInterval = setInterval(fetchStats, 15000);
 
         return () => {
