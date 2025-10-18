@@ -10,7 +10,7 @@ import { MapPin, Mail, Send, Instagram } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
-import emailjs from '@emailjs/browser';
+import { supabase } from '@/integrations/supabase/client';
 const ContactPage = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, {
@@ -36,27 +36,23 @@ const ContactPage = () => {
     setIsSubmitting(true);
     
     try {
-      // EmailJS configuration with your actual credentials
-      const serviceID = 'service_ui0fv0i';
-      const templateID = 'template_vx7a3ad';
-      const publicKey = 'B7aAKRlSXl8UTkhXM';
-      
-      // Prepare template parameters
-      const templateParams = {
-        from_name: formData.name,
-        from_email: formData.email,
-        subject: formData.subject,
-        message: formData.message,
-        to_name: 'Climate Action Team', // Add recipient name
-        reply_to: formData.email // Add reply-to field
-      };
-      
-      console.log('Sending email with params:', templateParams);
-      console.log('Using credentials:', { serviceID, templateID, publicKey });
-      
-      // Send email using EmailJS
-      const result = await emailjs.send(serviceID, templateID, templateParams, publicKey);
-      console.log('EmailJS result:', result);
+      // Call secure edge function instead of direct EmailJS
+      const { data, error } = await supabase.functions.invoke('send-contact-email', {
+        body: {
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+        },
+      });
+
+      if (error) {
+        throw error;
+      }
+
+      if (data?.error) {
+        throw new Error(data.error);
+      }
       
       // Reset form
       setFormData({
@@ -72,12 +68,12 @@ const ContactPage = () => {
         description: "Thank you for your message. We'll get back to you within 24 hours.",
       });
       
-    } catch (error) {
-      console.error('Email sending failed:', error);
+    } catch (error: any) {
+      const errorMessage = error?.message || 'There was an error sending your message. Please try again.';
       
       toast({
         title: "Failed to send message",
-        description: "There was an error sending your message. Please try again.",
+        description: errorMessage,
         variant: "destructive",
       });
     } finally {

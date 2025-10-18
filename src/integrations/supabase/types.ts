@@ -62,6 +62,14 @@ export type Database = {
         Args: Record<PropertyKey, never>
         Returns: undefined
       }
+      get_active_visitor_count: {
+        Args: Record<PropertyKey, never>
+        Returns: number
+      }
+      upsert_visitor_session: {
+        Args: { p_session_id: string }
+        Returns: undefined
+      }
     }
     Enums: {
       [_ in never]: never

@@ -19,29 +19,11 @@ const VisitorCounter = () => {
           sessionStorage.setItem('visitor-session-id', sessionId);
         }
 
-        // Clean up old sessions first
-        const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000).toISOString();
-        await supabase
-          .from('visitor_sessions')
-          .delete()
-          .lt('last_seen', fiveMinutesAgo);
+        // Clean up old sessions using secure RPC
+        await supabase.rpc('cleanup_old_sessions');
 
-        // Check if this session exists
-        const { data: existingSession } = await supabase
-          .from('visitor_sessions')
-          .select('id')
-          .eq('session_id', sessionId)
-          .maybeSingle();
-
-        // Upsert session (create or update)
-        await supabase
-          .from('visitor_sessions')
-          .upsert({
-            session_id: sessionId,
-            last_seen: new Date().toISOString()
-          }, {
-            onConflict: 'session_id'
-          });
+        // Upsert session using secure RPC function
+        await supabase.rpc('upsert_visitor_session', { p_session_id: sessionId });
 
         // Fetch current stats with simulated growth for total
         const fetchStats = async () => {
@@ -63,46 +45,19 @@ const VisitorCounter = () => {
             const displayTotal = stats.total_visitors + dailyGrowth;
             
             setTotalVisitors(displayTotal);
-            
-            // Periodically update the database with the simulated growth (once per day max)
-            if (daysPassed >= 1) {
-              const { data: statsId } = await supabase
-                .from('visitor_stats')
-                .select('id')
-                .limit(1)
-                .single();
-              
-              if (statsId) {
-                await supabase
-                  .from('visitor_stats')
-                  .update({ 
-                    total_visitors: displayTotal,
-                    updated_at: now.toISOString()
-                  })
-                  .eq('id', statsId.id);
-              }
-            }
           }
 
-          // Get REAL active visitors (sessions in last 5 minutes)
-          const fiveMinAgo = new Date(Date.now() - 5 * 60 * 1000).toISOString();
-          const { count } = await supabase
-            .from('visitor_sessions')
-            .select('*', { count: 'exact', head: true })
-            .gte('last_seen', fiveMinAgo);
-
-          setVisitors(count || 0);
+          // Get REAL active visitors count using secure function
+          const { data: activeCount } = await supabase.rpc('get_active_visitor_count');
+          setVisitors(activeCount || 0);
         };
 
         await fetchStats();
         setIsLoading(false);
 
-        // Update last_seen every 30 seconds
+        // Update last_seen every 30 seconds using secure RPC
         const updateInterval = setInterval(async () => {
-          await supabase
-            .from('visitor_sessions')
-            .update({ last_seen: new Date().toISOString() })
-            .eq('session_id', sessionId);
+          await supabase.rpc('upsert_visitor_session', { p_session_id: sessionId });
         }, 30000);
 
         // Refresh stats every 15 seconds
