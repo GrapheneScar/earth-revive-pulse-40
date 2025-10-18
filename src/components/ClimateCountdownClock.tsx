@@ -96,7 +96,9 @@ const ClimateCountdownClock = () => {
     value: timeLeft.seconds,
     label: 'SECONDS'
   }];
-  return <motion.section initial={{
+  return <motion.section 
+    id="climate-countdown"
+    initial={{
     opacity: 0,
     y: 20
   }} whileInView={{

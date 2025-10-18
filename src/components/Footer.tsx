@@ -22,44 +22,41 @@ const Footer = () => {
       { name: "Collaborators", href: "/collaborators" }
     ],
     "Interactive Features": [
-      { name: "Climate Quiz", href: "#", action: "quiz", icon: Trophy },
-      { name: "Carbon Calculator", href: "/about#calculator", icon: Calculator },
+      { name: "Climate Quiz", href: "/#climate-quiz", icon: Trophy },
+      { name: "Carbon Calculator", href: "/about#carbon-calculator", icon: Calculator },
       { name: "Certificate Generator", href: "/your-initiative", icon: Award },
-      { name: "Climate Countdown", href: "#", action: "countdown", icon: Clock },
-      { name: "Daily Eco Challenge", href: "#", action: "challenge", icon: Sparkles },
+      { name: "Climate Countdown", href: "/#climate-countdown", icon: Clock },
+      { name: "Daily Eco Challenge", href: "/#daily-challenge", icon: Sparkles },
       { name: "Your Initiative", href: "/your-initiative", icon: Target }
     ]
   };
 
-  const handleFeatureClick = (action?: string, href?: string) => {
-    if (action) {
-      // Scroll to section on homepage
-      if (window.location.pathname !== '/') {
-        navigate('/');
-        setTimeout(() => scrollToSection(action), 100);
-      } else {
-        scrollToSection(action);
-      }
-    } else if (href?.startsWith('/')) {
-      navigate(href);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  };
-
-  const scrollToSection = (section: string) => {
-    // Map actions to section IDs or scroll logic
-    const sectionMap: { [key: string]: string } = {
-      quiz: 'climate-quiz',
-      countdown: 'climate-countdown',
-      challenge: 'daily-challenge'
-    };
+  const handleFeatureClick = (href: string) => {
+    const [path, hash] = href.split('#');
     
-    const elementId = sectionMap[section];
-    if (elementId) {
-      const element = document.getElementById(elementId);
+    if (path && window.location.pathname !== path) {
+      // Navigate to different page first
+      navigate(path);
+      if (hash) {
+        // Scroll to section after navigation
+        setTimeout(() => {
+          const element = document.getElementById(hash);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 300);
+      } else {
+        setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 100);
+      }
+    } else if (hash) {
+      // Same page, just scroll to section
+      const element = document.getElementById(hash);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
+    } else {
+      // Just navigate
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
@@ -148,15 +145,13 @@ const Footer = () => {
                       viewport={{ once: true }}
                       transition={{ duration: 0.4, delay: 0.1 * linkIndex }}
                     >
-                      {link.action || category === "Interactive Features" ? (
+                      {category === "Interactive Features" ? (
                         <button
-                          onClick={() => handleFeatureClick(link.action, link.href)}
+                          onClick={() => handleFeatureClick(link.href)}
                           className="text-secondary-foreground/70 hover:text-primary transition-all duration-300 text-sm group flex items-center gap-2"
                         >
-                          {IconComponent ? (
+                          {IconComponent && (
                             <IconComponent className="w-3.5 h-3.5 text-primary/60 group-hover:text-primary transition-colors" />
-                          ) : (
-                            <span className="w-1 h-1 bg-primary/40 rounded-full group-hover:bg-primary transition-colors"></span>
                           )}
                           <span className="group-hover:translate-x-1 transition-transform duration-200">{link.name}</span>
                         </button>

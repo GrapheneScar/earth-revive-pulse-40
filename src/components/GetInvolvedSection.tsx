@@ -187,6 +187,7 @@ const GetInvolvedSection = () => {
 
         {/* Climate Quiz Game */}
         <motion.div
+          id="climate-quiz"
           initial={{ opacity: 0, y: 50, scale: 0.95 }}
           animate={isInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 50, scale: 0.95 }}
           transition={{ duration: 1, delay: 0.6 }}
