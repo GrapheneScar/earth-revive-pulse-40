@@ -51,8 +51,8 @@ const Index = () => {
           <VisitorCounter />
           <main className="overflow-x-hidden relative">
             <HeroSection />
-            <ClimateCountdownClock />
             <ProjectSummary />
+            <ClimateCountdownClock />
             <ImageCarousel />
             <AboutSection />
             <ImpactSection />
