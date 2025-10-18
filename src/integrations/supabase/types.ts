@@ -14,13 +14,54 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      visitor_sessions: {
+        Row: {
+          created_at: string | null
+          id: string
+          last_seen: string | null
+          session_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          last_seen?: string | null
+          session_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          last_seen?: string | null
+          session_id?: string
+        }
+        Relationships: []
+      }
+      visitor_stats: {
+        Row: {
+          id: string
+          total_visitors: number
+          updated_at: string | null
+        }
+        Insert: {
+          id?: string
+          total_visitors?: number
+          updated_at?: string | null
+        }
+        Update: {
+          id?: string
+          total_visitors?: number
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      cleanup_old_sessions: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
     }
     Enums: {
       [_ in never]: never
