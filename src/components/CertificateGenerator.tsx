@@ -126,9 +126,9 @@ const CertificateGenerator = () => {
               </div>
 
               {/* Date in bottom left corner */}
-              <div className="absolute bottom-0 left-0 w-full flex items-end" style={{ paddingBottom: "8%", paddingLeft: "20%" }}>
+              <div className="absolute bottom-0 left-0 w-full flex items-end" style={{ paddingBottom: "10.5%", paddingLeft: "20%" }}>
                 <p 
-                  className="text-xs sm:text-sm md:text-base font-medium"
+                  className="text-[10px] sm:text-xs md:text-sm font-medium"
                   style={{ 
                     fontFamily: "'Inter', sans-serif",
                     color: "#000000",
