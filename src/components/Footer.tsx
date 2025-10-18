@@ -17,6 +17,7 @@ const Footer = () => {
       { name: "Home", href: "/" },
       { name: "About", href: "/about" },
       { name: "Initiatives", href: "/initiatives" },
+      { name: "Your Initiative", href: "/initiatives/your-initiative" },
       { name: "Gallery", href: "/gallery" },
       { name: "Team", href: "/team" },
       { name: "Collaborators", href: "/collaborators" }
@@ -26,8 +27,7 @@ const Footer = () => {
       { name: "Carbon Calculator", href: "/about#carbon-calculator", icon: Calculator },
       { name: "Certificate Generator", href: "/initiatives/your-initiative", icon: Award },
       { name: "Climate Countdown", href: "/#climate-countdown", icon: Clock },
-      { name: "Daily Eco Challenge", href: "/#daily-challenge", icon: Sparkles },
-      { name: "Your Initiative", href: "/initiatives/your-initiative", icon: Target }
+      { name: "Daily Eco Challenge", href: "/#daily-challenge", icon: Sparkles }
     ]
   };
 
