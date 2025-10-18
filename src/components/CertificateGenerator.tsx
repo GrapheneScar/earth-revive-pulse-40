@@ -6,9 +6,11 @@ import { Button } from "@/components/ui/button";
 import { Download, Award } from "lucide-react";
 import { toast } from "sonner";
 import html2canvas from "html2canvas";
+import { format } from "date-fns";
 
 const CertificateGenerator = () => {
   const [name, setName] = useState("");
+  const [currentDate] = useState(format(new Date(), "dd/MM/yyyy"));
   const certificateRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -106,6 +108,7 @@ const CertificateGenerator = () => {
                 className="absolute inset-0 w-full h-full object-contain"
                 crossOrigin="anonymous"
               />
+              {/* Name */}
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-center" style={{ marginTop: "-8%" }}>
                   <p 
@@ -120,6 +123,20 @@ const CertificateGenerator = () => {
                     {name}
                   </p>
                 </div>
+              </div>
+
+              {/* Date in bottom left corner */}
+              <div className="absolute bottom-0 left-0 w-full flex items-end" style={{ paddingBottom: "8%", paddingLeft: "20%" }}>
+                <p 
+                  className="text-xs sm:text-sm md:text-base font-medium"
+                  style={{ 
+                    fontFamily: "'Inter', sans-serif",
+                    color: "#000000",
+                    letterSpacing: "0.02em"
+                  }}
+                >
+                  {currentDate}
+                </p>
               </div>
             </div>
             <p className="text-center text-sm text-muted-foreground mt-4">
