@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Card } from '@/components/ui/card';
 import { Eye, TrendingUp, Users } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
 
 const VisitorCounter = () => {
   const [visitors, setVisitors] = useState(0);
@@ -9,89 +10,113 @@ const VisitorCounter = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Initialize visitor counting
-    const initVisitorCount = () => {
-      // Get stored total visitors with more realistic base
-      const stored = localStorage.getItem('climate-total-visitors');
-      const lastVisit = localStorage.getItem('climate-last-visit');
-      const currentTime = Date.now();
-      
-      let baseVisitors = stored ? parseInt(stored, 10) : 2847; // More realistic starting number
-      
-      // Simulate organic growth over time
-      if (lastVisit) {
-        const timeDiff = currentTime - parseInt(lastVisit, 10);
-        const daysPassed = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-        // Add 3-8 visitors per day that passed
-        const organicGrowth = Math.floor(daysPassed * (3 + Math.random() * 5));
-        baseVisitors += organicGrowth;
-      }
-      
-      // Check if this is a new session (more realistic session tracking)
-      const sessionKey = `climate-session-${new Date().toDateString()}`;
-      const sessionVisitor = sessionStorage.getItem(sessionKey);
-      
-      if (!sessionVisitor) {
-        // New unique session today - increment total visitors
-        baseVisitors += 1;
-        localStorage.setItem('climate-total-visitors', baseVisitors.toString());
-        localStorage.setItem('climate-last-visit', currentTime.toString());
-        sessionStorage.setItem(sessionKey, 'true');
-        setTotalVisitors(baseVisitors);
-      } else {
-        setTotalVisitors(baseVisitors);
-      }
-
-      // More realistic concurrent visitors based on time of day
-      const hour = new Date().getHours();
-      let baseCurrentVisitors;
-      if (hour >= 9 && hour <= 17) {
-        // Peak hours: 2-12 concurrent visitors
-        baseCurrentVisitors = 2 + Math.floor(Math.random() * 11);
-      } else if (hour >= 18 && hour <= 22) {
-        // Evening: 1-8 visitors
-        baseCurrentVisitors = 1 + Math.floor(Math.random() * 8);
-      } else {
-        // Night/early morning: 1-4 visitors
-        baseCurrentVisitors = 1 + Math.floor(Math.random() * 4);
-      }
-      
-      setVisitors(baseCurrentVisitors);
-      setIsLoading(false);
-
-      // More realistic visitor fluctuation
-      const interval = setInterval(() => {
-        const currentHour = new Date().getHours();
-        let maxVisitors, minVisitors;
-        
-        if (currentHour >= 9 && currentHour <= 17) {
-          maxVisitors = 12;
-          minVisitors = 2;
-        } else if (currentHour >= 18 && currentHour <= 22) {
-          maxVisitors = 8;
-          minVisitors = 1;
-        } else {
-          maxVisitors = 4;
-          minVisitors = 1;
+    const initVisitorTracking = async () => {
+      try {
+        // Generate or get session ID
+        let sessionId = sessionStorage.getItem('visitor-session-id');
+        if (!sessionId) {
+          sessionId = `session-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+          sessionStorage.setItem('visitor-session-id', sessionId);
         }
-        
-        setVisitors(prev => {
-          // Natural fluctuation with occasional spikes
-          const shouldSpike = Math.random() < 0.1; // 10% chance of spike
-          if (shouldSpike) {
-            return Math.min(maxVisitors, prev + Math.floor(Math.random() * 3) + 2);
-          }
-          
-          const variance = Math.floor(Math.random() * 3) - 1; // -1, 0, or 1
-          return Math.max(minVisitors, Math.min(maxVisitors, prev + variance));
-        });
-      }, 12000 + Math.random() * 18000); // Every 12-30 seconds
 
-      return () => clearInterval(interval);
+        // Clean up old sessions first
+        const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000).toISOString();
+        await supabase
+          .from('visitor_sessions')
+          .delete()
+          .lt('last_seen', fiveMinutesAgo);
+
+        // Check if this session exists
+        const { data: existingSession } = await supabase
+          .from('visitor_sessions')
+          .select('id')
+          .eq('session_id', sessionId)
+          .maybeSingle();
+
+        const isNewVisitor = !existingSession;
+
+        // Upsert session (create or update)
+        await supabase
+          .from('visitor_sessions')
+          .upsert({
+            session_id: sessionId,
+            last_seen: new Date().toISOString()
+          }, {
+            onConflict: 'session_id'
+          });
+
+        // If new visitor, increment total count
+        if (isNewVisitor) {
+          const { data: stats } = await supabase
+            .from('visitor_stats')
+            .select('total_visitors')
+            .limit(1)
+            .single();
+
+          if (stats) {
+            await supabase
+              .from('visitor_stats')
+              .update({ 
+                total_visitors: stats.total_visitors + 1,
+                updated_at: new Date().toISOString()
+              })
+              .eq('id', (await supabase.from('visitor_stats').select('id').limit(1).single()).data?.id);
+          }
+        }
+
+        // Fetch current stats
+        const fetchStats = async () => {
+          // Get total visitors
+          const { data: stats } = await supabase
+            .from('visitor_stats')
+            .select('total_visitors')
+            .limit(1)
+            .maybeSingle();
+
+          if (stats) {
+            setTotalVisitors(stats.total_visitors);
+          }
+
+          // Get active visitors (sessions in last 5 minutes)
+          const { data: activeSessions, count } = await supabase
+            .from('visitor_sessions')
+            .select('*', { count: 'exact', head: true })
+            .gte('last_seen', fiveMinutesAgo);
+
+          setVisitors(count || 0);
+        };
+
+        await fetchStats();
+        setIsLoading(false);
+
+        // Update last_seen every 30 seconds
+        const updateInterval = setInterval(async () => {
+          await supabase
+            .from('visitor_sessions')
+            .update({ last_seen: new Date().toISOString() })
+            .eq('session_id', sessionId);
+
+          // Refresh stats
+          await fetchStats();
+        }, 30000);
+
+        // Refresh active visitors count more frequently
+        const refreshInterval = setInterval(fetchStats, 15000);
+
+        return () => {
+          clearInterval(updateInterval);
+          clearInterval(refreshInterval);
+        };
+      } catch (error) {
+        console.error('Error tracking visitors:', error);
+        setIsLoading(false);
+      }
     };
 
-    const cleanup = initVisitorCount();
-    return cleanup;
+    const cleanup = initVisitorTracking();
+    return () => {
+      cleanup.then(cleanupFn => cleanupFn && cleanupFn());
+    };
   }, []);
 
   // Animate number changes
