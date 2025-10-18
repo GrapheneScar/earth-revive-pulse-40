@@ -10,7 +10,7 @@ import { MapPin, Mail, Send, Instagram } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
-import { supabase } from '@/integrations/supabase/client';
+import emailjs from '@emailjs/browser';
 const ContactPage = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, {
@@ -33,28 +33,31 @@ const ContactPage = () => {
   };
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!formData.name.trim() || !formData.email.trim() || !formData.subject.trim() || !formData.message.trim()) {
+      toast({
+        title: "Error",
+        description: "Please fill in all fields.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
     
     try {
-      // Call secure edge function instead of direct EmailJS
-      const { data, error } = await supabase.functions.invoke('send-contact-email', {
-        body: {
-          name: formData.name,
-          email: formData.email,
+      await emailjs.send(
+        'service_45cxvga',
+        'template_rh6yg0k',
+        {
+          from_name: formData.name,
+          from_email: formData.email,
           subject: formData.subject,
           message: formData.message,
         },
-      });
-
-      if (error) {
-        throw error;
-      }
-
-      if (data?.error) {
-        throw new Error(data.error);
-      }
+        'dFzlWVfXPsRoWPbVf'
+      );
       
-      // Reset form
       setFormData({
         name: '',
         email: '',
@@ -62,18 +65,15 @@ const ContactPage = () => {
         message: ''
       });
       
-      // Show success toast
       toast({
         title: "Message sent successfully!",
         description: "Thank you for your message. We'll get back to you within 24 hours.",
       });
       
     } catch (error: any) {
-      const errorMessage = error?.message || 'There was an error sending your message. Please try again.';
-      
       toast({
         title: "Failed to send message",
-        description: errorMessage,
+        description: "There was an error sending your message. Please try again.",
         variant: "destructive",
       });
     } finally {
