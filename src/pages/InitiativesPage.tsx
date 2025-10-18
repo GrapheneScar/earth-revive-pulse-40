@@ -246,7 +246,36 @@ const InitiativesPage = () => {
       
 
       {/* Call to Action */}
-      
+      <section className="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-primary/10 via-background to-secondary/10">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="max-w-4xl mx-auto text-center"
+          >
+            <div className="flex justify-center mb-6">
+              <Leaf className="w-16 h-16 text-primary" />
+            </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
+              Ready to Make a Difference?
+            </h2>
+            <p className="text-lg sm:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+              Take on our 10-challenge initiative and become a certified Climate Champion. 
+              Every action counts towards a sustainable future!
+            </p>
+            <Button 
+              size="lg" 
+              className="text-lg px-8 py-6"
+              onClick={() => window.location.href = '/initiatives/your-initiative'}
+            >
+              Start Your Initiative
+              <ArrowRight className="ml-2 w-5 h-5" />
+            </Button>
+          </motion.div>
+        </div>
+      </section>
 
       <Footer />
     </div>;
