@@ -47,15 +47,15 @@ const ContactPage = () => {
     
     try {
       await emailjs.send(
-        'service_45cxvga',
-        'template_rh6yg0k',
+        'service_ui0fv0i',
+        'template_vx7a3ad',
         {
           from_name: formData.name,
           from_email: formData.email,
           subject: formData.subject,
           message: formData.message,
         },
-        'dFzlWVfXPsRoWPbVf'
+        'B7aAKRlSXl8UTkhXM'
       );
       
       setFormData({
