@@ -1,15 +1,16 @@
 import { motion } from 'framer-motion';
-import { Leaf, Instagram, Mail, MapPin, Phone, ArrowUp, Send } from 'lucide-react';
+import { Leaf, Instagram, Mail, MapPin, Phone, ArrowUp, Send, Trophy, Calculator, Award, Clock, Sparkles, Target } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const [email, setEmail] = useState('');
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const footerLinks = {
     "Quick Links": [
@@ -20,12 +21,46 @@ const Footer = () => {
       { name: "Team", href: "/team" },
       { name: "Collaborators", href: "/collaborators" }
     ],
-    "Get Involved": [
-      { name: "Contact Us", href: "/contact" },
-      { name: "Join Our Team", href: "/team" },
-      { name: "View Projects", href: "/gallery" },
-      { name: "Learn More", href: "/about" }
+    "Interactive Features": [
+      { name: "Climate Quiz", href: "#", action: "quiz", icon: Trophy },
+      { name: "Carbon Calculator", href: "/about#calculator", icon: Calculator },
+      { name: "Certificate Generator", href: "/your-initiative", icon: Award },
+      { name: "Climate Countdown", href: "#", action: "countdown", icon: Clock },
+      { name: "Daily Eco Challenge", href: "#", action: "challenge", icon: Sparkles },
+      { name: "Your Initiative", href: "/your-initiative", icon: Target }
     ]
+  };
+
+  const handleFeatureClick = (action?: string, href?: string) => {
+    if (action) {
+      // Scroll to section on homepage
+      if (window.location.pathname !== '/') {
+        navigate('/');
+        setTimeout(() => scrollToSection(action), 100);
+      } else {
+        scrollToSection(action);
+      }
+    } else if (href?.startsWith('/')) {
+      navigate(href);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  const scrollToSection = (section: string) => {
+    // Map actions to section IDs or scroll logic
+    const sectionMap: { [key: string]: string } = {
+      quiz: 'climate-quiz',
+      countdown: 'climate-countdown',
+      challenge: 'daily-challenge'
+    };
+    
+    const elementId = sectionMap[section];
+    if (elementId) {
+      const element = document.getElementById(elementId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
   };
 
   const handleNewsletterSubmit = (e: React.FormEvent) => {
@@ -103,36 +138,51 @@ const Footer = () => {
                 <div className="absolute -bottom-2 left-0 w-8 h-0.5 bg-gradient-to-r from-primary to-accent rounded-full"></div>
               </h4>
                <ul className="space-y-3">
-                {links.map((link, linkIndex) => (
-                  <motion.li 
-                    key={link.name}
-                    initial={{ opacity: 0, x: -10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: 0.1 * linkIndex }}
-                  >
-                    {link.href.startsWith('/') ? (
-                      <Link 
-                        to={link.href} 
-                        onClick={scrollToTop}
-                        className="text-secondary-foreground/70 hover:text-primary transition-all duration-300 text-sm group flex items-center gap-2"
-                      >
-                        <span className="w-1 h-1 bg-primary/40 rounded-full group-hover:bg-primary transition-colors"></span>
-                        <span className="group-hover:translate-x-1 transition-transform duration-200">{link.name}</span>
-                      </Link>
-                    ) : (
-                      <a 
-                        href={link.href} 
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-secondary-foreground/70 hover:text-primary transition-all duration-300 text-sm group flex items-center gap-2"
-                      >
-                        <span className="w-1 h-1 bg-primary/40 rounded-full group-hover:bg-primary transition-colors"></span>
-                        <span className="group-hover:translate-x-1 transition-transform duration-200">{link.name}</span>
-                      </a>
-                    )}
-                  </motion.li>
-                ))}
+                {links.map((link: any, linkIndex) => {
+                  const IconComponent = link.icon;
+                  return (
+                    <motion.li 
+                      key={link.name}
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: 0.1 * linkIndex }}
+                    >
+                      {link.action || category === "Interactive Features" ? (
+                        <button
+                          onClick={() => handleFeatureClick(link.action, link.href)}
+                          className="text-secondary-foreground/70 hover:text-primary transition-all duration-300 text-sm group flex items-center gap-2"
+                        >
+                          {IconComponent ? (
+                            <IconComponent className="w-3.5 h-3.5 text-primary/60 group-hover:text-primary transition-colors" />
+                          ) : (
+                            <span className="w-1 h-1 bg-primary/40 rounded-full group-hover:bg-primary transition-colors"></span>
+                          )}
+                          <span className="group-hover:translate-x-1 transition-transform duration-200">{link.name}</span>
+                        </button>
+                      ) : link.href.startsWith('/') ? (
+                        <Link 
+                          to={link.href} 
+                          onClick={scrollToTop}
+                          className="text-secondary-foreground/70 hover:text-primary transition-all duration-300 text-sm group flex items-center gap-2"
+                        >
+                          <span className="w-1 h-1 bg-primary/40 rounded-full group-hover:bg-primary transition-colors"></span>
+                          <span className="group-hover:translate-x-1 transition-transform duration-200">{link.name}</span>
+                        </Link>
+                      ) : (
+                        <a 
+                          href={link.href} 
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-secondary-foreground/70 hover:text-primary transition-all duration-300 text-sm group flex items-center gap-2"
+                        >
+                          <span className="w-1 h-1 bg-primary/40 rounded-full group-hover:bg-primary transition-colors"></span>
+                          <span className="group-hover:translate-x-1 transition-transform duration-200">{link.name}</span>
+                        </a>
+                      )}
+                    </motion.li>
+                  );
+                })}
               </ul>
             </motion.div>
           ))}
