@@ -66,6 +66,7 @@ export default {
 			fontFamily: {
 				sans: ['Inter', 'system-ui', 'sans-serif'],
 				display: ['Inter', 'system-ui', 'sans-serif'],
+				'alex-brush': ['Alex Brush', 'cursive'],
 			},
 			backgroundImage: {
 				'gradient-earth': 'var(--gradient-earth)',

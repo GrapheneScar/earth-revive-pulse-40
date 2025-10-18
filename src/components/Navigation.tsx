@@ -22,17 +22,26 @@ const Navigation = () => {
     setLastTap(now);
   };
 
+  const [showInitiativesDropdown, setShowInitiativesDropdown] = useState(false);
+
   const navItems = [
     { name: 'Home', href: '/' },
     { name: 'About Us', href: '/about' },
     { name: 'Our Team', href: '/team' },
-    { name: 'Initiatives', href: '/initiatives' },
+    { 
+      name: 'Initiatives', 
+      href: '/initiatives',
+      children: [
+        { name: 'Your Initiative', href: '/initiatives/your-initiative' }
+      ]
+    },
     { name: 'Our Collaborators', href: '/collaborators' },
     { name: 'Gallery', href: '/gallery' },
     { name: 'Contact', href: '/contact' },
   ];
 
   const isActive = (href: string) => location.pathname === href;
+  const isInitiativesActive = location.pathname.startsWith('/initiatives');
 
   return (
     <nav className="fixed top-0 w-full z-40 bg-background/80 backdrop-blur-md border-b border-border/50 shadow-soft">
@@ -49,25 +58,56 @@ const Navigation = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
-              <Link
+              <div 
                 key={item.name}
-                to={item.href}
-                className={`text-sm font-medium transition-colors duration-200 relative group ${
-                  isActive(item.href) 
-                    ? 'text-primary' 
-                    : 'text-muted-foreground hover:text-foreground'
-                }`}
+                className="relative"
+                onMouseEnter={() => item.children && setShowInitiativesDropdown(true)}
+                onMouseLeave={() => item.children && setShowInitiativesDropdown(false)}
               >
-                {item.name}
-                {isActive(item.href) && (
+                <Link
+                  to={item.href}
+                  className={`text-sm font-medium transition-colors duration-200 relative group ${
+                    isActive(item.href) || (item.children && isInitiativesActive)
+                      ? 'text-primary' 
+                      : 'text-muted-foreground hover:text-foreground'
+                  }`}
+                >
+                  {item.name}
+                  {(isActive(item.href) || (item.children && isInitiativesActive)) && (
+                    <motion.div
+                      layoutId="activeTab"
+                      className="absolute -bottom-6 left-0 right-0 h-0.5 bg-primary rounded-full"
+                      initial={false}
+                      transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                    />
+                  )}
+                </Link>
+
+                {/* Dropdown Menu */}
+                {item.children && showInitiativesDropdown && (
                   <motion.div
-                    layoutId="activeTab"
-                    className="absolute -bottom-6 left-0 right-0 h-0.5 bg-primary rounded-full"
-                    initial={false}
-                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                  />
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute top-full left-0 mt-2 w-48 bg-background border border-border rounded-lg shadow-lg overflow-hidden z-50"
+                  >
+                    {item.children.map((child) => (
+                      <Link
+                        key={child.name}
+                        to={child.href}
+                        className={`block px-4 py-2 text-sm font-medium transition-colors duration-200 ${
+                          isActive(child.href)
+                            ? 'text-primary bg-primary/10'
+                            : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                        }`}
+                      >
+                        {child.name}
+                      </Link>
+                    ))}
+                  </motion.div>
                 )}
-              </Link>
+              </div>
             ))}
             
             {/* Instagram Button */}
@@ -260,18 +300,39 @@ const Navigation = () => {
         >
           <div className="py-4 space-y-2">
             {navItems.map((item) => (
-              <Link
-                key={item.name}
-                to={item.href}
-                onClick={() => setIsOpen(false)}
-                className={`block px-4 py-2 text-sm font-medium transition-colors duration-200 ${
-                  isActive(item.href)
-                    ? 'text-primary bg-primary/10'
-                    : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
-                }`}
-              >
-                {item.name}
-              </Link>
+              <div key={item.name}>
+                <Link
+                  to={item.href}
+                  onClick={() => !item.children && setIsOpen(false)}
+                  className={`block px-4 py-2 text-sm font-medium transition-colors duration-200 ${
+                    isActive(item.href) || (item.children && isInitiativesActive)
+                      ? 'text-primary bg-primary/10'
+                      : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                  }`}
+                >
+                  {item.name}
+                </Link>
+                
+                {/* Mobile Submenu */}
+                {item.children && (
+                  <div className="pl-4 space-y-1 mt-1">
+                    {item.children.map((child) => (
+                      <Link
+                        key={child.name}
+                        to={child.href}
+                        onClick={() => setIsOpen(false)}
+                        className={`block px-4 py-2 text-sm font-medium transition-colors duration-200 ${
+                          isActive(child.href)
+                            ? 'text-primary bg-primary/10'
+                            : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                        }`}
+                      >
+                        {child.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
             ))}
           </div>
         </motion.div>

@@ -107,13 +107,13 @@ const CertificateGenerator = () => {
                 crossOrigin="anonymous"
               />
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center" style={{ marginTop: "2%" }}>
+                <div className="text-center" style={{ marginTop: "-8%" }}>
                   <p 
-                    className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold"
+                    className="font-alex-brush text-2xl sm:text-3xl md:text-4xl"
                     style={{ 
-                      fontFamily: "'Playfair Display', serif",
+                      fontFamily: "'Alex Brush', cursive",
                       color: "#000000",
-                      textShadow: "0 1px 2px rgba(0,0,0,0.1)",
+                      letterSpacing: "0.05em",
                       lineHeight: "1.2"
                     }}
                   >
