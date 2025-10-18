@@ -34,8 +34,9 @@ const Footer = () => {
   const handleFeatureClick = (href: string) => {
     const [path, hash] = href.split('#');
     
-    if (path && window.location.pathname !== path) {
-      // Navigate to different page first
+    // If there's a path (could be empty string for same page)
+    if (path && path !== window.location.pathname) {
+      // Navigate to different page
       navigate(path);
       if (hash) {
         // Scroll to section after navigation
@@ -46,17 +47,18 @@ const Footer = () => {
           }
         }, 300);
       } else {
+        // Just scroll to top for regular page navigation
         setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 100);
       }
+    } else if (path && path === window.location.pathname && !hash) {
+      // Already on the page without hash, just scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (hash) {
-      // Same page, just scroll to section
+      // Same page with hash, just scroll to section
       const element = document.getElementById(hash);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
-    } else {
-      // Just navigate
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
