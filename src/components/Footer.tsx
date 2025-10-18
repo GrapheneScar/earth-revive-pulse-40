@@ -24,10 +24,10 @@ const Footer = () => {
     "Interactive Features": [
       { name: "Climate Quiz", href: "/#climate-quiz", icon: Trophy },
       { name: "Carbon Calculator", href: "/about#carbon-calculator", icon: Calculator },
-      { name: "Certificate Generator", href: "/your-initiative", icon: Award },
+      { name: "Certificate Generator", href: "/initiatives/your-initiative", icon: Award },
       { name: "Climate Countdown", href: "/#climate-countdown", icon: Clock },
       { name: "Daily Eco Challenge", href: "/#daily-challenge", icon: Sparkles },
-      { name: "Your Initiative", href: "/your-initiative", icon: Target }
+      { name: "Your Initiative", href: "/initiatives/your-initiative", icon: Target }
     ]
   };
 
